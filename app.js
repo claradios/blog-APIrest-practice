@@ -16,14 +16,13 @@ const app = express();
 app.use(express.json());
 
 
-
 let conn;
 let posts;
 
 app.post('/posts', async (req, res) => {
     const post = req.body;
     //Validation
-    console.log(article);
+    console.log(post);
     if (typeof post.author != 'string' ||
         typeof post.nickname != 'string' ||
         typeof post.title != 'string' ||
