@@ -5,24 +5,20 @@ const ObjectId = require('mongodb').ObjectId;
 const express = require('express');
 const url = "mongodb://localhost:27017/postsDB";
 
-
 //api blog de referencia, mi key: 832800956c174df093b590ed7005de11
-//Generate unique id for resources
-//const uuid = require('uuid/v4');
 
 const app = express();
 
 //Convert json bodies to JavaScript object
 app.use(express.json());
 
-
 let conn;
 let posts;
+let offensiveWords;
 
 app.post('/posts', async (req, res) => {
     const post = req.body;
     //Validation
-    console.log(post);
     if (typeof post.author != 'string' ||
         typeof post.nickname != 'string' ||
         typeof post.title != 'string' ||
@@ -46,6 +42,7 @@ app.post('/posts', async (req, res) => {
         res.json(newPost);
     }
 });
+
 app.get('/posts', async (req, res) => {
     const allPosts = await posts.find({}).toArray();
     res.json(allPosts);
@@ -60,7 +57,6 @@ app.get('/posts/:id', async (req, res) => {
         res.json(post);
     }
 });
-
 
 app.delete('/posts/:id', async (req, res) => {
     const id = req.params.id;
@@ -85,7 +81,7 @@ app.put('/posts/:id', async (req, res) => {
             typeof postReq.nickname != 'string' ||
             typeof postReq.title != 'string' ||
             typeof postReq.content != 'string' ||
-            typeof postReq.date != 'string' ) {
+            typeof postReq.date != 'string') {
             res.sendStatus(400);
         } else {
             //Create object with needed fields and assign id
@@ -96,7 +92,7 @@ app.put('/posts/:id', async (req, res) => {
                 content: postReq.content,
                 date: postReq.date,
                 urlToImage: postReq.urlToImage,
-                comments: postReq.comments    
+                comments: postReq.comments
             };
             //Update resource
             await posts.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
@@ -105,6 +101,85 @@ app.put('/posts/:id', async (req, res) => {
         }
     }
 });
+
+//OFFENSIVE WORDS 
+app.post('/offensivewords', async (req, res) => {
+    // - POST Creación,*/offensivewords*
+    const offensiveWord = req.body;
+    //Validation
+    if (typeof offensiveWord.word != 'string' ||
+        typeof offensiveWord.level != 'number'
+    ) {
+        res.sendStatus(400);
+    } else {
+        //Create object with needed fields and assign id
+        const newOffensiveWord = {
+            word: offensiveWord.word,
+            level: offensiveWord.level
+        };
+        await offensiveWords.insertOne(newOffensiveWord);
+        res.json(newOffensiveWord);
+    }
+});
+
+app.get('/offensivewords', async (req, res) => {
+    // - GET listado,*/offensivewords*
+    const allWords = await offensiveWords.find({}).toArray();
+    res.json(allWords);
+});
+
+app.get('/offensivewords/:id', async (req, res) => {
+    // - GET listado,*/offensivewords*
+    const id = req.params.id;
+    const offensiveWord = await offensiveWords.findOne({ _id: new ObjectId(id) });
+    if (!offensiveWord) {
+        res.sendStatus(404);
+    } else {
+        res.json(offensiveWord);
+    }
+});
+
+app.delete('/offensivewords/:id', async (req, res) => {
+    // - DELETE ONE borrado, */offensivewords/:id*
+    const id = req.params.id;
+    const offensiveWord = await offensiveWords.findOne({ _id: new ObjectId(id) });
+    if (!offensiveWord) {
+        res.sendStatus(404);
+    } else {
+        await offensiveWords.deleteOne({ _id: new ObjectId(id) });
+        res.json(offensiveWord);
+    }
+});
+
+app.put('/offensivewords/:id', async (req, res) => {
+    // - PATCH or PUT modificación, */offensivewords/:id*
+    const id = req.params.id;
+    const offensiveWord = await offensiveWords.findOne({ _id: new ObjectId(id) });
+    if (!offensiveWord) {
+        res.sendStatus(404);
+    } else {
+        const offensiveWordReq = req.body;
+        //Validation
+        if (typeof offensiveWordReq.word != 'string' ||
+            typeof offensiveWordReq.level != 'number'
+        ) {
+            res.sendStatus(400);
+        } else {
+            //Create object with needed fields and assign id
+            const newOffensiveWord = {
+                word: postReq.author,
+                level: postReq.number
+            };
+            //Update resource
+            await posts.updateOne({ _id: new ObjectId(id) }, { $set: newOffensiveWord });
+            //Return new resource         
+            res.json(newOffensiveWord);
+        }
+    }
+});
+
+
+
 
 async function dbConnect() {
 
@@ -116,6 +191,7 @@ async function dbConnect() {
     console.log("Connected to Mongo");
 
     posts = conn.db().collection('posts');
+    offensiveWords = conn.db().collection('offensivewords');
 }
 
 async function main() {

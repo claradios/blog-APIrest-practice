@@ -1,10 +1,10 @@
 {
 	"info": {
 		"_postman_id": "d2f2150b-55da-4c1d-b3d0-c30e3d14e91d",
-		"name": "REST API Posts",
+		"name": "REST API Posts collection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
-	"article": [
+	"item": [
 		{
 			"name": "New Post POST",
 			"request": {
@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Clara Dios\",\n\t\"nickname\": \"cddd\",\n\t\"title\":\"Criptomonedas\",\n\t\"content\":\"Esto es un artículo de blog y tiene mucho texto\",\n\t\"date\":\"2020-01-01\",\n\t\"urlToImage\":\"www.goggle.com/images\",\n\t\"comments\":\"[]\"}"
+					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/",
@@ -37,7 +37,7 @@
 			"response": []
 		},
 		{
-			"name": "Query Items GET",
+			"name": "Query Posts GET",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -61,7 +61,7 @@
 			"response": []
 		},
 		{
-			"name": "Query Item GET",
+			"name": "Query Post GET",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -88,6 +88,30 @@
 			"name": "Delete Post DELETE",
 			"request": {
 				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Post PUT",
+			"request": {
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
