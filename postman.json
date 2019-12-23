@@ -1,12 +1,12 @@
 {
 	"info": {
 		"_postman_id": "d2f2150b-55da-4c1d-b3d0-c30e3d14e91d",
-		"name": "REST API Articles",
+		"name": "REST API Posts",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"article": [
 		{
-			"name": "New Article POST",
+			"name": "New Post POST",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,17 +19,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Clara Dios\",\n\t\"title\":\"Criptomonedas\",\n\t\"content\":\"Esto es un artículo de blog y tiene mucho texto\",\n\t\"date\":\"2020-01-01\",\n\t\"urlToImage\":\"www.goggle.com/images\"}"
+					"raw": "{\n\t\"author\": \"Clara Dios\",\n\t\"nickname\": \"cddd\",\n\t\"title\":\"Criptomonedas\",\n\t\"content\":\"Esto es un artículo de blog y tiene mucho texto\",\n\t\"date\":\"2020-01-01\",\n\t\"urlToImage\":\"www.goggle.com/images\",\n\t\"comments\":\"[]\"}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/articles/",
+					"raw": "http://localhost:3000/posts/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"articles",
+						"posts",
 						""
 					]
 				}
@@ -46,14 +46,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/articles/",
+					"raw": "http://localhost:3000/posts/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"articles",
+						"posts",
 						""
 					]
 				}
@@ -70,14 +70,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/articles/1f934386-0cae-47ae-846b-bb0bc134303b",
+					"raw": "http://localhost:3000/posts/1f934386-0cae-47ae-846b-bb0bc134303b",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"articles",
+						"posts",
 						"1f934386-0cae-47ae-846b-bb0bc134303b"
 					]
 				}
@@ -85,7 +85,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete Article DELETE",
+			"name": "Delete Post DELETE",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -94,14 +94,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/articles/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"articles",
+						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
 					]
 				}
