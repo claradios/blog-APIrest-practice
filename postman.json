@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "d2f2150b-55da-4c1d-b3d0-c30e3d14e91d",
+		"name": "REST API Articles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"article": [
+		{
+			"name": "New Article POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"author\": \"Clara Dios\",\n\t\"title\":\"Criptomonedas\",\n\t\"content\":\"Esto es un artículo de blog y tiene mucho texto\",\n\t\"date\":\"2020-01-01\",\n\t\"urlToImage\":\"www.goggle.com/images\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/articles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"articles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Items GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/articles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"articles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Item GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/articles/1f934386-0cae-47ae-846b-bb0bc134303b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"articles",
+						"1f934386-0cae-47ae-846b-bb0bc134303b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Article DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/articles/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"articles",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
