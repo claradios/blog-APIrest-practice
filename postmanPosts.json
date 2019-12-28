@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\"}"
+					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\",\n\t\"date\": \"2020/04/06\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/",

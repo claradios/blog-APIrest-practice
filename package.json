@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/claradios/blog-APIrest-practice-#readme",
   "dependencies": {
-    "mongodb": "^3.4.1",
-    "express": "4.17.1"
+    "cors": "^2.8.5",
+    "express": "4.17.1",
+    "mongodb": "^3.4.1"
   }
 }
