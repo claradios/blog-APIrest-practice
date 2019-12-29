@@ -3,8 +3,7 @@
 
 const express = require('express');
 const routerOffensiveWords = express.Router();
-const repository = require('../repository/');
-
+const repository = require('../../repository');
 
 routerOffensiveWords.post('/', async (req, res) => {
     // - POST Creación,*/offensivewords*
@@ -77,6 +76,5 @@ routerOffensiveWords.put('/:id', async (req, res) => {
         }
     }
 });
-
 
 module.exports = routerOffensiveWords;

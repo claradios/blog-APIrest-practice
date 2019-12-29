@@ -3,7 +3,7 @@
 
 const express = require('express');
 const routerPosts = express.Router();
-const repository = require('../repository/');
+const repository = require('../../repository');
 
 routerPosts.post('/', async (req, res) => {
 
