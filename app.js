@@ -1,8 +1,8 @@
-//Tendrá el servidor Express.
+//Contiene el servidor Express.
 
 const cors = require('cors');
 const express = require('express');
-
+const PORT = process.env.PORT || 3000;
 const routerPosts = require('./controller/routerPosts');
 const routerOffensiveWords = require('./controller/routerOffensiveWords');
 
@@ -17,7 +17,7 @@ app.use('/offensivewords',routerOffensiveWords);
 
 async function main() {     
     await repository.dbConnect();         
-    app.listen(3000, () => console.log('Server Express started in port 3000'));
+    app.listen(PORT, () => console.log(`Server Express started in port ${PORT}`));
 }
 
 main();
