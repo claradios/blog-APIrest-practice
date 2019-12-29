@@ -1,8 +1,9 @@
-// Tendrá definidos los métodos de la API REST. Se usará un router que será configurado en Express.
+// Tendrá definidos los métodos de la API REST. 
+//Se usará un router que será configurado en Express.
 
 const express = require('express');
 const routerOffensiveWords = express.Router();
-const repository = require('./repository/OffensiveWords.js');
+const repository = require('../repository/OffensiveWords.js');
 
 
 routerOffensiveWords.post('/', async (req, res) => {
@@ -15,21 +16,21 @@ routerOffensiveWords.post('/', async (req, res) => {
     ) {
         res.sendStatus(400);
     } else {
-        repository.addOffensiveWord(offensiveWord)
+        await repository.addOffensiveWord(offensiveWord)
         res.json(offensiveWord);
     }
 });
 
 routerOffensiveWords.get('/', async (req, res) => {
     // - GET listado,*/offensivewords*
-    const allWords = repository.getAllOffensiveWords();
+    const allWords = await repository.getAllOffensiveWords();
     res.json(allWords);
 });
 
 routerOffensiveWords.get('/:id', async (req, res) => {
     // - GET listado,*/offensivewords*
     const id = req.params.id;
-    const offensiveWord = repository.getOffensiveWordById(id)
+    const offensiveWord = await repository.getOffensiveWordById(id)
     if (!offensiveWord) {
         res.sendStatus(404);
     } else {
@@ -40,11 +41,11 @@ routerOffensiveWords.get('/:id', async (req, res) => {
 routerOffensiveWords.delete('/:id', async (req, res) => {
     // - DELETE ONE borrado, */offensivewords/:id*
     const id = req.params.id;
-    const offensiveWord = repository.getOffensiveWordById(id);
+    const offensiveWord = await repository.getOffensiveWordById(id);
     if (!offensiveWord) {
         res.sendStatus(404);
     } else {
-        repository.deleteOffensiveWordById(id);
+        await repository.deleteOffensiveWordById(id);
         res.json(offensiveWord);
     }
 });
@@ -52,7 +53,7 @@ routerOffensiveWords.delete('/:id', async (req, res) => {
 routerOffensiveWords.put('/:id', async (req, res) => {
     // - PATCH or PUT modificación, */offensivewords/:id*
     const id = req.params.id;
-    const offensiveWord = repository.getOffensiveWordById(id);
+    const offensiveWord = await repository.getOffensiveWordById(id);
     if (!offensiveWord) {
         res.sendStatus(404);
     } else {
@@ -69,7 +70,7 @@ routerOffensiveWords.put('/:id', async (req, res) => {
                 level: postReq.number
             };
             //Update resource
-            modifyOffensiveWordById(id, newOffensiveWord)
+            await repository.modifyOffensiveWordById(id, newOffensiveWord)
            
             //Return new resource         
             res.json(newOffensiveWord);
@@ -77,16 +78,6 @@ routerOffensiveWords.put('/:id', async (req, res) => {
     }
 });
 
-async function dbConnectWords() {
-    const url = "mongodb://localhost:27017/postsDB";
-    const conn = await MongoClient.connect(url, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-    });
-    console.log("Connected to Mongo");    
-}
+
 
 module.exports = routerOffensiveWords;
-exports.dbConnectWords = dbConnectWords;
-
-//export default {routerOffensiveWords,dbConnectWords};

@@ -14,17 +14,21 @@ module.exports = class Posts {
             urlToImage: post.urlToImage,
             comments: post.comments
         };
-        return await this.collection.insertOne(newPost);
+        return this.collection.insertOne(newPost);
     }
+
     getAllPosts() {
-        return await this.collection.find({}).toArray();
+        return this.collection.find({}).toArray();
     }
+
     getPostById(id) {
-        return await this.collection.findOne({ _id: new ObjectId(id) });
+        return this.collection.findOne({ _id: new ObjectId(id) });
     }
+
     deletePostById(id) {
-        return await this.collection.deleteOne({ _id: new ObjectId(id) });
+        return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
+    
     modifyPost(postReq,id) {
         //Create object with needed fields and assign id
         const newPost = {
@@ -37,6 +41,6 @@ module.exports = class Posts {
             comments: postReq.comments
         };
         //Update resource
-        return await this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
+        return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
     }
 }
