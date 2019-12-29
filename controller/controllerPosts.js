@@ -2,16 +2,12 @@
 
 const express = require('express');
 const MongoClient = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectId;
 const routerPosts = express.Router();
-
-
-let posts;
+const repository = require('../repository/Posts.js')
 
 routerPosts.post('/', async (req, res) => {
 
-    const post = req.body;
-    console.log(post);
+    const post = req.body;  
     //Validation
     if (typeof post.author != 'string' ||
         typeof post.nickname != 'string' ||
@@ -23,29 +19,19 @@ routerPosts.post('/', async (req, res) => {
         console.log('he fallado');
     } else {
         //Create object with needed fields and assign id
-        const newPost = {
-            author: post.author,
-            nickname: post.nickname,
-            title: post.title,
-            content: post.content,
-            date: post.date,
-            // urlToImage: post.urlToImage,
-            //comments: post.comments
-
-        };
-        await posts.insertOne(newPost);
-        res.json(newPost);
+        repository.addPost(post)
+        res.json(post);
     }
 });
 
 routerPosts.get('/', async (req, res) => {
-    const allPosts = await posts.find({}).toArray();
+    const allPosts = repository.getAllPosts();
     res.json(allPosts);
 });
 
 routerPosts.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const post = await posts.findOne({ _id: new ObjectId(id) });
+    const post = getPostById(id);
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -55,11 +41,11 @@ routerPosts.get('/:id', async (req, res) => {
 
 routerPosts.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const post = await posts.findOne({ _id: new ObjectId(id) });
+    const post = getPostById(id);
     if (!post) {
         res.sendStatus(404);
     } else {
-        await posts.deleteOne({ _id: new ObjectId(id) });
+        deletePostById(id);
         res.json(post);
     }
 });
@@ -79,20 +65,9 @@ routerPosts.put('/:id', async (req, res) => {
             typeof postReq.date != 'string') {
             res.sendStatus(400);
         } else {
-            //Create object with needed fields and assign id
-            const newPost = {
-                author: postReq.author,
-                nickname: postReq.nickname,
-                title: postReq.title,
-                content: postReq.content,
-                date: postReq.date,
-                urlToImage: postReq.urlToImage,
-                comments: postReq.comments
-            };
-            //Update resource
-            await posts.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
+            modifyPost(postReq,id);
             //Return new resource         
-            res.json(newPost);
+            res.json(postReq);
         }
     }
 });
