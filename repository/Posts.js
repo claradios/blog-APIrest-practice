@@ -28,7 +28,7 @@ module.exports = class Posts {
     deletePostById(id) {
         return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
-    
+
     modifyPost(postReq,id) {
         //Create object with needed fields and assign id
         const newPost = {
@@ -39,8 +39,8 @@ module.exports = class Posts {
             date: postReq.date,
             urlToImage: postReq.urlToImage,
             comments: postReq.comments
-        };
-        //Update resource
+        };     
+        //Update resource      
         return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
     }
 }

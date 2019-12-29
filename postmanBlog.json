@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\",\n\t\"date\": \"2020/04/06\"}"
+					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\",\n\t\"date\": \"2020/04/06\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/",
@@ -115,7 +115,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n\t\"author\": \"Jaime Molina\",\n\t\"nickname\": \"molina52\",\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\",\n\t\"date\": \"2020/04/06\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
@@ -242,7 +242,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\n\t\"word\": \"zorra\",\n\t\"level\":4}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",

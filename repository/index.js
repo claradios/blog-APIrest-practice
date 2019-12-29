@@ -11,8 +11,8 @@ module.exports = {
             useUnifiedTopology: true,
             useNewUrlParser: true
         });
-        this.posts = new Posts(conn);
-        this.offensiveWords = new OffensiveWords(conn);
+        this.postsCol = new Posts(conn);
+        this.offensiveWordsCol = new OffensiveWords(conn);
         console.log("Connected to Mongo");
     }
 };

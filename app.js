@@ -5,14 +5,13 @@ const express = require('express');
 const PORT = process.env.PORT || 3000;
 const routerPosts = require('./controller/routerPosts');
 const routerOffensiveWords = require('./controller/routerOffensiveWords');
-
 const repository = require('./repository/');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use('/posts',routerPosts)
+app.use('/posts',routerPosts);
 app.use('/offensivewords',routerOffensiveWords);
 
 async function main() {     
