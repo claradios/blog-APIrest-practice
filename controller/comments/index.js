@@ -4,6 +4,7 @@
 const express = require('express');
 const routerComments = express.Router();
 const repository = require('../../repository');
+const validator = require('../../validator/');
 
 routerComments.post('/', async (req, res) => {
     const comment = req.body;
@@ -15,7 +16,7 @@ routerComments.post('/', async (req, res) => {
         res.status(400).send(bodyErr);
     } else {
         const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
-        const validation = await repository.offensiveWordsCol.validateComment(text, wordsToCheck);
+        const validation = await validator(text, wordsToCheck);
         if (validation.length === 0) {
             await repository.commentsCol.addComment(comment);
             res.json(comment);
