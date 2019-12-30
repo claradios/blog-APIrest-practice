@@ -11,22 +11,21 @@ routerComments.post('/', async (req, res) => {
     //Validation
     if (typeof nickname != 'string' ||
         typeof text != 'string') {
-        const bodyErr='Incorrect BODY';
+        const bodyErr = 'Incorrect BODY';
         res.status(400).send(bodyErr);
     } else {
         const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
-        const validation = await repository.offensiveWordsCol.validateComment(text,wordsToCheck);      
-        if (validation === []) {
+        const validation = await repository.offensiveWordsCol.validateComment(text, wordsToCheck);
+        if (validation.length === 0) {
             await repository.commentsCol.addComment(comment);
             res.json(comment);
         } else {
             let warningMsg = '';
             validation.forEach(offensiveWord => {
-            const {word,level} = offensiveWord;
-            warningMsg +=`The word ${word} is forbidden. It is catalogued as level ${level}.`;
-            }); 
-            res.send(warningMsg)
-            res.status(400);
+                const { word, level } = offensiveWord;
+                warningMsg += `The word ${word} is forbidden. It is catalogued as level ${level}.`;
+            });
+            res.status(400).send(warningMsg);
         }
     }
 });
@@ -43,7 +42,7 @@ routerComments.get('/:id', async (req, res) => {
     const comment = await repository.commentsCol.getCommentById(id);
     //validation
     if (!comment) {
-        res.sendStatus(400).send('that comment doesnt match any of the existents');       
+        res.sendStatus(400).send('that comment doesnt match any of the existents');
     } else {
         res.json(comment);
     }
