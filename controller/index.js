@@ -1,4 +1,5 @@
 const routes = require('express').Router();
+
 const offensivewords = require('./offensivewords');
 const posts = require('./posts');
 const comments = require('./comments');

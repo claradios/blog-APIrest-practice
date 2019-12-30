@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\",\n\t\"date\": \"2020/04/06\"}"
+					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"comments\": \"http://localhost:3000/posts/1f934386-0cae-47ae-846b-bb0bc134303b/comments\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/",
@@ -115,7 +115,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Jaime Molina\",\n\t\"nickname\": \"molina52\",\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\",\n\t\"date\": \"2020/04/06\"}"
+					"raw": "{\n\t\"author\": \"Jaime Molina\",\n\t\"nickname\": \"molina52\",\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
@@ -254,6 +254,116 @@
 					"path": [
 						"offensivewords",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Comment POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Quería saludar a todos los lectores. Hola desde Canarias\",\n\t\"date\": \"2020-04-06\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/offensivewords/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query comments GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"comments",
+						"0d27jf24-7336-42d5-a3b3-531a05a3b3a3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Offensive Word PUT",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Buenas tardes.Quería saludar a todos los lectores. Hola desde Canarias\",\n\t\"date\": \"2020-04-06\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"comments",
+						"0d27jf24-7336-42d5-a3b3-531a05a3b3a3"
 					]
 				}
 			},

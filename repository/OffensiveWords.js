@@ -1,5 +1,5 @@
 const ObjectId = require('mongodb').ObjectId;
-
+const defaultWords = require('../defOffensiveWords');
 module.exports = class OffensiveWords {
   constructor(conn) {
     this.conn = conn;
@@ -30,8 +30,19 @@ module.exports = class OffensiveWords {
     const newOffensiveWord = {
       word: offensiveWordReq.word,
       level: offensiveWordReq.level
-    };    
+    };
     return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newOffensiveWord });
+  }
+
+  insertDefaultWords(array) {
+    array.forEach(async (item) => {
+      const { word, level } = item;
+      if (typeof word != 'string' || typeof level != 'number') {
+        console.log('there is a problem with the defaul offensive word array');
+      } else {
+        this.collection.insertOne(item);        
+      }
+    });
   }
 
 }

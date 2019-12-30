@@ -4,7 +4,7 @@
 const express = require('express');
 const routerOffensiveWords = express.Router();
 const repository = require('../../repository');
-
+const defOffensiveWords = require('../../defOffensiveWords.js');
 routerOffensiveWords.post('/', async (req, res) => {
     // - POST Creación,*/offensivewords*
     const offensiveWord = req.body;
@@ -21,13 +21,11 @@ routerOffensiveWords.post('/', async (req, res) => {
 });
 
 routerOffensiveWords.get('/', async (req, res) => {
-    // - GET listado,*/offensivewords*
-    const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();
+    const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();       
     res.json(allWords);
 });
 
 routerOffensiveWords.get('/:id', async (req, res) => {
-    // - GET listado,*/offensivewords*
     const id = req.params.id;
     const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id)
     if (!offensiveWord) {
@@ -38,7 +36,6 @@ routerOffensiveWords.get('/:id', async (req, res) => {
 });
 
 routerOffensiveWords.delete('/:id', async (req, res) => {
-    // - DELETE ONE borrado, */offensivewords/:id*
     const id = req.params.id;
     const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id);
     if (!offensiveWord) {
@@ -50,7 +47,6 @@ routerOffensiveWords.delete('/:id', async (req, res) => {
 });
 
 routerOffensiveWords.put('/:id', async (req, res) => {
-    // - PATCH or PUT modificación, */offensivewords/:id*
     const id = req.params.id;
     const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id);
     console.log(id);
@@ -67,7 +63,6 @@ routerOffensiveWords.put('/:id', async (req, res) => {
             res.sendStatus(400);
             console.log('something went wrong on petitions body');
         } else {
-            //Create object with needed fields and assign id
             console.log('body is alright, we are working on modifying your word.Thanks');
             //Update resource
             await repository.offensiveWordsCol.modifyOffensiveWordById(id, offensiveWordReq);

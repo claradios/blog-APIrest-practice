@@ -1,5 +1,5 @@
 // Tiene definidos los métodos de la API REST para Posts. 
-// Usa un router que configurado en Express.
+// Usa un router configurado en Express.
 
 const express = require('express');
 const routerPosts = express.Router();
@@ -7,8 +7,7 @@ const repository = require('../../repository');
 
 routerPosts.post('/', async (req, res) => {
 
-    const post = req.body;
-    console.log(post);
+    const post = req.body;    
     //Validation
     if (typeof post.author != 'string' ||
         typeof post.nickname != 'string' ||

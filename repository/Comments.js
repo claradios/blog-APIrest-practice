@@ -6,16 +6,36 @@ module.exports = class Comments {
         this.conn = conn;
         this.collection = this.conn.db().collection('comments');
     }
-    addComment(comment, postId) {
-        // - Adición de un nuevo comentario a una entrada
-        // *'/post/:id/comments/'*
+
+    addComment(comment) {
+        const newComment = {
+            nickname: comment.nickname,
+            text: comment.text,
+            date: comment.date
+        }    
+        this.collection.insertOne(newComment);  
     }
-    deleteComment(commentId) {
-        // - Borrado de un comentario existente en una entrada
-        // *'/post/:id/comments/:id'*
+
+    getAllComments() {
+        return this.collection.find({}).toArray();
     }
-    modifyComment(newComment, commentId, postId) {
-        // - Modificación de un comentario existente
-        // *'/post/:id/comments/:id'*
+
+    getCommentById(id) {
+        return this.collection.findOne({ _id: new ObjectId(id) });
+    }
+
+    deleteCommentById(id) {
+        return this.collection.deleteOne({ _id: new ObjectId(id) });
+    }
+
+    modifyCommentById(id, commentReq) {
+
+        const newComment = {
+            nickname: commentReq.nickname,
+            text: commentReq.text,
+            date: commentReq.date
+          };    
+
+        return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newComment });
     }
 }
