@@ -1,5 +1,5 @@
 // Tiene definidos los métodos de la API REST para comments
-// Usa un router configurado en Express
+// Usa un router configurado en Express.
 
 const express = require('express');
 const routerComments = express.Router();
@@ -7,14 +7,27 @@ const repository = require('../../repository');
 
 routerComments.post('/', async (req, res) => {
     const comment = req.body;
+    const { nickname, text, date } = comment;
     //Validation
-    if (typeof comment.nickname != 'string' ||
-        typeof comment.text != 'string') {
-        console.log('petition BODY is not correct');
-        res.sendStatus(400);
+    if (typeof nickname != 'string' ||
+        typeof text != 'string') {
+        const bodyErr='Incorrect BODY';
+        res.status(400).send(bodyErr);
     } else {
-        await repository.commentsCol.addComment(comment);
-        res.json(comment);
+        const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
+        const validation = await repository.offensiveWordsCol.validateComment(text,wordsToCheck);      
+        if (validation === []) {
+            await repository.commentsCol.addComment(comment);
+            res.json(comment);
+        } else {
+            let warningMsg = '';
+            validation.forEach(offensiveWord => {
+            const {word,level} = offensiveWord;
+            warningMsg +=`The word ${word} is forbidden. It is catalogued as level ${level}.`;
+            }); 
+            res.send(warningMsg)
+            res.status(400);
+        }
     }
 });
 
@@ -30,8 +43,7 @@ routerComments.get('/:id', async (req, res) => {
     const comment = await repository.commentsCol.getCommentById(id);
     //validation
     if (!comment) {
-        res.sendStatus(400);
-        console.log('that comment doesnt match any of the existents');
+        res.sendStatus(400).send('that comment doesnt match any of the existents');       
     } else {
         res.json(comment);
     }

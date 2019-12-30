@@ -6,12 +6,12 @@ const routerOffensiveWords = express.Router();
 const repository = require('../../repository');
 const defOffensiveWords = require('../../defOffensiveWords.js');
 routerOffensiveWords.post('/', async (req, res) => {
-    // - POST Creación,*/offensivewords*
     const offensiveWord = req.body;
+    const { word, level } = offensiveWord;
     //Validation
-    if (typeof offensiveWord.word != 'string' ||
-        typeof offensiveWord.level != 'number'
-    ) {
+    if (typeof word != 'string' ||
+        typeof level != 'number' ||
+        level > 0 && level >= 5) {
         console.log('petition BODY is not correct');
         res.sendStatus(400);
     } else {
@@ -21,7 +21,7 @@ routerOffensiveWords.post('/', async (req, res) => {
 });
 
 routerOffensiveWords.get('/', async (req, res) => {
-    const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();       
+    const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();
     res.json(allWords);
 });
 

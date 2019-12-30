@@ -38,11 +38,22 @@ module.exports = class OffensiveWords {
     array.forEach(async (item) => {
       const { word, level } = item;
       if (typeof word != 'string' || typeof level != 'number') {
-        console.log('there is a problem with the defaul offensive word array');
+        console.log('there is a problem with the default offensive words list');
       } else {
-        this.collection.insertOne(item);        
+        this.collection.insertOne(item);
       }
     });
   }
 
+  validateComment(text, wordsToCheck) {
+
+    const wordsFoundOnComment = [];
+    wordsToCheck.forEach(offensiveWord => {
+      const { word } = offensiveWord;
+      if (text.includes(word)) {
+        wordsFoundOnComment.push(offensiveWord);
+      }
+    });   
+    return wordsFoundOnComment;
+  }
 }
