@@ -13,12 +13,13 @@ app.use(express.json());
 app.use('/', controller);
 
 async function main() {
-
     await repository.dbConnect();
-
     const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();
-    const defaultWords = await repository.offensiveWordsCol.insertDefaultWords(defOffensiveWords);
-    await (allWords.length !== 0 || defaultWords);    
+    
+    if (allWords.length === 0) {
+        await repository.offensiveWordsCol.insertDefaultWords(defOffensiveWords);
+        console.log('default offensive words list has been inserted')
+    } 
 
     app.listen(PORT, () => console.log(`Server Express started in port ${PORT}`));
 }

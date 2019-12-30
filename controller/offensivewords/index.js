@@ -4,7 +4,7 @@
 const express = require('express');
 const routerOffensiveWords = express.Router();
 const repository = require('../../repository');
-const defOffensiveWords = require('../../defOffensiveWords.js');
+
 routerOffensiveWords.post('/', async (req, res) => {
     const offensiveWord = req.body;
     const { word, level } = offensiveWord;
@@ -48,13 +48,11 @@ routerOffensiveWords.delete('/:id', async (req, res) => {
 
 routerOffensiveWords.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id);
-    console.log(id);
+    const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id);    
     if (!offensiveWord) {
         res.sendStatus(404);
     } else {
-        const offensiveWordReq = req.body;
-        console.log(offensiveWordReq);
+        const offensiveWordReq = req.body;        
         //Validation
         if (
             typeof offensiveWordReq.word != 'string' ||
