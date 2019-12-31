@@ -3,9 +3,15 @@ Se desea implementar un servicio para la gestión de un blog con persistencia y 
 
 Las entidades de información que deberá gestionar el blog son:
 
+*REVISAR -> los comentarios se meten como url a la que haces petición?*
+
 - Post. Cada entrada contiene los siguientes campos: Nombre del autor, Nickname del autor, Titulo, Texto, Lista de comentarios. {author, nickname, title, content, comments}
 
+*REVISAR -> formato de la fecha y cómo se valida*
+
 - Comment. Cada comentario contiene los siguientes campos: Nickname del autor del comentario, Contenido, Fecha del comentario. {nickname, text, date}
+
+*HECHO*
 
 - OffensiveWord: Cada palabra tendrá asociada un campo “level” indicando la gravedad de la palabra de 1 a 5.
     {word, level}
@@ -35,6 +41,15 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - Modificación de un comentario existente
     *'/post/:id/comments/:id'*
 
+    - Adición de un nuevo comentario a una entrada
+    *'/post/:id/comments/'*
+
+    - Modificación de un comentario existente
+    *'/post/:id/comments/:id'*
+
+    - Borrado de un comentario existente en una entrada
+    *'/post/:id/comments/:id'*
+
     - Borrado de un comentario existente en una entrada
     *'/post/:id/comments/:id'*
 
@@ -46,7 +61,19 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - DELETE ONE borrado, */offensivewords/:id*
     - PATCH modificación, */offensivewords/:id*
 
-Si el comentario que se intenta incorporar contiene alguna de las palabras ofensivas registradas en la BBDD, el comentario no se podrá crear. La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel. Las palabras ofensivas estarán almacenadas en la BBDD. Si al arrancar la aplicación se detecta que no hay palabras ofensivas en la BBDD, la aplicación deberá insertar un juego de palabras por defecto.
+*HECHO*
+
+Si el comentario que se intenta incorporar contiene alguna de las palabras ofensivas registradas en la BBDD, el comentario no se podrá crear.
+
+*REVISAR -> estás devolviendo cadena, no json.*
+
+ La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
+ 
+*HECHO*
+
+Las palabras ofensivas estarán almacenadas en la BBDD. Si al arrancar la aplicación se detecta que no hay palabras ofensivas en la BBDD, la aplicación deberá insertar un juego de palabras por defecto.
+
+*HECHO*
 
 # Aspectos técnicos
 La aplicación estará dividida en, al menos, 4 módulos Node: 
@@ -55,9 +82,13 @@ La aplicación estará dividida en, al menos, 4 módulos Node:
 - *repository.js*: Módulo que contendrá el código de acceso a la base de datos.
 - *validator.js*: Validador que verifica que el comentario no contiene ninguna palabra ofensiva.
 
+
+*HECHO*
 ## API REST:
 La API REST deberá cumplir con el nivel de madurez 2 y el formato de las URLs deberá identificar recursos, no acciones.
 Se deberá entregar un fichero postman.json con al menos un ejemplo de cada una de los endpoints de la API REST.
+
+*HECHO*
 
 ## Persistencia:
 La persistencia se implementará con MongoDB de forma obligatoria. Se podrán usar el driver oficial Mongo o el ODM Mongoose.
@@ -65,3 +96,12 @@ Opcionalmente se podrá entregar la práctica con la persistencia de palabras of
 
 
  http://expressjs.com/es/4x/api.html#router
+
+## Control de calidad
+Se deberán implementar tests unitarios del validador con Jest. Estos tests, ya que son unitarios, no deberán acceder a la bbdd real. Es decir, 
+
+- hay que crear un doble del módulo que permite acceder a la base de datos. La funcionalidad que debería verificarse en los tests es:
+
+- Comentario con palabras ofensivas: Con este test se debe verificar que si el comentario tiene una palabra ofensiva, se debe generar el error correspondiente. 
+
+- Comentario sin palabras ofensivas: Con este test se debe verificar que si el comentario no tiene palabras ofensivas debe obtenerse una validación OK.
