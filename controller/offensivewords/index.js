@@ -8,12 +8,14 @@ const repository = require('../../repository');
 routerOffensiveWords.post('/', async (req, res) => {
     const offensiveWord = req.body;
     const { word, level } = offensiveWord;
+    const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();
     //Validation
     if (typeof word != 'string' ||
         typeof level != 'number' ||
-        level > 0 && level >= 5) {
-        console.log('petition BODY is not correct');
-        res.sendStatus(400);
+        level > 0 && level >= 5) {      
+        res.status(400).send('invalid BODY');
+    } else if(repository.offensiveWordsCol.isAlreadyIncluded(offensiveWord,allWords)) {
+        res.status(400).send('Offensive Word is already included.')
     } else {
         await repository.offensiveWordsCol.addOffensiveWord(offensiveWord);
         res.json(offensiveWord);

@@ -7,10 +7,8 @@ module.exports = class OffensiveWords {
   }
 
   addOffensiveWord(offensiveWord) {
-    const newOffensiveWord = {
-      word: offensiveWord.word,
-      level: offensiveWord.level
-    };
+    const { word, level } = offensiveWord
+    const newOffensiveWord = { word, level };
     this.collection.insertOne(newOffensiveWord);
   }
 
@@ -45,15 +43,11 @@ module.exports = class OffensiveWords {
     });
   }
 
-  validateComment(text, wordsToCheck) {
-
-    const wordsFoundOnComment = [];
-    wordsToCheck.forEach(offensiveWord => {
-      const { word } = offensiveWord;
-      if (text.includes(word)) {
-        wordsFoundOnComment.push(offensiveWord);
-      }
-    });   
-    return wordsFoundOnComment;
+  isAlreadyIncluded(offensiveWord, allWords) {  
+    const { word } = offensiveWord
+    const coincidences = allWords.filter(item => item.word === word);
+    if (coincidences.length === 0) {
+      return false;
+    } else { return true }
   }
 }

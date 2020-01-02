@@ -67,8 +67,11 @@ Si el comentario que se intenta incorporar contiene alguna de las palabras ofens
 
 *REVISAR -> estás devolviendo cadena, no json.*
 
- La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
- 
+La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
+
+*OJO*
+Si la palabra ya está en la lista, no debería poder añadirse de nuevo.
+
 *HECHO*
 
 Las palabras ofensivas estarán almacenadas en la BBDD. Si al arrancar la aplicación se detecta que no hay palabras ofensivas en la BBDD, la aplicación deberá insertar un juego de palabras por defecto.
