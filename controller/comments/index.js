@@ -8,12 +8,12 @@ const validator = require('../../validator/');
 
 routerComments.post('/', async (req, res) => {
     const comment = req.body;
-    const { nickname, text, date } = comment;
+    const { nickname, text} = comment;
+   
     //Validation
     if (typeof nickname != 'string' ||
-        typeof text != 'string') {
-        const bodyErr = 'Incorrect BODY';
-        res.status(400).send(bodyErr);
+        typeof text != 'string') {      
+        res.status(400).send('Invalid BODY');
     } else {
         const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
         const validation = await validator(text, wordsToCheck);
@@ -21,12 +21,7 @@ routerComments.post('/', async (req, res) => {
             await repository.commentsCol.addComment(comment);
             res.json(comment);
         } else {
-            let warningMsg = '';
-            validation.forEach(offensiveWord => {
-                const { word, level } = offensiveWord;
-                warningMsg += `The word ${word} is forbidden. It is catalogued as level ${level}.`;
-            });
-            res.status(400).send(warningMsg);
+            res.status(400).json(validation);
         }
     }
 });
