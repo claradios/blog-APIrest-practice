@@ -69,7 +69,7 @@ Si el comentario que se intenta incorporar contiene alguna de las palabras ofens
 
 La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
 
-*OJO*
+*HECHO*
 Si la palabra ya está en la lista, no debería poder añadirse de nuevo.
 
 *HECHO*

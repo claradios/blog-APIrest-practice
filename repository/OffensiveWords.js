@@ -43,11 +43,14 @@ module.exports = class OffensiveWords {
     });
   }
 
-  isAlreadyIncluded(offensiveWord, allWords) {  
+  isAlreadyIncluded(offensiveWord, allWords) {
     const { word } = offensiveWord
     const coincidences = allWords.filter(item => item.word === word);
     if (coincidences.length === 0) {
       return false;
-    } else { return true }
+    } else {
+      return true;
+    }
   }
+  
 }

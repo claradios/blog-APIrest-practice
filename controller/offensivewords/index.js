@@ -10,11 +10,13 @@ routerOffensiveWords.post('/', async (req, res) => {
     const { word, level } = offensiveWord;
     const allWords = await repository.offensiveWordsCol.getAllOffensiveWords();
     //Validation
-    if (typeof word != 'string' ||
+    if (
+        typeof word != 'string' ||
         typeof level != 'number' ||
-        level > 0 && level >= 5) {      
+        level < 0 || level >= 5
+    ) {
         res.status(400).send('invalid BODY');
-    } else if(repository.offensiveWordsCol.isAlreadyIncluded(offensiveWord,allWords)) {
+    } else if (repository.offensiveWordsCol.isAlreadyIncluded(offensiveWord, allWords)) {
         res.status(400).send('Offensive Word is already included.')
     } else {
         await repository.offensiveWordsCol.addOffensiveWord(offensiveWord);
@@ -50,11 +52,11 @@ routerOffensiveWords.delete('/:id', async (req, res) => {
 
 routerOffensiveWords.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id);    
+    const offensiveWord = await repository.offensiveWordsCol.getOffensiveWordById(id);
     if (!offensiveWord) {
         res.sendStatus(404);
     } else {
-        const offensiveWordReq = req.body;        
+        const offensiveWordReq = req.body;
         //Validation
         if (
             typeof offensiveWordReq.word != 'string' ||
