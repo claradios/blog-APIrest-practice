@@ -11,13 +11,14 @@ module.exports = class Comments {
         const newComment = {
             nickname: comment.nickname,
             text: comment.text,
-            date: comment.date
+            date: comment.date,
+            postId: comment.postId,
         }    
         this.collection.insertOne(newComment);          
     }
 
-    getAllComments() {
-        return this.collection.find({}).toArray();
+    getAllComments(postId) {
+        return this.collection.find({postId:postId}).toArray();
     }
 
     getCommentById(id) {
@@ -28,8 +29,8 @@ module.exports = class Comments {
         return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
 
-    deleteAllComments() {
-        return this.collection.deleteMany({});
+    deleteAllComments(postId) {
+        return this.collection.deleteMany({postId:postId});
     }
 
     modifyCommentById(id, commentReq) {

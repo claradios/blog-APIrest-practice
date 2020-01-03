@@ -6,19 +6,15 @@ const routerPosts = express.Router();
 const repository = require('../../repository');
 
 routerPosts.post('/', async (req, res) => {
-
-    const post = req.body;   
-    post.comments = []; 
+    const post = req.body;       
     //Validation
     if (typeof post.author != 'string' ||
         typeof post.nickname != 'string' ||
         typeof post.title != 'string' ||
         typeof post.content != 'string'
     ) {
-        res.sendStatus(400);
-        console.log('validation error');
-    } else {
-        //Create object with needed fields and assign id
+        res.status(400).send('invalid BODY');        
+    } else { 
         await repository.postsCol.addPost(post)
         res.json(post);
     }
@@ -32,7 +28,7 @@ routerPosts.get('/', async (req, res) => {
 routerPosts.get('/:id', async (req, res) => {
     const id = req.params.id;
     const post = await repository.postsCol.getPostById(id);   
-    const allComments = await repository.commentsCol.getAllComments();
+    const allComments = await repository.commentsCol.getAllComments(id);
     post.comments = allComments;
     if (!post) {
         res.sendStatus(404);
@@ -44,7 +40,7 @@ routerPosts.get('/:id', async (req, res) => {
 routerPosts.delete('/:id', async (req, res) => {
     const id = req.params.id;
     const post = await repository.postsCol.getPostById(id);   
-    const allComments =  await repository.commentsCol.deleteAllComments();
+    const allComments =  await repository.commentsCol.deleteAllComments(id);
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -52,6 +48,7 @@ routerPosts.delete('/:id', async (req, res) => {
         res.json(post);
     }
 });
+
 routerPosts.patch('/:id', async (req, res) => {
     const id = req.params.id;    
     const comment = req.body;

@@ -4,15 +4,22 @@
 const express = require('express');
 const routerComments = express.Router();
 const repository = require('../../repository');
-const validator = require('../../validator/');
+const validator = require('../../validator/'); 
 
 routerComments.post('/', async (req, res) => {
     const comment = req.body;
-    const { nickname, text} = comment;
-   
+    const url = req.baseUrl;
+    const urlToArr = url.split('/');   
+    const postId = urlToArr[2];
+    const date = new Date();
+
+    const { nickname, text } = comment;
+    comment.postId = postId;
+    comment.date = date;
+  
     //Validation
     if (typeof nickname != 'string' ||
-        typeof text != 'string') {      
+        typeof text != 'string') {
         res.status(400).send('Invalid BODY');
     } else {
         const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
@@ -26,8 +33,11 @@ routerComments.post('/', async (req, res) => {
     }
 });
 
-routerComments.get('/', async (req, res) => {
-    const allComments = await repository.commentsCol.getAllComments();
+routerComments.get('/', async (req, res) => {    
+    const url = req.baseUrl;
+    const urlToArr = url.split('/');   
+    const postId = urlToArr[2];
+    const allComments = await repository.commentsCol.getAllComments(postId);
     res.json(allComments);
 });
 
@@ -47,8 +57,7 @@ routerComments.delete('/:id', async (req, res) => {
     const comment = await repository.commentsCol.getCommentById(id);
     //Validation
     if (!comment) {
-        res.sendStatus(400);
-        console.log('that comment doesnt match any of the existents');
+        res.status(400).send('Comment not found');      
     } else {
         await repository.commentsCol.deleteCommentById(id);
         res.json(comment);
@@ -56,8 +65,11 @@ routerComments.delete('/:id', async (req, res) => {
 });
 
 routerComments.delete('/', async (req, res) => {
-     const allComments = await repository.commentsCol.deleteAllComments();
-     res.json(allComments);
+    const url = req.baseUrl;
+    const urlToArr = url.split('/');   
+    const postId = urlToArr[2];
+    const allComments = await repository.commentsCol.deleteAllComments(postId);
+    res.json(allComments);
 })
 
 routerComments.put('/:id', async (req, res) => {
