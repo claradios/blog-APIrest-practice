@@ -10,8 +10,6 @@ Las entidades de información que deberá gestionar el blog son:
 
 - Comment. Cada comentario contiene los siguientes campos: Nickname del autor del comentario, Contenido, Fecha del comentario. {nickname, text, date}
 
-## SI
-
 - OffensiveWord: Cada palabra tendrá asociada un campo “level” indicando la gravedad de la palabra de 1 a 5.
     {word, level}
 
@@ -20,43 +18,36 @@ La aplicación ofrecerá los siguientes endpoints REST:
 
 - *Entradas y comentarios*
 
-## SI
     - Recuperación de todas las entradas (sin comentarios)
     *'/post'* --> me salen todos los post que hay (esto es un GET de toda la coleccion)
 
-## SI 
     - Creación de una nueva entrada (sin comentarios)
     *'/post/'* --> ventana para crear uno. Esto es un POST a la colección
 
-## SI
     - Modificación de una entrada existente (se actualizará toda la información de la misma, excepto sus comentarios)
     *'/post/:id/'*
 
-## SI 
     - Recuperación de una entrada (con comentarios)
     *'/post/:id'*--> me sale un único (esto es un GET metiendo el id)
 
-## NO 
     - Borrado de una entrada existente (con todos sus comentarios)
     *'/post/:id/*'
 
-## SI
     - Adición de un nuevo comentario a una entrada
     *'/post/:id/comments/'*
-## SI 
+
     - Modificación de un comentario existente
     *'/post/:id/comments/:id'*
-## SI
+
     - Adición de un nuevo comentario a una entrada
     *'/post/:id/comments/'*
-## SI
+
     - Modificación de un comentario existente
     *'/post/:id/comments/:id'*
-## SI
+
     - Borrado de un comentario existente en una entrada
     *'/post/:id/comments/:id'*
 
-## SI
 - *Palabras ofensivas*
     /offensivewords    
     - POST Creación,*/offensivewords*
@@ -64,23 +55,15 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - DELETE ONE borrado, */offensivewords/:id*
     - PATCH modificación, */offensivewords/:id*
 
-## SI
 
 Si el comentario que se intenta incorporar contiene alguna de las palabras ofensivas registradas en la BBDD, el comentario no se podrá crear.
 
-## SI
-
 La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
-
-## SI
 
 Si la palabra ya está en la lista, no debería poder añadirse de nuevo.
 
-## SI
-
 Las palabras ofensivas estarán almacenadas en la BBDD. Si al arrancar la aplicación se detecta que no hay palabras ofensivas en la BBDD, la aplicación deberá insertar un juego de palabras por defecto.
 
-## SI
 
 # Aspectos técnicos
 La aplicación estará dividida en, al menos, 4 módulos Node: 
