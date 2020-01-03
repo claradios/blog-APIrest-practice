@@ -13,7 +13,7 @@ module.exports = class Comments {
             text: comment.text,
             date: comment.date
         }    
-        this.collection.insertOne(newComment);  
+        this.collection.insertOne(newComment);          
     }
 
     getAllComments() {

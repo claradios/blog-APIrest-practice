@@ -11,8 +11,7 @@ module.exports = class Posts {
             title: post.title,
             content: post.content,
             date: post.date,
-            urlToImage: post.urlToImage,
-            comments: post.comments
+            urlToImage: post.urlToImage            
         };
         return this.collection.insertOne(newPost);
     }
@@ -29,7 +28,7 @@ module.exports = class Posts {
         return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
 
-    modifyPost(postReq,id) {
+    modifyPost(postReq, id) {
         //Create object with needed fields and assign id
         const newPost = {
             author: postReq.author,
@@ -39,8 +38,12 @@ module.exports = class Posts {
             date: postReq.date,
             urlToImage: postReq.urlToImage,
             comments: postReq.comments
-        };     
+        };
         //Update resource      
         return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
+    }
+
+    addCommentArr(id,comment) {    
+        return this.collection.updateOne({ _id: ObjectId(id) }, { $set: { comments:[comment] } }, { upsert: true });
     }
 }

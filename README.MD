@@ -20,21 +20,28 @@ Las entidades de información que deberá gestionar el blog son:
 La aplicación ofrecerá los siguientes endpoints REST:
 
 - *Entradas y comentarios*
+
+## SI
     - Recuperación de todas las entradas (sin comentarios)
     *'/post'* --> me salen todos los post que hay (esto es un GET de toda la coleccion)
 
-    - Recuperación de una entrada (con comentarios)
-    *'/post/:id'*--> me sale un único (esto es un GET metiendo el id)
-
+## SI 
     - Creación de una nueva entrada (sin comentarios)
     *'/post/'* --> ventana para crear uno. Esto es un POST a la colección
 
-    - Borrado de una entrada existente (con todos sus comentarios)
-    *'/post/:id/*'
-
+## SI
     - Modificación de una entrada existente (se actualizará toda la información de la misma, excepto sus comentarios)
     *'/post/:id/'*
 
+## NO 
+    - Recuperación de una entrada (con comentarios)
+    *'/post/:id'*--> me sale un único (esto es un GET metiendo el id)
+
+## NO 
+    - Borrado de una entrada existente (con todos sus comentarios)
+    *'/post/:id/*'
+
+
     - Adición de un nuevo comentario a una entrada
     *'/post/:id/comments/'*
 
@@ -53,7 +60,7 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - Borrado de un comentario existente en una entrada
     *'/post/:id/comments/:id'*
 
-
+## SI
 - *Palabras ofensivas*
     /offensivewords    
     - POST Creación,*/offensivewords*
@@ -65,11 +72,12 @@ La aplicación ofrecerá los siguientes endpoints REST:
 
 Si el comentario que se intenta incorporar contiene alguna de las palabras ofensivas registradas en la BBDD, el comentario no se podrá crear.
 
-*REVISAR -> estás devolviendo cadena, no json.*
+*HECHO*
 
 La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
 
 *HECHO*
+
 Si la palabra ya está en la lista, no debería poder añadirse de nuevo.
 
 *HECHO*
@@ -100,6 +108,7 @@ Opcionalmente se podrá entregar la práctica con la persistencia de palabras of
 
  http://expressjs.com/es/4x/api.html#router
 
+## NO
 ## Control de calidad
 Se deberán implementar tests unitarios del validador con Jest. Estos tests, ya que son unitarios, no deberán acceder a la bbdd real. Es decir, 
 

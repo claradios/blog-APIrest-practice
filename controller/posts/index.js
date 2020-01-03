@@ -7,7 +7,8 @@ const repository = require('../../repository');
 
 routerPosts.post('/', async (req, res) => {
 
-    const post = req.body;    
+    const post = req.body;   
+    post.comments = []; 
     //Validation
     if (typeof post.author != 'string' ||
         typeof post.nickname != 'string' ||
@@ -30,7 +31,10 @@ routerPosts.get('/', async (req, res) => {
 
 routerPosts.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const post = await repository.postsCol.getPostById(id);
+    const post = await repository.postsCol.getPostById(id);   
+    const allComments = await repository.commentsCol.getAllComments();
+    post.comments = allComments;
+    //console.log(allComments);
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -47,6 +51,19 @@ routerPosts.delete('/:id', async (req, res) => {
         await repository.postsCol.deletePostById(id);
         res.json(post);
     }
+});
+routerPosts.patch('/:id', async (req, res) => {
+    //añadir un comentario
+    // https://docs.mongodb.com/manual/reference/operator/update/push/
+    // leer documentación
+    console.log('hola');
+    const id = req.params.id;    
+    const comment = req.body;
+    if(!comment) {
+        res.sendStatus(404);
+    } else {
+        await repository.postCol.addCommentArr(id,comment);
+    }    
 });
 
 routerPosts.put('/:id', async (req, res) => {
