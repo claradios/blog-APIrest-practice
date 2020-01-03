@@ -28,6 +28,10 @@ module.exports = class Comments {
         return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
 
+    deleteAllComments() {
+        return this.collection.deleteMany({});
+    }
+
     modifyCommentById(id, commentReq) {
 
         const newComment = {

@@ -27,10 +27,8 @@ routerComments.post('/', async (req, res) => {
 });
 
 routerComments.get('/', async (req, res) => {
-    // Validation
     const allComments = await repository.commentsCol.getAllComments();
     res.json(allComments);
-
 });
 
 routerComments.get('/:id', async (req, res) => {
@@ -56,6 +54,11 @@ routerComments.delete('/:id', async (req, res) => {
         res.json(comment);
     }
 });
+
+routerComments.delete('/', async (req, res) => {
+     const allComments = await repository.commentsCol.deleteAllComments();
+     res.json(allComments);
+})
 
 routerComments.put('/:id', async (req, res) => {
     const id = req.params.id;

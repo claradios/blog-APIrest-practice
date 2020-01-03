@@ -3,7 +3,6 @@ Se desea implementar un servicio para la gestión de un blog con persistencia y 
 
 Las entidades de información que deberá gestionar el blog son:
 
-*REVISAR -> los comentarios se meten como url a la que haces petición?*
 
 - Post. Cada entrada contiene los siguientes campos: Nombre del autor, Nickname del autor, Titulo, Texto, Lista de comentarios. {author, nickname, title, content, comments}
 
@@ -11,7 +10,7 @@ Las entidades de información que deberá gestionar el blog son:
 
 - Comment. Cada comentario contiene los siguientes campos: Nickname del autor del comentario, Contenido, Fecha del comentario. {nickname, text, date}
 
-*HECHO*
+## SI
 
 - OffensiveWord: Cada palabra tendrá asociada un campo “level” indicando la gravedad de la palabra de 1 a 5.
     {word, level}
@@ -33,7 +32,7 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - Modificación de una entrada existente (se actualizará toda la información de la misma, excepto sus comentarios)
     *'/post/:id/'*
 
-## NO 
+## SI 
     - Recuperación de una entrada (con comentarios)
     *'/post/:id'*--> me sale un único (esto es un GET metiendo el id)
 
@@ -41,22 +40,19 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - Borrado de una entrada existente (con todos sus comentarios)
     *'/post/:id/*'
 
-
+## SI
     - Adición de un nuevo comentario a una entrada
     *'/post/:id/comments/'*
-
+## SI 
     - Modificación de un comentario existente
     *'/post/:id/comments/:id'*
-
+## SI
     - Adición de un nuevo comentario a una entrada
     *'/post/:id/comments/'*
-
+## SI
     - Modificación de un comentario existente
     *'/post/:id/comments/:id'*
-
-    - Borrado de un comentario existente en una entrada
-    *'/post/:id/comments/:id'*
-
+## SI
     - Borrado de un comentario existente en una entrada
     *'/post/:id/comments/:id'*
 
@@ -68,23 +64,23 @@ La aplicación ofrecerá los siguientes endpoints REST:
     - DELETE ONE borrado, */offensivewords/:id*
     - PATCH modificación, */offensivewords/:id*
 
-*HECHO*
+## SI
 
 Si el comentario que se intenta incorporar contiene alguna de las palabras ofensivas registradas en la BBDD, el comentario no se podrá crear.
 
-*HECHO*
+## SI
 
 La petición REST será rechazada con un código de error y se devolverá un JSON con información sobre la palabra ofensiva (o palabras) y su nivel.
 
-*HECHO*
+## SI
 
 Si la palabra ya está en la lista, no debería poder añadirse de nuevo.
 
-*HECHO*
+## SI
 
 Las palabras ofensivas estarán almacenadas en la BBDD. Si al arrancar la aplicación se detecta que no hay palabras ofensivas en la BBDD, la aplicación deberá insertar un juego de palabras por defecto.
 
-*HECHO*
+## SI
 
 # Aspectos técnicos
 La aplicación estará dividida en, al menos, 4 módulos Node: 

@@ -34,7 +34,6 @@ routerPosts.get('/:id', async (req, res) => {
     const post = await repository.postsCol.getPostById(id);   
     const allComments = await repository.commentsCol.getAllComments();
     post.comments = allComments;
-    //console.log(allComments);
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -44,7 +43,8 @@ routerPosts.get('/:id', async (req, res) => {
 
 routerPosts.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const post = await repository.postsCol.getPostById(id);
+    const post = await repository.postsCol.getPostById(id);   
+    const allComments =  await repository.commentsCol.deleteAllComments();
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -53,10 +53,6 @@ routerPosts.delete('/:id', async (req, res) => {
     }
 });
 routerPosts.patch('/:id', async (req, res) => {
-    //añadir un comentario
-    // https://docs.mongodb.com/manual/reference/operator/update/push/
-    // leer documentación
-    console.log('hola');
     const id = req.params.id;    
     const comment = req.body;
     if(!comment) {
