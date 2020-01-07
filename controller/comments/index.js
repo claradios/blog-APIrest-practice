@@ -2,21 +2,20 @@
 // Usa un router configurado en Express.
 
 const express = require('express');
-const routerComments = express.Router();
+const routerComments = express.Router({mergeParams:true});
 const repository = require('../../repository');
 const validator = require('../../validator/'); 
+const ObjectID = require('mongodb').ObjectID;
+//var router = require("express").Router({mergeParams: true});
 
 routerComments.post('/', async (req, res) => {
+   
+    const postId = req.params.id;    
     const comment = req.body;
-    const url = req.baseUrl;
-    const urlToArr = url.split('/');   
-    const postId = urlToArr[2];
-    const date = new Date();
-
     const { nickname, text } = comment;
-    comment.postId = postId;
-    comment.date = date;
-  
+    comment._id = new ObjectID();    
+    comment.date = new Date();
+    
     //Validation
     if (typeof nickname != 'string' ||
         typeof text != 'string') {
@@ -25,7 +24,7 @@ routerComments.post('/', async (req, res) => {
         const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
         const validation = await validator(text, wordsToCheck);
         if (validation.length === 0) {
-            await repository.commentsCol.addComment(comment);
+            await repository.postsCol.addComment(comment, postId);
             res.json(comment);
         } else {
             res.status(400).json(validation);
@@ -54,12 +53,15 @@ routerComments.get('/:id', async (req, res) => {
 
 routerComments.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const comment = await repository.commentsCol.getCommentById(id);
+    console.log(id);
+   const comment = await repository.postsCol.getCommentById(id);
+ console.log(comment);
+    
     //Validation
-    if (!comment) {
+    if (!id) {
         res.status(400).send('Comment not found');      
     } else {
-        await repository.commentsCol.deleteCommentById(id);
+        await repository.postsCol.deleteCommentById(id);
         res.json(comment);
     }
 });
@@ -88,7 +90,7 @@ routerComments.put('/:id', async (req, res) => {
             console.log('the comment BODY doesnt match criteria');
         } else {
             //UPDATE RESOURCE
-            await repository.commentsCol.modifyCommentById(id, commentReq);
+            await repository.postsCol.modifyCommentById(id, commentReq);
             res.json(commentReq);
         }
     }

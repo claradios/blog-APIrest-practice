@@ -2,7 +2,7 @@ const validator = require('../validator');
 
 describe('comment validation according with forbidden words', ()=> {
 
-    test('comment contains forbidden words->returns [{word:"cerdo",level:2}]', () => {
+    test('if comment contains cerdo, validator returns [{word:"cerdo",level:2}]', () => {
         const text = 'Tío eres un cerdo, deja de escribir estas chorradas';
         const wordsToCheck = [{word:"cerdo",level:2},{word:"zorra",level:4}];
         const output = [{word:"cerdo",level:2}];
@@ -10,7 +10,8 @@ describe('comment validation according with forbidden words', ()=> {
 
         expect(result).toEqual(output);
     });
-    test('comment without forbidden words->returns []', () => {
+    
+    test('comment without forbidden words,validator returns []', () => {
         const text = 'Hola a todos, quería saludar desde Madrid.';
         const wordsToCheck = [{word:"cerdo",level:2},{word:"zorra",level:4}];
         const output = [];

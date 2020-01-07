@@ -1,5 +1,4 @@
 const ObjectId = require('mongodb').ObjectId;
-const defaultWords = require('../defOffensiveWords');
 module.exports = class OffensiveWords {
   constructor(conn) {
     this.conn = conn;

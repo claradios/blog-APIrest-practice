@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"comments\": \"http://localhost:3000/posts/1f934386-0cae-47ae-846b-bb0bc134303b/comments\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
+					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/",
@@ -273,7 +273,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Quería saludar a todos los lectores. Hola desde Canarias\",\n\t\"date\": \"2020-04-06\"}"
+					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Quería saludar a todos los lectores. Hola desde Canarias\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/offensivewords/",
@@ -344,13 +344,13 @@
 			"response": []
 		},
 		{
-			"name": "Modify Offensive Word PUT",
+			"name": "Modify comment PUT",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Buenas tardes.Quería saludar a todos los lectores. Hola desde Canarias\",\n\t\"date\": \"2020-04-06\"}"
+					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Buenas tardes.Quería saludar a todos los lectores. Hola desde Canarias\"}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",

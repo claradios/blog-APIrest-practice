@@ -28,8 +28,6 @@ routerPosts.get('/', async (req, res) => {
 routerPosts.get('/:id', async (req, res) => {
     const id = req.params.id;
     const post = await repository.postsCol.getPostById(id);   
-    const allComments = await repository.commentsCol.getAllComments(id);
-    post.comments = allComments;
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -39,8 +37,7 @@ routerPosts.get('/:id', async (req, res) => {
 
 routerPosts.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const post = await repository.postsCol.getPostById(id);   
-    const allComments =  await repository.commentsCol.deleteAllComments(id);
+    const post = await repository.postsCol.getPostById(id);       
     if (!post) {
         res.sendStatus(404);
     } else {

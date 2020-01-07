@@ -18,7 +18,7 @@ async function main() {
     
     if (allWords.length === 0) {
         await repository.offensiveWordsCol.insertDefaultWords(defOffensiveWords);
-        console.log('default offensive words list has been inserted')
+        console.log('Default offensive words list has been inserted.')
     } 
 
     app.listen(PORT, () => console.log(`Server Express started in port ${PORT}`));

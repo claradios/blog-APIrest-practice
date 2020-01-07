@@ -10,14 +10,13 @@ module.exports = class Posts {
             nickname: post.nickname,
             title: post.title,
             content: post.content,
-            date: post.date,
-            urlToImage: post.urlToImage            
+            urlToImage: post.urlToImage
         };
         return this.collection.insertOne(newPost);
     }
 
     getAllPosts() {
-        return this.collection.find({}).toArray();
+        return this.collection.find({}).project({ comments: 0 }).toArray();
     }
 
     getPostById(id) {
@@ -35,15 +34,51 @@ module.exports = class Posts {
             nickname: postReq.nickname,
             title: postReq.title,
             content: postReq.content,
-            date: postReq.date,
-            urlToImage: postReq.urlToImage,
-            comments: postReq.comments
+            urlToImage: postReq.urlToImage
         };
         //Update resource      
         return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
     }
 
-    addCommentArr(id,comment) {    
-        return this.collection.updateOne({ _id: ObjectId(id) }, { $set: { comments:[comment] } }, { upsert: true });
+    // addCommentArr(id, comment) {
+    //     return this.collection.updateOne({ _id: ObjectId(id) }, { $set: { comments: [comment] } }, { upsert: true });
+    // }
+
+    addComment(comment, postId) {
+        const newComment = {
+            nickname: comment.nickname,
+            text: comment.text,
+            date: comment.date,
+            _id: comment._id,
+        }
+        console.log(newComment);
+        console.log(postId);
+        this.collection.updateOne({ _id: ObjectId(postId) }, { $push: { comments: newComment } });
+    }
+
+    getCommentById(id) {
+        // return this.collection.findOne({ _id: new ObjectId(id) });
+        return this.collection.find({ comments: { $all: [{ _id: ObjectId(id) }] } }).toArray();
+    }
+
+    deleteCommentById(postId, id) {
+        console.log(postId);
+        console.log(id);
+        return this.collection.updateOne({ _id: ObjectId(postId) }, { $pull: { comments: { $in: [{ _id: ObjectId(id) }] } } });
+    }
+
+    deleteAllComments(postId) {
+        return this.collection.deleteMany({ postId: postId });
+    }
+
+    modifyCommentById(id, commentReq) {
+
+        const newComment = {
+            nickname: commentReq.nickname,
+            text: commentReq.text,
+            date: commentReq.date
+        };
+
+        return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newComment });
     }
 }

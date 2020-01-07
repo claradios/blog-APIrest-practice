@@ -28,16 +28,10 @@ La aplicación ofrecerá los siguientes endpoints REST:
     *'/post/:id/'*
 
     - Recuperación de una entrada (con comentarios)
-    *'/post/:id'*--> me sale un único (esto es un GET metiendo el id)
+    *'/post/:id'*
 
     - Borrado de una entrada existente (con todos sus comentarios)
     *'/post/:id/*'
-
-    - Adición de un nuevo comentario a una entrada
-    *'/post/:id/comments/'*
-
-    - Modificación de un comentario existente
-    *'/post/:id/comments/:id'*
 
     - Adición de un nuevo comentario a una entrada
     *'/post/:id/comments/'*
