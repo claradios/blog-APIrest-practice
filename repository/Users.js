@@ -15,8 +15,7 @@ module.exports = class Users {
             nickname: user.nickname,
             password: passwordHash,
             name: user.name
-        }
-        console.log(newUser);
+        }       
         this.collection.insertOne(newUser);
     }
 
@@ -31,6 +30,10 @@ module.exports = class Users {
     getUserByName(name) {
         return this.collection.findOne({name: name });
     }}
+
+    // isAlreadyIncluded() {
+
+    // }
 
 //     deleteCommentById(id) {
 //         return this.collection.deleteOne({ _id: new ObjectId(id) });

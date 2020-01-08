@@ -5,12 +5,13 @@ module.exports = class Posts {
         this.collection = this.conn.db().collection('posts');
     }
     addPost(post) {
+        const {author, nickname, title, content, urlToImage} = post;
         const newPost = {
-            author: post.author,
-            nickname: post.nickname,
-            title: post.title,
-            content: post.content,
-            urlToImage: post.urlToImage
+            author,
+            nickname,
+            title,
+            content,
+            urlToImage
         };
         return this.collection.insertOne(newPost);
     }
@@ -28,28 +29,28 @@ module.exports = class Posts {
     }
 
     modifyPost(postReq, id) {
-        //Create object with needed fields and assign id
+       const {author, nickname, title, content, urlToImage} = postReq;
         const newPost = {
-            author: postReq.author,
-            nickname: postReq.nickname,
-            title: postReq.title,
-            content: postReq.content,
-            urlToImage: postReq.urlToImage
+            author,
+            nickname,
+            title,
+            content,
+            urlToImage
         };
-        //Update resource      
-        return this.collection.updateOne({ _id: new ObjectId(id) }, { $set: newPost });
+        //UPDATE RESOURCE      
+        return this.collection.updateOne(
+            { _id: new ObjectId(id) },
+            { $set: newPost }
+        );
     }
 
-    // addCommentArr(id, comment) {
-    //     return this.collection.updateOne({ _id: ObjectId(id) }, { $set: { comments: [comment] } }, { upsert: true });
-    // }
-
     addComment(comment, postId) {
+        const {nickname, text, date, _id} = comment;
         const newComment = {
-            nickname: comment.nickname,
-            text: comment.text,
-            date: comment.date,
-            _id: comment._id,
+            nickname,
+            text,
+            date,
+            _id
         }
 
         this.collection.updateOne(
@@ -58,12 +59,25 @@ module.exports = class Posts {
         );
     }
 
-    findCommentById(id) {
-        // return this.collection.findOne({ _id: new ObjectId(id) });
+    findCommentById(id) {       
         return this.collection.find(
             { comments: { $elemMatch: { _id: ObjectId(id) } } }
         ).toArray();
 
+    }
+
+    findSpecificComment(id) {
+        return this.collection.aggregate([
+            { "$match": { 'comments._id': ObjectId(id) }},
+            { "$project": {
+                "comments": { "$filter": {
+                    "input": '$comments',
+                    "as": 'comments',
+                    "cond": { "$eq": ['$$comments._id', ObjectId(id)]}
+                }},
+                _id: 0
+            }}
+          ]).toArray();
     }
 
     deleteCommentById(postId, id) {
@@ -74,13 +88,14 @@ module.exports = class Posts {
     }
 
     modifyCommentById(postId, id, commentReq) {
+        const {nickname, text, _id} = commentReq;
         const newComment = {
-            nickname: commentReq.nickname,
-            text: commentReq.text,
-            date: `${new Date()} (last edited)`,
-            _id: id,
+            nickname,
+            text,
+            _id,
+            date: `${new Date()} (last edited)`            
         };
-       // https://blog.fullstacktraining.com/retrieve-only-queried-element-in-an-object-array-in-mongodb-collection/
+        // https://blog.fullstacktraining.com/retrieve-only-queried-element-in-an-object-array-in-mongodb-collection/
         return this.collection.updateOne(
             { _id: ObjectId(postId), "comments._id": ObjectId(id) },
             { $set: { "comments.$": newComment } }

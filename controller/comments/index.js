@@ -35,18 +35,19 @@ routerComments.post('/', async (req, res) => {
 
 routerComments.delete('/:id', async (req, res) => {
     const id = req.params.id;
-    const post = await repository.postsCol.findCommentById(id);
-     
-    const url = req.baseUrl;
-    const urlToArr = url.split('/');   
-    const postId = urlToArr[2];    
+   
+    const comment = await repository.postsCol.findCommentById(id);
     
+    const url = req.baseUrl;
+    const urlToArr = url.split('/');
+    const postId = urlToArr[2];
+
     //Validation
-    if (!post) {
+    if (comment.length === s0) {
         res.status(400).send('Comment not found');
     } else {
         await repository.postsCol.deleteCommentById(postId, id);
-        res.json(post);
+        res.json(comment);
     }
 });
 
@@ -55,27 +56,44 @@ routerComments.put('/:id', async (req, res) => {
     const id = req.params.id;
 
     const url = req.baseUrl;
-    const urlToArr = url.split('/');   
-    const postId = urlToArr[2]; 
+    const urlToArr = url.split('/');
+    const postId = urlToArr[2];
 
-    const comment = await repository.postsCol.findCommentById(id);
-    //EXISTENCE Validation
-    if (!comment) {
-        res.sendStatus(400);
-        console.log('the comment doesnt match any of the existents');
+    //FIND COMMENT TO EDIT
+    
+    const searchComment = await repository.postsCol.findSpecificComment(id);
+    const commentToArray = searchComment[0].comments;
+    const finalComment = commentToArray[0];
+    console.log(finalComment);  
+  
+    if (searchComment.length === 0) {
+        res.status(400).send('the comment doesnt match any of the existents');       
     } else {
         const commentReq = req.body;
-        //BODY Validation
-        if (typeof commentReq.nickname != 'string' ||
-            typeof commentReq.text != 'string') {
-            res.status(400).send('the comment BODY doesnt match criteria');           
+        const { text, nickname } = commentReq;
+        //commentReq._id = id;
+        //BODY VALIDATION
+        if (typeof nickname != 'string' ||
+            typeof text != 'string') {
+            res.status(400).send('invalid BODY');
         } else {
-            //UPDATE RESOURCE          
-            await repository.postsCol.modifyCommentById(postId, id, commentReq);
-            res.json(commentReq);
+            //WORDS VALIDATION
+            const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
+            const validation = await validator(text, wordsToCheck);
+            if (validation.length === 0) {
+                //UPDATE RESOURCE 
+                await repository.postsCol.modifyCommentById(postId, id, commentReq);
+                res.json(commentReq);
+            } else {
+                res.status(400).json(validation);
+            }
         }
     }
 });
+
+
+
+
 
 module.exports = routerComments;
 

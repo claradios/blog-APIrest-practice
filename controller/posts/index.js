@@ -46,27 +46,15 @@ routerPosts.delete('/:id', async (req, res) => {
     }
 });
 
-routerPosts.patch('/:id', async (req, res) => {
-    const id = req.params.id;    
-    const comment = req.body;
-    if(!comment) {
-        res.sendStatus(404);
-    } else {
-        await repository.postCol.addCommentArr(id,comment);
-    }    
-});
-
 routerPosts.put('/:id', async (req, res) => {
     const id = req.params.id;
     const post = await repository.postsCol.getPostById(id);
-    console.log(id);
-    console.log(post);
+   
     if (!post) {
-        res.sendStatus(404);
-        console.log('there is not such an element on the collection');
+        res.status(404).send('there is not such an element on the collection');       
     } else {
         const postReq = req.body;
-        console.log(postReq);
+      
         //Validation
         if (typeof postReq.author != 'string' ||
             typeof postReq.nickname != 'string' ||
