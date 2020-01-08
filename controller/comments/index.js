@@ -57,7 +57,7 @@ routerComments.put('/:id', async (req, res) => {
     const url = req.baseUrl;
     const urlToArr = url.split('/');   
     const postId = urlToArr[2]; 
-    
+
     const comment = await repository.postsCol.findCommentById(id);
     //EXISTENCE Validation
     if (!comment) {
@@ -70,8 +70,7 @@ routerComments.put('/:id', async (req, res) => {
             typeof commentReq.text != 'string') {
             res.status(400).send('the comment BODY doesnt match criteria');           
         } else {
-            //UPDATE RESOURCE
-          
+            //UPDATE RESOURCE          
             await repository.postsCol.modifyCommentById(postId, id, commentReq);
             res.json(commentReq);
         }

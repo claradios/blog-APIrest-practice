@@ -51,7 +51,7 @@ module.exports = class Posts {
             date: comment.date,
             _id: comment._id,
         }
-       
+
         this.collection.updateOne(
             { _id: ObjectId(postId) },
             { $push: { comments: newComment } }
@@ -62,8 +62,8 @@ module.exports = class Posts {
         // return this.collection.findOne({ _id: new ObjectId(id) });
         return this.collection.find(
             { comments: { $elemMatch: { _id: ObjectId(id) } } }
-         ).toArray();
-    
+        ).toArray();
+
     }
 
     deleteCommentById(postId, id) {
@@ -72,22 +72,18 @@ module.exports = class Posts {
             { "$pull": { "comments": { "_id": ObjectId(id) } } }
         );
     }
-   
+
     modifyCommentById(postId, id, commentReq) {
         const newComment = {
             nickname: commentReq.nickname,
             text: commentReq.text,
-            date: commentReq.date
+            date: `${new Date()} (edited)`,
+            _id: id,
         };
-
+        //no está llegando la fecha original ni el id
         return this.collection.updateOne(
             { _id: ObjectId(postId), "comments._id": ObjectId(id) },
-            { $set: { "comments.$.text" : newComment.text } }
-         )
-
-        // return this.collection.updateOne(
-        //     { _id: ObjectId(id) }, 
-        //     { $set: {comments: newComment} }
-        //     );
+            { $set: { "comments.$": newComment } }
+        )
     }
 }
