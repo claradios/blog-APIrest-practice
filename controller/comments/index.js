@@ -36,10 +36,11 @@ routerComments.post('/', async (req, res) => {
 routerComments.delete('/:id', async (req, res) => {
     const id = req.params.id;
     const post = await repository.postsCol.findCommentById(id);
-    const postId = post._id;  
-    console.log(id,postId);
-    const comment = await repository.postCol.findComment(id);
-    console.log(comment);
+     
+    const url = req.baseUrl;
+    const urlToArr = url.split('/');   
+    const postId = urlToArr[2];    
+    
     //Validation
     if (!post) {
         res.status(400).send('Comment not found');
@@ -52,7 +53,12 @@ routerComments.delete('/:id', async (req, res) => {
 
 routerComments.put('/:id', async (req, res) => {
     const id = req.params.id;
-    const comment = await repository.commentsCol.getCommentById(id);
+
+    const url = req.baseUrl;
+    const urlToArr = url.split('/');   
+    const postId = urlToArr[2]; 
+    
+    const comment = await repository.postsCol.findCommentById(id);
     //EXISTENCE Validation
     if (!comment) {
         res.sendStatus(400);
@@ -62,11 +68,11 @@ routerComments.put('/:id', async (req, res) => {
         //BODY Validation
         if (typeof commentReq.nickname != 'string' ||
             typeof commentReq.text != 'string') {
-            res.sendStatus(400);
-            console.log('the comment BODY doesnt match criteria');
+            res.status(400).send('the comment BODY doesnt match criteria');           
         } else {
             //UPDATE RESOURCE
-            await repository.postsCol.modifyCommentById(id, commentReq);
+          
+            await repository.postsCol.modifyCommentById(postId, id, commentReq);
             res.json(commentReq);
         }
     }

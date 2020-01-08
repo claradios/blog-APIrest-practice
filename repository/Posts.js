@@ -51,8 +51,7 @@ module.exports = class Posts {
             date: comment.date,
             _id: comment._id,
         }
-        console.log(newComment);
-        console.log(postId);
+       
         this.collection.updateOne(
             { _id: ObjectId(postId) },
             { $push: { comments: newComment } }
@@ -74,7 +73,7 @@ module.exports = class Posts {
         );
     }
    
-    modifyCommentById(id, commentReq) {
+    modifyCommentById(postId, id, commentReq) {
         const newComment = {
             nickname: commentReq.nickname,
             text: commentReq.text,
@@ -82,8 +81,13 @@ module.exports = class Posts {
         };
 
         return this.collection.updateOne(
-            { _id: ObjectId(id) }, 
-            { $set: {comments: newComment} }
-            );
+            { _id: ObjectId(postId), "comments._id": ObjectId(id) },
+            { $set: { "comments.$.text" : newComment.text } }
+         )
+
+        // return this.collection.updateOne(
+        //     { _id: ObjectId(id) }, 
+        //     { $set: {comments: newComment} }
+        //     );
     }
 }
