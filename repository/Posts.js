@@ -77,13 +77,13 @@ module.exports = class Posts {
         const newComment = {
             nickname: commentReq.nickname,
             text: commentReq.text,
-            date: `${new Date()} (edited)`,
+            date: `${new Date()} (last edited)`,
             _id: id,
         };
-        //no está llegando la fecha original ni el id
+       
         return this.collection.updateOne(
             { _id: ObjectId(postId), "comments._id": ObjectId(id) },
             { $set: { "comments.$": newComment } }
-        )
+        );
     }
 }
