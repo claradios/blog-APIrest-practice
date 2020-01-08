@@ -6,6 +6,37 @@
 	},
 	"item": [
 		{
+			"name": "New User POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"password\": \"5fjdkvmgkxn\"}"
+				},
+				"url": {
+					"raw": "https://localhost:3443/users/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "New Post POST",
 			"request": {
 				"method": "POST",
@@ -22,12 +53,12 @@
 					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						""
@@ -46,12 +77,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						""
@@ -70,12 +101,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/1f934386-0cae-47ae-846b-bb0bc134303b",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/1f934386-0cae-47ae-846b-bb0bc134303b",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"1f934386-0cae-47ae-846b-bb0bc134303b"
@@ -94,12 +125,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
@@ -118,12 +149,12 @@
 					"raw": "{\n\t\"author\": \"Jaime Molina\",\n\t\"nickname\": \"molina52\",\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
@@ -149,12 +180,12 @@
 					"raw": "{\n\t\"word\": \"zorra\",\n\t\"level\":4}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/offensivewords/",
-					"protocol": "http",
+					"raw": "https://localhost:3443/offensivewords/",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"offensivewords",
 						""
@@ -173,12 +204,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/offensivewords/",
-					"protocol": "http",
+					"raw": "https://localhost:3443/offensivewords/",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"offensivewords",
 						""
@@ -197,12 +228,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/offensivewords/1f934386-0cae-47ae-846b-bb0bc134303b",
-					"protocol": "http",
+					"raw": "https://localhost:3443/offensivewords/1f934386-0cae-47ae-846b-bb0bc134303b",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"offensivewords",
 						"1f934386-0cae-47ae-846b-bb0bc134303b"
@@ -221,12 +252,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",
-					"protocol": "http",
+					"raw": "https://localhost:3443/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"offensivewords",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
@@ -245,12 +276,12 @@
 					"raw": "{\n\t\"word\": \"zorra\",\n\t\"level\":4}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",
-					"protocol": "http",
+					"raw": "https://localhost:3443/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"offensivewords",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
@@ -276,12 +307,12 @@
 					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Quería saludar a todos los lectores. Hola desde Canarias\"}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/offensivewords/",
-					"protocol": "http",
+					"raw": "https://localhost:3443/offensivewords/",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
@@ -301,12 +332,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
@@ -327,12 +358,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
@@ -353,12 +384,12 @@
 					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Buenas tardes.Quería saludar a todos los lectores. Hola desde Canarias\"}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
-					"protocol": "http",
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3443",
 					"path": [
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845",

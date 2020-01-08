@@ -3,6 +3,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const Posts = require('./Posts');
 const OffensiveWords = require('./OffensiveWords');
+const Users = require('./Users.js');
 const url = "mongodb://localhost:27017/postsDB";
 
 module.exports = {
@@ -14,6 +15,7 @@ module.exports = {
         //colecciones: 
         this.postsCol = new Posts(conn);
         this.offensiveWordsCol = new OffensiveWords(conn);
+        this.usersCol = new Users(conn);
         console.log("Connected to Mongo");
     }
 };

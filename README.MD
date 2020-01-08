@@ -93,3 +93,16 @@ Se deberán implementar tests unitarios del validador con Jest. Estos tests, ya 
 
 
 aquí por ejemplo tendŕias una estructura hecha , ejemplo de boiler plate: https://express-rest-api-generato.readthedocs.io/en/latest/ 
+
+necesitamos poner las credenciales (login y password) y enviarlas en la cabecera *Authorization*.
+
+- El valor se calcula como `'Basic '+base64(login+':'+password)`
+- En postman se especifica el tipo de autorizacion "basic auth"
+- La autenticación se puede hacer directamente con express pero rhay un framework llamado passport que vamos a usar.
+
+`npm install --save passport`
+`npm install --save passport-http`
+
+vamos a usar BCrypt como función HASH que encriptará nuestras contraseñas antes de guardarlas.
+para autenticar a un usuario , se calcula el hash de la password introducida y se compara con el hash guardado.
+`npm install --save bcryptjs`
