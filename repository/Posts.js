@@ -80,7 +80,7 @@ module.exports = class Posts {
             date: `${new Date()} (last edited)`,
             _id: id,
         };
-       
+       // https://blog.fullstacktraining.com/retrieve-only-queried-element-in-an-object-array-in-mongodb-collection/
         return this.collection.updateOne(
             { _id: ObjectId(postId), "comments._id": ObjectId(id) },
             { $set: { "comments.$": newComment } }

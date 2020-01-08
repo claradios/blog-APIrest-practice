@@ -90,3 +90,6 @@ Se deberán implementar tests unitarios del validador con Jest. Estos tests, ya 
 - Comentario con palabras ofensivas: Con este test se debe verificar que si el comentario tiene una palabra ofensiva, se debe generar el error correspondiente. 
 
 - Comentario sin palabras ofensivas: Con este test se debe verificar que si el comentario no tiene palabras ofensivas debe obtenerse una validación OK.
+
+
+aquí por ejemplo tendŕias una estructura hecha , ejemplo de boiler plate: https://express-rest-api-generato.readthedocs.io/en/latest/ 
