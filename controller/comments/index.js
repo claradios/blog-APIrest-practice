@@ -10,7 +10,7 @@ const ObjectID = require('mongodb').ObjectID;
 
 routerComments.post('/', async (req, res) => {
 
-    const postId = req.params.id;
+    const postId = req.params.postId;
     const comment = req.body;
     const { nickname, text } = comment;
     comment._id = new ObjectID();
@@ -33,35 +33,31 @@ routerComments.post('/', async (req, res) => {
 });
 
 
-routerComments.delete('/:id', async (req, res) => {
-    const id = req.params.id;
+routerComments.delete('/:commentId', async (req, res) => {
+    const postId = req.params.postId;
+    const commentId = req.params.commentId;
 
-    const comment = await repository.postsCol.findCommentById(id);
-
-    const url = req.baseUrl;
-    const urlToArr = url.split('/');
-    const postId = urlToArr[2];
+    const comment = await repository.postsCol.findCommentById(commentId);
+  
+    
 
     //Validation
     if (comment.length === s0) {
         res.status(400).send('Comment not found');
     } else {
-        await repository.postsCol.deleteCommentById(postId, id);
+        await repository.postsCol.deleteCommentById(postId, commentId);
         res.json(comment);
     }
 });
 
 ///posts/:postId/comments/:commentId
-routerComments.put('/:id', async (req, res) => {
-    const id = req.params.id;
-    //const postId = req.params.postId
-    const url = req.baseUrl;
-    const urlToArr = url.split('/');
-    const postId = urlToArr[2];
-
+routerComments.put('/:commentId', async (req, res) => {
+    const commentId = req.params.commentId;
+    const postId = req.params.postId
+   
     //FIND COMMENT TO EDIT
 
-    const searchComment = await repository.postsCol.findSpecificComment(id);    
+    const searchComment = await repository.postsCol.findSpecificComment(commentId);    
     const originalComment = searchComment[0].comments[0];   
     
     const { date } = originalComment;
@@ -83,7 +79,7 @@ routerComments.put('/:id', async (req, res) => {
             const validation = await validator(text, wordsToCheck);
             if (validation.length === 0) {
                 //UPDATE RESOURCE 
-                await repository.postsCol.modifyCommentById(postId, id, commentReq);
+                await repository.postsCol.modifyCommentById(postId, commentId, commentReq);
                 res.json(commentReq);
             } else {
                 res.status(400).json(validation);

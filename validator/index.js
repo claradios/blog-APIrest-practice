@@ -2,10 +2,28 @@
 
 module.exports = (text, wordsToCheck) => {
     const wrongWords = [];
+    const lowerText = text.toLowerCase();
     wordsToCheck.forEach(offensiveWord => {
-        if (text.includes(offensiveWord.word)) {
-            wrongWords.push(offensiveWord);
-        }
+        const { word } = offensiveWord;
+        const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
+      
+        const options = [
+            ` ${word} `,
+            ` ${word},`,
+            ` ${word}.`,
+            ` ${word}?`,
+            ` ${word}!`,
+            `${capitalized} `,
+            `${capitalized},`,
+            `${capitalized}.`,
+            `${capitalized}?`,
+            `${capitalized}!`,    
+        ]
+
+        options.forEach(opt => {
+            if (lowerText.includes(opt)) { wrongWords.push(offensiveWord) }
+        });
     });
+
     return wrongWords;
 }

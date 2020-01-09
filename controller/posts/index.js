@@ -25,8 +25,8 @@ routerPosts.get('/', async (req, res) => {
     res.json(allPosts);
 });
 
-routerPosts.get('/:id', async (req, res) => {
-    const id = req.params.id;
+routerPosts.get('/:postId', async (req, res) => {
+    const id = req.params.postId;
     const post = await repository.postsCol.getPostById(id);   
     if (!post) {
         res.sendStatus(404);
@@ -35,8 +35,8 @@ routerPosts.get('/:id', async (req, res) => {
     }
 });
 
-routerPosts.delete('/:id', async (req, res) => {
-    const id = req.params.id;
+routerPosts.delete('/:postId', async (req, res) => {
+    const id = req.params.postId;
     const post = await repository.postsCol.getPostById(id);       
     if (!post) {
         res.sendStatus(404);
@@ -46,8 +46,8 @@ routerPosts.delete('/:id', async (req, res) => {
     }
 });
 
-routerPosts.put('/:id', async (req, res) => {
-    const id = req.params.id;
+routerPosts.put('/:postId', async (req, res) => {
+    const id = req.params.postId;
     const post = await repository.postsCol.getPostById(id);
    
     if (!post) {

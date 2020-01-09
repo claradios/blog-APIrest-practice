@@ -7,7 +7,10 @@ module.exports = class OffensiveWords {
 
   addOffensiveWord(offensiveWord) {
     const { word, level } = offensiveWord
-    const newOffensiveWord = { word, level };
+    const newOffensiveWord = {
+      word: word.toLowerCase(),
+      level
+    };
     this.collection.insertOne(newOffensiveWord);
   }
 
@@ -51,5 +54,5 @@ module.exports = class OffensiveWords {
       return true;
     }
   }
-  
+
 }
