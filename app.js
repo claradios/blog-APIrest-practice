@@ -13,7 +13,12 @@ const https = require('https');
 // autenticación
 const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
+// jwt
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwt = require("jsonwebtoken");
 
+const SECRET_KEY = "SECRET_KEY"
 const app = express();
 
 passport.use(new BasicStrategy(verify));
@@ -23,13 +28,50 @@ app.use(express.json());
 app.use('/', controller);
 
 
-function verify(name, password, done) {
-    if (name == 'admin' && password == 'pass') {
-    return done(null, { name, password });
+async function verify(username, password, done) {
+
+    const user = await repository.usersCol.findUser(username);
+
+    if (!user) {
+        return done(null, false, { message: 'User not found' });
+    }
+
+    if (await repository.usersCol.verifyPassword(user, password)) {
+        return done(null, user);
     } else {
-    return done(null, false, { message: 'Incorrect username or password' });
+        return done(null, false, { message: 'Incorrect password' });
     }
+}
+
+app.post("/login",
+    passport.authenticate('basic', { session: false }),
+    (req, res) => {
+
+        const { username } = req.user;
+
+        const opts = { expiresIn: 120 }; //token expires in 2min
+        const token = jwt.sign({ username }, SECRET_KEY, opts);
+
+        return res.status(200).json({ message: "Auth Passed", token });
+
+    });
+
+const jwtOpts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: SECRET_KEY
+}
+
+passport.use(new JwtStrategy(jwtOpts, async (payload, done) => {
+
+    var user = await users.find(payload.username);
+
+    if (user) {
+        return done(null, user);
+    } else {
+        return done(null, false, { message: 'User not found' });
     }
+
+}));
 
 async function main() {
     await repository.dbConnect();
@@ -39,7 +81,7 @@ async function main() {
         await repository.offensiveWordsCol.insertDefaultWords(defOffensiveWords);
         console.log('Default offensive words list has been inserted.')
     }
-  
+
     https.createServer({
         key: fs.readFileSync('server.key'),
         cert: fs.readFileSync('server.cert')

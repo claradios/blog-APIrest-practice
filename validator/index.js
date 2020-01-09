@@ -4,6 +4,7 @@ module.exports = (text = '', wordsToCheck = []) => {
     const wrongWords = [];
     const lowerText = text.toLowerCase();
     wordsToCheck.forEach(offensiveWord => {
+        
         const { word } = offensiveWord;
         const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
 
