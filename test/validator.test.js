@@ -89,6 +89,24 @@ describe('comment validation ', () => {
         expect(result).toEqual(output);
     });
 
+    test('it returns [{word:"cerdo",level:2}] if "Cerdo" starts sentence ', () => {
+        const text = 'CeRdO!!!';
+        const wordsToCheck = [{ word: "cerdo", level: 2 }, { word: "zorra", level: 4 }];
+        const output = [{ word: "cerdo", level: 2 }];
+        const result = validator(text, wordsToCheck);
+
+        expect(result).toEqual(output);
+    });
+
+    test('it returns [] if "disPUTA",', () => {
+        const text = 'Hubo una fuerte disPUTA ';
+        const wordsToCheck = [{ word: "puta", level: 2 }, { word: "zorra", level: 4 }];
+        const output = [];
+        const result = validator(text, wordsToCheck);
+
+        expect(result).toEqual(output);
+    });
+
     test('it returns [] if "imputado",', () => {
         const text = 'Los políticos han de ser imputados';
         const wordsToCheck = [{ word: "puta", level: 2 }, { word: "zorra", level: 4 }];
