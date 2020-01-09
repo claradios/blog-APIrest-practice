@@ -1,6 +1,13 @@
 const validator = require('../validator');
 
 describe('comment validation ', () => {
+    test('it returns [] if no parameters', () => {             
+        const output = [];
+        const result = validator();
+
+        expect(result).toEqual(output);
+    });
+    
     test('it returns [] if not forbidden words', () => {
         const text = 'Hola a todos, quería saludar desde Madrid.';
         const wordsToCheck = [{ word: "cerdo", level: 2 }, { word: "zorra", level: 4 }];

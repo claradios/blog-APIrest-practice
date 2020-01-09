@@ -5,7 +5,7 @@ const express = require('express');
 const routerPosts = express.Router();
 const repository = require('../../repository');
 
-routerPosts.post('/', async (req, res) => {
+routerPosts.post('/',async (req, res) => {
     const post = req.body;       
     //Validation
     if (typeof post.author != 'string' ||

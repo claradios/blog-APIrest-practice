@@ -1,6 +1,6 @@
 //Validador que verifica que el comentario no contiene ninguna palabra ofensiva.
 
-module.exports = (text, wordsToCheck) => {
+module.exports = (text ='', wordsToCheck = []) => {
     const wrongWords = [];
     const lowerText = text.toLowerCase();
     wordsToCheck.forEach(offensiveWord => {

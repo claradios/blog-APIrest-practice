@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "d2f2150b-55da-4c1d-b3d0-c30e3d14e91d",
-		"name": "REST API Blog collection",
+		"_postman_id": "576ab993-f689-40b7-946a-534f28ffb161",
+		"name": "REST API Blog collection copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "New User POST",
+			"name": "Query Users  POST",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -30,6 +30,75 @@
 					"port": "3443",
 					"path": [
 						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Users GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:3443/users/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login GET",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "clara",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3443/login/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"login",
 						""
 					]
 				}
@@ -72,10 +141,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "https://localhost:3443/posts/",
 					"protocol": "https",
@@ -96,10 +161,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "https://localhost:3443/posts/1f934386-0cae-47ae-846b-bb0bc134303b",
 					"protocol": "https",
@@ -199,10 +260,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "https://localhost:3443/offensivewords/",
 					"protocol": "https",
@@ -223,10 +280,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "https://localhost:3443/offensivewords/1f934386-0cae-47ae-846b-bb0bc134303b",
 					"protocol": "https",
@@ -307,7 +360,7 @@
 					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Quería saludar a todos los lectores. Hola desde Canarias\"}"
 				},
 				"url": {
-					"raw": "https://localhost:3443/offensivewords/",
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -321,7 +374,29 @@
 				}
 			},
 			"response": []
-		},		
+		},
+		{
+			"name": "Query comments GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"posts",
+						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Delete Comment DELETE",
 			"request": {
@@ -374,5 +449,6 @@
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
