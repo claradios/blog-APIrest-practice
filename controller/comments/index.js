@@ -35,9 +35,9 @@ routerComments.post('/', async (req, res) => {
 
 routerComments.delete('/:id', async (req, res) => {
     const id = req.params.id;
-   
+
     const comment = await repository.postsCol.findCommentById(id);
-    
+
     const url = req.baseUrl;
     const urlToArr = url.split('/');
     const postId = urlToArr[2];
@@ -51,27 +51,28 @@ routerComments.delete('/:id', async (req, res) => {
     }
 });
 
-
+///posts/:postId/comments/:commentId
 routerComments.put('/:id', async (req, res) => {
     const id = req.params.id;
-
+    //const postId = req.params.postId
     const url = req.baseUrl;
     const urlToArr = url.split('/');
     const postId = urlToArr[2];
 
     //FIND COMMENT TO EDIT
+
+    const searchComment = await repository.postsCol.findSpecificComment(id);    
+    const originalComment = searchComment[0].comments[0];   
     
-    const searchComment = await repository.postsCol.findSpecificComment(id);
-    const commentToArray = searchComment[0].comments;
-    const finalComment = commentToArray[0];
-    console.log(finalComment);  
-  
+    const { date } = originalComment;
+
     if (searchComment.length === 0) {
-        res.status(400).send('the comment doesnt match any of the existents');       
+        res.status(400).send('the comment doesnt match any of the existents');
     } else {
         const commentReq = req.body;
         const { text, nickname } = commentReq;
-        //commentReq._id = id;
+        commentReq.date = date;
+      
         //BODY VALIDATION
         if (typeof nickname != 'string' ||
             typeof text != 'string') {

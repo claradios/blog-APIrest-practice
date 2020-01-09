@@ -5,7 +5,7 @@ module.exports = class Posts {
         this.collection = this.conn.db().collection('posts');
     }
     addPost(post) {
-        const {author, nickname, title, content, urlToImage} = post;
+        const { author, nickname, title, content, urlToImage } = post;
         const newPost = {
             author,
             nickname,
@@ -29,7 +29,7 @@ module.exports = class Posts {
     }
 
     modifyPost(postReq, id) {
-       const {author, nickname, title, content, urlToImage} = postReq;
+        const { author, nickname, title, content, urlToImage } = postReq;
         const newPost = {
             author,
             nickname,
@@ -45,7 +45,7 @@ module.exports = class Posts {
     }
 
     addComment(comment, postId) {
-        const {nickname, text, date, _id} = comment;
+        const { nickname, text, date, _id } = comment;
         const newComment = {
             nickname,
             text,
@@ -59,7 +59,7 @@ module.exports = class Posts {
         );
     }
 
-    findCommentById(id) {       
+    findCommentById(id) {
         return this.collection.find(
             { comments: { $elemMatch: { _id: ObjectId(id) } } }
         ).toArray();
@@ -68,16 +68,20 @@ module.exports = class Posts {
 
     findSpecificComment(id) {
         return this.collection.aggregate([
-            { "$match": { 'comments._id': ObjectId(id) }},
-            { "$project": {
-                "comments": { "$filter": {
-                    "input": '$comments',
-                    "as": 'comments',
-                    "cond": { "$eq": ['$$comments._id', ObjectId(id)]}
-                }},
-                _id: 0
-            }}
-          ]).toArray();
+            { "$match": { 'comments._id': ObjectId(id) } },
+            {
+                "$project": {
+                    "comments": {
+                        "$filter": {
+                            "input": '$comments',
+                            "as": 'comments',
+                            "cond": { "$eq": ['$$comments._id', ObjectId(id)] }
+                        }
+                    },
+                    _id: 0
+                }
+            }
+        ]).toArray();
     }
 
     deleteCommentById(postId, id) {
@@ -88,12 +92,13 @@ module.exports = class Posts {
     }
 
     modifyCommentById(postId, id, commentReq) {
-        const {nickname, text, _id} = commentReq;
+        const { nickname, text, date } = commentReq;
         const newComment = {
             nickname,
             text,
-            _id,
-            date: `${new Date()} (last edited)`            
+            date,
+            _id: ObjectId(id),
+            edited: `${new Date()} (last edited)`
         };
         // https://blog.fullstacktraining.com/retrieve-only-queried-element-in-an-object-array-in-mongodb-collection/
         return this.collection.updateOne(
