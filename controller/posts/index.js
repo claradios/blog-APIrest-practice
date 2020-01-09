@@ -4,21 +4,25 @@
 const express = require('express');
 const routerPosts = express.Router();
 const repository = require('../../repository');
+const passport = require('passport');
 
-routerPosts.post('/',async (req, res) => {
-    const post = req.body;       
-    //Validation
-    if (typeof post.author != 'string' ||
-        typeof post.nickname != 'string' ||
-        typeof post.title != 'string' ||
-        typeof post.content != 'string'
-    ) {
-        res.status(400).send('invalid BODY');        
-    } else { 
-        await repository.postsCol.addPost(post)
-        res.json(post);
-    }
-});
+
+routerPosts.post('/',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const post = req.body;
+        //Validation
+        if (typeof post.author != 'string' ||
+            typeof post.nickname != 'string' ||
+            typeof post.title != 'string' ||
+            typeof post.content != 'string'
+        ) {
+            res.status(400).send('invalid BODY');
+        } else {
+            await repository.postsCol.addPost(post)
+            res.json(post);
+        }
+    });
 
 routerPosts.get('/', async (req, res) => {
     const allPosts = await repository.postsCol.getAllPosts();
@@ -27,7 +31,7 @@ routerPosts.get('/', async (req, res) => {
 
 routerPosts.get('/:postId', async (req, res) => {
     const id = req.params.postId;
-    const post = await repository.postsCol.getPostById(id);   
+    const post = await repository.postsCol.getPostById(id);
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -37,7 +41,7 @@ routerPosts.get('/:postId', async (req, res) => {
 
 routerPosts.delete('/:postId', async (req, res) => {
     const id = req.params.postId;
-    const post = await repository.postsCol.getPostById(id);       
+    const post = await repository.postsCol.getPostById(id);
     if (!post) {
         res.sendStatus(404);
     } else {
@@ -49,12 +53,12 @@ routerPosts.delete('/:postId', async (req, res) => {
 routerPosts.put('/:postId', async (req, res) => {
     const id = req.params.postId;
     const post = await repository.postsCol.getPostById(id);
-   
+
     if (!post) {
-        res.status(404).send('there is not such an element on the collection');       
+        res.status(404).send('there is not such an element on the collection');
     } else {
         const postReq = req.body;
-      
+
         //Validation
         if (typeof postReq.author != 'string' ||
             typeof postReq.nickname != 'string' ||

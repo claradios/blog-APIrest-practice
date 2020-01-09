@@ -21,7 +21,7 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = "SECRET_KEY"
 const app = express();
 
-passport.use(new BasicStrategy(verify));
+
 app.use(passport.initialize());
 app.use(cors());
 app.use(express.json());
@@ -43,6 +43,8 @@ async function verify(username, password, done) {
     }
 }
 
+passport.use(new BasicStrategy(verify));
+
 app.post("/login",
     passport.authenticate('basic', { session: false }),
     (req, res) => {
@@ -62,15 +64,12 @@ const jwtOpts = {
 }
 
 passport.use(new JwtStrategy(jwtOpts, async (payload, done) => {
-
-    var user = await users.find(payload.username);
-
+    const user = await repository.usersCol.findUser(payload.username);
     if (user) {
         return done(null, user);
     } else {
         return done(null, false, { message: 'User not found' });
     }
-
 }));
 
 async function main() {
