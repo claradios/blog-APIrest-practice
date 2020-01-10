@@ -78,17 +78,17 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "password",
+							"value": "5fjdkvmgkxn",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "clara",
+							"value": "Juana Molina",
 							"type": "string"
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"url": {
 					"raw": "https://localhost:3443/login/",
@@ -108,6 +108,16 @@
 		{
 			"name": "New Post POST",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNsYXJhIiwiaWF0IjoxNTc4NTg4NDIzLCJleHAiOjE1Nzg1ODg1NDN9.zMoyH3oTFhHmNclh6febWNqREHImlSZZfcDYRYMB76A",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -119,7 +129,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"title\": \"Qué Es Bitcoin\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
+					"raw": "{\n\t\"author\": \"Victor Ullastres\",\n\t\"nickname\": \"mullas3\",\n\t\"title\": \"La Factura De La Luz\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
 					"raw": "https://localhost:3443/posts/",

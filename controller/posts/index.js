@@ -6,7 +6,6 @@ const routerPosts = express.Router();
 const repository = require('../../repository');
 const passport = require('passport');
 
-
 routerPosts.post('/',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
@@ -53,12 +52,10 @@ routerPosts.delete('/:postId', async (req, res) => {
 routerPosts.put('/:postId', async (req, res) => {
     const id = req.params.postId;
     const post = await repository.postsCol.getPostById(id);
-
     if (!post) {
         res.status(404).send('there is not such an element on the collection');
     } else {
         const postReq = req.body;
-
         //Validation
         if (typeof postReq.author != 'string' ||
             typeof postReq.nickname != 'string' ||
@@ -73,8 +70,6 @@ routerPosts.put('/:postId', async (req, res) => {
         }
     }
 });
-
-
 
 module.exports = routerPosts;
 

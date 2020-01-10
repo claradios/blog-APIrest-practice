@@ -1,24 +1,28 @@
-//Contiene el servidor Express.
-//para generar archivo key y cert de https --> openssl req -nodes -new -x509 -keyout server.key -out server.cert
+// servidor Express.
 const cors = require('cors');
 const express = require('express');
 const PORT = process.env.PORT || 3443;
+
 //módulos
 const controller = require('./controller');
 const repository = require('./repository/');
 const defOffensiveWords = require('./defOffensiveWords.js');
+
 // cifrado
 const fs = require('fs');
 const https = require('https');
-// autenticación
+
+// autenticación - passport
+//para generar archivo key y cert de https --> openssl req -nodes -new -x509 -keyout server.key -out server.cert
 const passport = require('passport');
 const BasicStrategy = require('passport-http').BasicStrategy;
-// jwt
+
+// autenticación - jwt
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const jwt = require("jsonwebtoken");
+const SECRET_KEY = "SECRET_KEY";
 
-const SECRET_KEY = "SECRET_KEY"
 const app = express();
 
 

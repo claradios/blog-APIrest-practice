@@ -106,3 +106,21 @@ necesitamos poner las credenciales (login y password) y enviarlas en la cabecera
 vamos a usar BCrypt como función HASH que encriptará nuestras contraseñas antes de guardarlas.
 para autenticar a un usuario , se calcula el hash de la password introducida y se compara con el hash guardado.
 `npm install --save bcryptjs`
+
+
+hay que hacer un fichero con los usuarios y otro con las contraseñas que quedarían en teoría fuera del control de verisones en una carpeta de entorno enviroment
+y tenemos en la pagina 33 del tema 8, y en vez de await customers insert one lo cargas de un fichero json.
+
+las contraseñas se guardan solo hasheadas con bcrypt
+
+el script node.js llamado load_admins.js se conectará a mongodb y creará los usuarios damin cuando se ejecute.
+
+# test de la API REST
+`npm install supertest --save-dev`
+
+para testear conviene no tener el sitio del listen app en el mismo modulo donde configuramos express (es decir para poder arrancar en otro puerto el servidor pues necesitamos) Es decir, sacamos el listen a otro fichero. para que superagent pueda levantar el servidor en cualquier otro puerto para hacer lost ests. En el ejemplo 1 del tema 10 está esta separación. 
+
+Si te instalas morgan y dices app.use(morgan).
+
+const morgan = require('morgan-body');
+está en el ejercicio 1 del tema 10
