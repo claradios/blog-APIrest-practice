@@ -36,5 +36,15 @@ module.exports = class Users {
         return this.collection.findOne({ username });
     }
 
+    insertDefaultUsers(array) {
+        array.forEach(async (user) => {
+            const { username, passwordHash, nickname } = user;
+            if (typeof username != 'string' || typeof passwordHash != 'string' || typeof nickname != 'string') {
+                console.log('there is a problem with the default users insertion');
+            } else {
+                this.collection.insertOne(user);
+            }
+        });
+    }
 }
 
