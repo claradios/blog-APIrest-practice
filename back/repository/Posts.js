@@ -67,8 +67,7 @@ module.exports = class Posts {
         ).toArray();
     }
 
-    findSpecificComment(id) {
-        console.log(id);
+    findSpecificComment(id) {        
         return this.collection.aggregate([
             { "$match": { 'comments._id': ObjectId(id) } },
             {
