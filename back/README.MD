@@ -113,7 +113,7 @@ y tenemos en la pagina 33 del tema 8, y en vez de await customers insert one lo 
 
 las contraseñas se guardan solo hasheadas con bcrypt
 
-el script node.js llamado load_admins.js se conectará a mongodb y creará los usuarios damin cuando se ejecute.
+el script node.js llamado load_admins.js se conectará a mongodb y creará los usuarios admin cuando se ejecute.
 
 # test de la API REST
 `npm install supertest --save-dev`
@@ -126,3 +126,23 @@ const morgan = require('morgan-body');
 está en el ejercicio 1 del tema 10
 
  # tengo que conectar que cuando un autor haga el post, se me carguen sus datos nickname y nombre
+
+ # USUARIOS
+
+ Control de usuarios
+## toTO
+La aplicación tiene que permitir varios tipos de usuarios:
+Autenticados:
+- Administrador: Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
+- Publisher: Los usuarios de tipo publisher podrán:
+    Crear entradas del blog. 
+    Borrar y modificar únicamente las entradas que hayan creado ellos.
+    Borrar comentarios de sus entradas.
+    Añadir comentarios a otras entradas.
+No autenticado: Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
+
+## hecho
+Cualquier usuario podrá registrarse en la aplicación y se le asignará el rol de “publisher”.  Para ello, se creará un endpoint de creación de usuarios. Para simplificar la implementación, un usuario no se puede borrar ni modificar.
+
+## hecho (revisar, tus usuarios están en un array)
+Se deberá implementar un script Node.js llamado load_admins.js que se conectará a MongoDB y creará los usuarios admin cuando se ejecute. Los usuarios estarán en un fichero de texto.

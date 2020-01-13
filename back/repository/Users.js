@@ -10,6 +10,7 @@ module.exports = class Users {
 
     async addUser(user) {
         const { password, username } = user;
+        const rol = 'publisher';
         const passwordHash = await bcrypt.hash(password, bcrypt.genSaltSync(8), null);
         const isUser = await this.collection.findOne({ username });
         if (!isUser) {
@@ -17,7 +18,8 @@ module.exports = class Users {
             const newUser = {
                 nickname,
                 username,
-                passwordHash
+                passwordHash,
+                rol
             }
             this.collection.insertOne(newUser);
         } // si ya existe devolver que ya existe. //mejorar esta función enlazándola con el POST user

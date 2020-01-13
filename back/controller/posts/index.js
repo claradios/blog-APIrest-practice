@@ -38,38 +38,42 @@ routerPosts.get('/:postId', async (req, res) => {
     }
 });
 
-routerPosts.delete('/:postId', async (req, res) => {
-    const id = req.params.postId;
-    const post = await repository.postsCol.getPostById(id);
-    if (!post) {
-        res.sendStatus(404);
-    } else {
-        await repository.postsCol.deletePostById(id);
-        res.json(post);
-    }
-});
-
-routerPosts.put('/:postId', async (req, res) => {
-    const id = req.params.postId;
-    const post = await repository.postsCol.getPostById(id);
-    if (!post) {
-        res.status(404).send('there is not such an element on the collection');
-    } else {
-        const postReq = req.body;
-        //Validation
-        if (typeof postReq.author != 'string' ||
-            typeof postReq.nickname != 'string' ||
-            typeof postReq.title != 'string' ||
-            typeof postReq.content != 'string'
-        ) {
-            res.sendStatus(400);
+routerPosts.delete('/:postId',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const id = req.params.postId;
+        const post = await repository.postsCol.getPostById(id);
+        if (!post) {
+            res.sendStatus(404);
         } else {
-            await repository.postsCol.modifyPost(postReq, id);
-            //Return new resource         
-            res.json(postReq);
+            await repository.postsCol.deletePostById(id);
+            res.json(post);
         }
-    }
-});
+    });
+
+routerPosts.put('/:postId',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const id = req.params.postId;
+        const post = await repository.postsCol.getPostById(id);
+        if (!post) {
+            res.status(404).send('there is not such an element on the collection');
+        } else {
+            const postReq = req.body;
+            //Validation
+            if (typeof postReq.author != 'string' ||
+                typeof postReq.nickname != 'string' ||
+                typeof postReq.title != 'string' ||
+                typeof postReq.content != 'string'
+            ) {
+                res.sendStatus(400);
+            } else {
+                await repository.postsCol.modifyPost(postReq, id);
+                //Return new resource         
+                res.json(postReq);
+            }
+        }
+    });
 
 module.exports = routerPosts;
 

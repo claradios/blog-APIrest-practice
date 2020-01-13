@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Query Users  POST",
+			"name": "New User  POST",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -380,28 +380,6 @@
 						"posts",
 						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
 						"comments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Query comments GET",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"posts",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
-						"comments",
-						""
 					]
 				}
 			},
