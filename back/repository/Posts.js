@@ -4,8 +4,8 @@ module.exports = class Posts {
         this.conn = conn;
         this.collection = this.conn.db().collection('posts');
     }
-    addPost(post,user) {
-        const {username, nickname} = user;
+    addPost(post, user) {
+        const { username, nickname } = user;
         const { title, content, urlToImage } = post;
         const newPost = {
             author: username,
@@ -29,10 +29,11 @@ module.exports = class Posts {
         return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
 
-    modifyPost(postReq, id) {
-        const { author, nickname, title, content, urlToImage } = postReq;
+    modifyPost(user, postReq, id) {
+        const { username, nickname } = user;
+        const { title, content, urlToImage } = postReq;
         const newPost = {
-            author,
+            author:username,
             nickname,
             title,
             content,

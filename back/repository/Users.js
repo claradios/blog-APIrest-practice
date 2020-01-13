@@ -8,9 +8,8 @@ module.exports = class Users {
         this.collection = this.conn.db().collection('users');
     }
 
-    async addUser(user) {
-        const { password, username } = user;
-        const rol = 'publisher';
+    async addUser(user) {        
+        const { password, username, rol ='publisher' } = user;     
         const passwordHash = await bcrypt.hash(password, bcrypt.genSaltSync(8), null);
         const isUser = await this.collection.findOne({ username });
         if (!isUser) {
@@ -26,7 +25,6 @@ module.exports = class Users {
     }
 
     async verifyPassword(user, password) {
-        console.log(user, password);
         return await bcrypt.compare(password, user.passwordHash);
     }
 
@@ -40,12 +38,7 @@ module.exports = class Users {
 
     insertDefaultUsers(array) {
         array.forEach(async (user) => {
-            const { username, passwordHash, nickname } = user;
-            if (typeof username != 'string' || typeof passwordHash != 'string' || typeof nickname != 'string') {
-                console.log('there is a problem with the default users insertion');
-            } else {
-                this.collection.insertOne(user);
-            }
+            await this.addUser(user)   
         });
     }
 

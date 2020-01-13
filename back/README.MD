@@ -131,6 +131,10 @@ está en el ejercicio 1 del tema 10
 
  Control de usuarios
 ## toTO
+
+-detectar bien el validator
+-que si el usuario ya está no se pueda añadir
+
 La aplicación tiene que permitir varios tipos de usuarios:
 Autenticados:
 - Administrador: Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
