@@ -13,7 +13,7 @@ test('when get all posts then get test posts', async (done) => {
     expect(body[0].author).toBeTruthy();
     expect(body[0].id).toBeTruthy();
     done();
-})
+});
 
 test('when create new post then this post can be obtained', async (done) => {
 

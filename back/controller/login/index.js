@@ -2,21 +2,16 @@
 
 const express = require('express');
 const routerLogin = express.Router();
+
 const passport = require('passport');
 const jwt = require("jsonwebtoken");
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
 const SECRET_KEY = "SECRET_KEY";
 
-// const jwtOpts = {
-//     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-//     secretOrKey: SECRET_KEY
-// }
 
 routerLogin.post('/',
     passport.authenticate('basic', { session: false }),
     (req, res) => {
-        console.log('hola');
+        
         const { username } = req.user;
 
         const opts = { expiresIn: 120 }; //token expires in 2min

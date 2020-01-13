@@ -124,3 +124,5 @@ Si te instalas morgan y dices app.use(morgan).
 
 const morgan = require('morgan-body');
 está en el ejercicio 1 del tema 10
+
+ # tengo que conectar que cuando un autor haga el post, se me carguen sus datos nickname y nombre
