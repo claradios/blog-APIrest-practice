@@ -13,23 +13,23 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Juana Molina\",\n\t\"nickname\": \"molina22\",\n\t\"password\": \"5fjdkvmgkxn\"}"
+					"raw": "{\n\t\"username\": \"Maria Antonieta\",\n\t\"nickname\": \"marian\",\n\t\"password\": \"guillotina\"}"
 				},
 				"url": {
-					"raw": "https://localhost:3443/users/",
+					"raw": "https://localhost:3443/signup/",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "3443",
 					"path": [
-						"users",
+						"signup",
 						""
 					]
 				}
@@ -78,12 +78,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "5fjdkvmgkxn",
+							"value": "tombola3",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "Juana Molina",
+							"value": "Pepa Flores",
 							"type": "string"
 						}
 					]
@@ -113,7 +113,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNsYXJhIiwiaWF0IjoxNTc4NTg4NDIzLCJleHAiOjE1Nzg1ODg1NDN9.zMoyH3oTFhHmNclh6febWNqREHImlSZZfcDYRYMB76A",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTE4MTQ1LCJleHAiOjE1Nzg5MTgyNjV9.xix0UnHLpy1utJbBYU6r11pjvWHyCCUWUkDDuA0eHpE",
 							"type": "string"
 						}
 					]
@@ -129,7 +129,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Victor Ullastres\",\n\t\"nickname\": \"mullas3\",\n\t\"title\": \"La Factura De La Luz\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
+					"raw": "{\n\t\"title\": \"Caramen Os Habla\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
 					"raw": "https://localhost:3443/posts/",
@@ -172,7 +172,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:3443/posts/1f934386-0cae-47ae-846b-bb0bc134303b",
+					"raw": "https://localhost:3443/posts/5e160fcccc12600aad9a2b3c",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -180,7 +180,7 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"1f934386-0cae-47ae-846b-bb0bc134303b"
+						"5e160fcccc12600aad9a2b3c"
 					]
 				}
 			},
@@ -189,6 +189,16 @@
 		{
 			"name": "Delete Post DELETE",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTE5NTAwLCJleHAiOjE1Nzg5MTk2MjB9.nf5XuIXT6GckMR4Ga2TWDkKd7_zS4G4S5_fsIMvWsaQ",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"body": {
@@ -196,7 +206,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"raw": "https://localhost:3443/posts/5e1c60685e3b3b449562f0d8",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -204,7 +214,7 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+						"5e1c60685e3b3b449562f0d8"
 					]
 				}
 			},
@@ -213,14 +223,36 @@
 		{
 			"name": "Modify Post PUT",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTE5Mjg4LCJleHAiOjE1Nzg5MTk0MDh9.aaQaRzf04P8MW9elevTtSWQNbX2zN7bjMZnKN513MQk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"author\": \"Jaime Molina\",\n\t\"nickname\": \"molina52\",\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
+					"raw": "{\n\t\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"He venido a hablar de mis ovejitas.\",\n\t\"urlToImage\":\"www.nada.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"raw": "https://localhost:3443/posts/5e1c50f30a1f2f3542edd804",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -228,7 +260,7 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+						"5e1c50f30a1f2f3542edd804"
 					]
 				}
 			},
@@ -237,6 +269,16 @@
 		{
 			"name": "New Offensive Word POST",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMDg1LCJleHAiOjE1Nzg5MzMyMDV9._beOh3H2Zz1zeYvS9U58mcuCUdGWJ5SghI6lI1jkFdM",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -248,7 +290,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"word\": \"zorra\",\n\t\"level\":4}"
+					"raw": "{\n\t\"word\": \"maricón\",\n\t\"level\":4}"
 				},
 				"url": {
 					"raw": "https://localhost:3443/offensivewords/",
@@ -268,6 +310,16 @@
 		{
 			"name": "Query Offensive Words GET",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMDg1LCJleHAiOjE1Nzg5MzMyMDV9._beOh3H2Zz1zeYvS9U58mcuCUdGWJ5SghI6lI1jkFdM",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -288,10 +340,20 @@
 		{
 			"name": "Query Offensive Word GET",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMjMxLCJleHAiOjE1Nzg5MzMzNTF9.6KQ86IIB9Gf3NznwhgBppZ1BNH7wTpwZhpKyxm76fdY",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:3443/offensivewords/1f934386-0cae-47ae-846b-bb0bc134303b",
+					"raw": "https://localhost:3443/offensivewords/5e0a0b5029dc5d3e3a2580aa",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -299,7 +361,7 @@
 					"port": "3443",
 					"path": [
 						"offensivewords",
-						"1f934386-0cae-47ae-846b-bb0bc134303b"
+						"5e0a0b5029dc5d3e3a2580aa"
 					]
 				}
 			},
@@ -308,6 +370,16 @@
 		{
 			"name": "Delete Offensive Word DELETE",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMjMxLCJleHAiOjE1Nzg5MzMzNTF9.6KQ86IIB9Gf3NznwhgBppZ1BNH7wTpwZhpKyxm76fdY",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"body": {
@@ -315,7 +387,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:3443/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"raw": "https://localhost:3443/offensivewords/5e1c9b880983d167f5eb071d",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -323,7 +395,7 @@
 					"port": "3443",
 					"path": [
 						"offensivewords",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+						"5e1c9b880983d167f5eb071d"
 					]
 				}
 			},
@@ -332,14 +404,36 @@
 		{
 			"name": "Modify Offensive Word PUT",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzNDM5LCJleHAiOjE1Nzg5MzM1NTl9.rhvc00B91vaox9B69p7J8vY1ri170TXImU18egG04P8",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"word\": \"zorra\",\n\t\"level\":4}"
+					"raw": "{\n\t\"word\": \"subnormal\",\n\t\"level\":2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "https://localhost:3443/offensivewords/0d27bf26-7446-42c9-a3b3-531a0e97c845",
+					"raw": "https://localhost:3443/offensivewords/5e0a0b5029dc5d3e3a2580ac",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -347,7 +441,7 @@
 					"port": "3443",
 					"path": [
 						"offensivewords",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845"
+						"5e0a0b5029dc5d3e3a2580ac"
 					]
 				}
 			},
@@ -356,6 +450,16 @@
 		{
 			"name": "New Comment POST",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTMxNjcwLCJleHAiOjE1Nzg5MzE3OTB9.Wo-KlY_w8fra7X5Q_XI91fuIHfofEoirrkNWItEGJoY",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -367,10 +471,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Quería saludar a todos los lectores. Hola desde Canarias\"}"
+					"raw": "{\n\t\"text\":\"Siesta time for sure\"}"
 				},
 				"url": {
-					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments",
+					"raw": "https://localhost:3443/posts/5e160fcccc12600aad9a2b3c/comments/",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -378,8 +482,9 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
-						"comments"
+						"5e160fcccc12600aad9a2b3c",
+						"comments",
+						""
 					]
 				}
 			},
@@ -388,6 +493,16 @@
 		{
 			"name": "Delete Comment DELETE",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTI5MTE0LCJleHAiOjE1Nzg5MjkyMzR9.CXDLnU8TH0UASbEt36tIvVMv44_3HBaGYUmxdyCBSgw",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"body": {
@@ -395,7 +510,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
+					"raw": "https://localhost:3443/posts/5e160fcccc12600aad9a2b3c/comments/5e16e8e572d0db0e7336d3b6",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -403,9 +518,9 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"5e160fcccc12600aad9a2b3c",
 						"comments",
-						"0d27jf24-7336-42d5-a3b3-531a05a3b3a3"
+						"5e16e8e572d0db0e7336d3b6"
 					]
 				}
 			},
@@ -414,14 +529,36 @@
 		{
 			"name": "Modify comment PUT",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTMyMzU4LCJleHAiOjE1Nzg5MzI0Nzh9.n9-s9GER1LAQ-bm5RWd1kQPVW_ahoYdPwgb6ryeCRm0",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nickname\": \"javiva\",\n\t\"text\":\"Buenas tardes.Quería saludar a todos los lectores. Hola desde Canarias\"}"
+					"raw": "{\n\t\n\t\"text\":\"la modificación de comentarios funciona\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "https://localhost:3443/posts/0d27bf26-7446-42c9-a3b3-531a0e97c845/comments/0d27jf24-7336-42d5-a3b3-531a05a3b3a3",
+					"raw": "https://localhost:3443/posts/5e160fcccc12600aad9a2b3c/comments/5e1c95ebaf1d58633d442982",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -429,9 +566,9 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"0d27bf26-7446-42c9-a3b3-531a0e97c845",
+						"5e160fcccc12600aad9a2b3c",
 						"comments",
-						"0d27jf24-7336-42d5-a3b3-531a05a3b3a3"
+						"5e1c95ebaf1d58633d442982"
 					]
 				}
 			},

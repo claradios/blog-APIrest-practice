@@ -10,7 +10,7 @@ const login = require('./login');
 routes.use('/offensivewords', offensivewords);
 routes.use('/posts', posts);
 routes.use('/posts/:id/comments',comments);
-routes.use('/users',users);
+routes.use('/',users);
 routes.use('/login',login);
 // routes.use('/login',login);
 

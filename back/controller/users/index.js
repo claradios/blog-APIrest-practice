@@ -2,7 +2,7 @@ const express = require('express');
 const routerUsers = express.Router();
 const repository = require('../../repository');
 
-routerUsers.post('/', async (req, res) => {
+routerUsers.post('/signup', async (req, res) => {
     const user = req.body;
     const { nickname, password, username } = user;
     const allUsers = await repository.usersCol.getAllUsers();
@@ -23,7 +23,7 @@ routerUsers.post('/', async (req, res) => {
     }
 });
 
-routerUsers.get('/', async (req, res) => {
+routerUsers.get('/users', async (req, res) => {
     const allUsers = await repository.usersCol.getAllUsers();
     res.json(allUsers);
 });
