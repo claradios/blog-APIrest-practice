@@ -4,10 +4,11 @@ module.exports = class Posts {
         this.conn = conn;
         this.collection = this.conn.db().collection('posts');
     }
-    addPost(post) {
-        const { author, nickname, title, content, urlToImage } = post;
+    addPost(post,user) {
+        const {username, nickname} = user;
+        const { title, content, urlToImage } = post;
         const newPost = {
-            author,
+            author: username,
             nickname,
             title,
             content,

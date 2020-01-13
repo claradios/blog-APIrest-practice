@@ -135,10 +135,19 @@ La aplicación tiene que permitir varios tipos de usuarios:
 Autenticados:
 - Administrador: Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
 - Publisher: Los usuarios de tipo publisher podrán:
-    Crear entradas del blog. 
-    Borrar y modificar únicamente las entradas que hayan creado ellos.
-    Borrar comentarios de sus entradas.
-    Añadir comentarios a otras entradas.
+
+    ### Crear entradas del blog.
+    No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
+    user.rol === 'admin' || user.rol === 'publisher'
+    ### Borrar y modificar únicamente las entradas que hayan creado ellos.
+    Hace falta comprobar si es 
+    user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
+    ### Borrar comentarios de sus entradas.
+    user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
+    ### Añadir comentarios a otras entradas.
+    No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
+    user.rol === 'admin' || user.rol === 'publisher' 
+
 No autenticado: Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
 
 ## hecho

@@ -6,6 +6,7 @@ const routerComments = express.Router({ mergeParams: true });
 const repository = require('../../repository');
 const validator = require('../../validator/');
 const ObjectID = require('mongodb').ObjectID;
+const passport = require('passport');
 
 
 routerComments.post('/',

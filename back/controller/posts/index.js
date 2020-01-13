@@ -9,16 +9,20 @@ const passport = require('passport');
 routerPosts.post('/',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
+        //console.log(req);
         const post = req.body;
+        const user = req.user;
+        console.log(user);
+        //author  nickname
         //Validation
-        if (typeof post.author != 'string' ||
-            typeof post.nickname != 'string' ||
+        if (typeof user.username != 'string' ||
+            typeof user.nickname != 'string' ||
             typeof post.title != 'string' ||
             typeof post.content != 'string'
         ) {
             res.status(400).send('invalid BODY');
         } else {
-            await repository.postsCol.addPost(post)
+            await repository.postsCol.addPost(post,user)
             res.json(post);
         }
     });
