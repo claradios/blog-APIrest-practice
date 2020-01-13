@@ -134,7 +134,11 @@ está en el ejercicio 1 del tema 10
 
 
 -detectar bien el validator
+
+## YES
 -que si el usuario ya está no se pueda añadir
+
+## YES
 -que el endpoint se llame signup
 
 
