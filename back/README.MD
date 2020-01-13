@@ -140,15 +140,17 @@ Autenticados:
 - Administrador: Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
 - Publisher: Los usuarios de tipo publisher podrán:
 
-    ### Crear entradas del blog.
+    ### Crear entradas del blog. YES
     No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
     user.rol === 'admin' || user.rol === 'publisher'
-    ### Borrar y modificar únicamente las entradas que hayan creado ellos.
+
+    ### Borrar y modificar únicamente las entradas que hayan creado ellos. YES
     Hace falta comprobar si es 
     user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
-    ### Borrar comentarios de sus entradas.
+
+    ### Borrar comentarios de sus entradas. NO
     user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
-    ### Añadir comentarios a otras entradas.
+    ### Añadir comentarios a otras entradas.NO
     No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
     user.rol === 'admin' || user.rol === 'publisher' 
 

@@ -16,9 +16,7 @@ routerPosts.post('/',
         //Validation rol
         if (rol !== 'admin' && rol !== 'publisher') {
             res.status(400).send('unauthorized bitch');
-        }
-        //Validation body
-         if (
+        }else if (
             typeof username != 'string' ||
             typeof nickname != 'string' ||
             typeof title != 'string' ||

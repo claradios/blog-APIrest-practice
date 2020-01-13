@@ -65,7 +65,6 @@ module.exports = class Posts {
         return this.collection.find(
             { comments: { $elemMatch: { _id: ObjectId(id) } } }
         ).toArray();
-
     }
 
     findSpecificComment(id) {

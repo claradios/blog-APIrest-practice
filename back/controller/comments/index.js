@@ -11,17 +11,22 @@ const passport = require('passport');
 
 routerComments.post('/',
     passport.authenticate('jwt', { session: false }),
-    async (req, res) => {
-
+    async (req, res) => {    
+        const user = req.user;   
+        const { rol, nickname } = user;
         const postId = req.params.postId;
-        const comment = req.body;
-        const { nickname, text } = comment;
+        const comment = req.body;        
+        const { text } = comment;
         comment._id = new ObjectID();
         comment.date = new Date();
+        comment.nickname = nickname;        
 
+        //Validation rol
+        if (rol !== 'admin' && rol !== 'publisher') {
+            res.status(400).send('unauthorized bitch');
+        }
         //Validation
-        if (typeof nickname != 'string' ||
-            typeof text != 'string') {
+        else if (typeof text != 'string') {
             res.status(400).send('Invalid BODY');
         } else {
             const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
