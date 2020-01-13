@@ -8,20 +8,17 @@ module.exports = class Users {
         this.collection = this.conn.db().collection('users');
     }
 
-    async addUser(user) {        
-        const { password, username, rol ='publisher' } = user;     
+    async addUser(user) {
+        const { nickname, password, username, rol = 'publisher' } = user;
         const passwordHash = await bcrypt.hash(password, bcrypt.genSaltSync(8), null);
-        const isUser = await this.collection.findOne({ username });
-        if (!isUser) {
-            const { nickname, username } = user;
+
             const newUser = {
                 nickname,
                 username,
                 passwordHash,
                 rol
             }
-            this.collection.insertOne(newUser);
-        } // si ya existe devolver que ya existe. //mejorar esta función enlazándola con el POST user
+            this.collection.insertOne(newUser);       
     }
 
     async verifyPassword(user, password) {
@@ -38,7 +35,7 @@ module.exports = class Users {
 
     loadAdminUsers(array) {
         array.forEach(async (user) => {
-            await this.addUser(user)   
+            await this.addUser(user)
         });
     }
 

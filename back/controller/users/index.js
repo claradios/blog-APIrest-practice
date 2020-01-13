@@ -5,7 +5,7 @@ const repository = require('../../repository');
 routerUsers.post('/signup', async (req, res) => {
     const user = req.body;
     const { nickname, password, username } = user;
-    const allUsers = await repository.usersCol.getAllUsers();
+    const isUser = repository.usersCol.findUser(user);
     //Validation
     if (
         typeof nickname != 'string' ||
@@ -13,11 +13,9 @@ routerUsers.post('/signup', async (req, res) => {
         typeof username != 'string'
     ) {
         res.status(400).send('invalid BODY');
-    } 
-    // else if (repository.usersCol.isAlreadyIncluded(user, allUsers)) {
-    //     res.status(400).send('User is already included.')
-    // } 
-    else {
+    } else if (isUser) {
+        res.status(400).send('username is taken')
+    } else {
         await repository.usersCol.addUser(user);
         res.json(user);
     }
