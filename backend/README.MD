@@ -92,7 +92,7 @@ Se deberán implementar tests unitarios del validador con Jest. Estos tests, ya 
 - Comentario sin palabras ofensivas: Con este test se debe verificar que si el comentario no tiene palabras ofensivas debe obtenerse una validación OK.
 
 
-aquí por ejemplo tendŕias una estructura hecha , ejemplo de boiler plate: https://express-rest-api-generato.readthedocs.io/en/latest/ 
+ejemplo de boiler plate: https://express-rest-api-generato.readthedocs.io/en/latest/ 
 
 necesitamos poner las credenciales (login y password) y enviarlas en la cabecera *Authorization*.
 
