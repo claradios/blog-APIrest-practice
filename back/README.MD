@@ -150,7 +150,8 @@ Autenticados:
 
     ### Borrar comentarios de sus entradas. NO
     user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
-    ### Añadir comentarios a otras entradas.NO
+    
+    ### Añadir comentarios a otras entradas.SI
     No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
     user.rol === 'admin' || user.rol === 'publisher' 
 

@@ -11,15 +11,15 @@ const passport = require('passport');
 
 routerComments.post('/',
     passport.authenticate('jwt', { session: false }),
-    async (req, res) => {    
-        const user = req.user;   
+    async (req, res) => {
+        const user = req.user;
         const { rol, nickname } = user;
         const postId = req.params.postId;
-        const comment = req.body;        
+        const comment = req.body;
         const { text } = comment;
         comment._id = new ObjectID();
         comment.date = new Date();
-        comment.nickname = nickname;        
+        comment.nickname = nickname;
 
         //Validation rol
         if (rol !== 'admin' && rol !== 'publisher') {
@@ -44,19 +44,22 @@ routerComments.post('/',
 routerComments.delete('/:commentId',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const postId = req.params.postId;
+        const postId = req.params.id;
         const commentId = req.params.commentId;
-
-        const comment = await repository.postsCol.findCommentById(commentId);
-
-
-
-        //Validation
-        if (comment.length === s0) {
+        const { rol, nickname } = req.user;
+        const comment = await repository.postsCol.findSpecificComment(commentId);      
+        
+        if (comment.length === 0) {
             res.status(400).send('Comment not found');
-        } else {
+        } else if (
+            rol !== 'admin' && nickname !== comment.nickname
+        ) {
+            console.log(rol)
+            res.status(400).send('unauthorized');
+        }
+        else {
             await repository.postsCol.deleteCommentById(postId, commentId);
-            res.json(comment);
+            res.json(comment[0]);
         }
     });
 
