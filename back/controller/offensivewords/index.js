@@ -84,17 +84,14 @@ routerOffensiveWords.put('/:id',
         } else if (!offensiveWord) {
             res.status(404).send('Word not found.');
         } else {
-            const offensiveWordReq = req.body;
-            //Validation
+            const offensiveWordReq = req.body;  
             if (
                 typeof offensiveWordReq.word != 'string' ||
                 typeof offensiveWordReq.level != 'number'
             ) {
                 res.status(400).send('invalid BODY');
-            } else {
-                //Update resource
-                await repository.offensiveWordsCol.modifyOffensiveWordById(id, offensiveWordReq);
-                //Return new resource         
+            } else {              
+                await repository.offensiveWordsCol.modifyOffensiveWordById(id, offensiveWordReq);                     
                 res.json(offensiveWordReq);
             }
         }

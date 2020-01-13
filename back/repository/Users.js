@@ -36,7 +36,7 @@ module.exports = class Users {
         return this.collection.findOne({ username });
     }
 
-    insertDefaultUsers(array) {
+    loadAdminUsers(array) {
         array.forEach(async (user) => {
             await this.addUser(user)   
         });

@@ -132,8 +132,12 @@ está en el ejercicio 1 del tema 10
  Control de usuarios
 ## toTO
 
+
 -detectar bien el validator
 -que si el usuario ya está no se pueda añadir
+-que el endpoint se llame signup
+
+
 
 La aplicación tiene que permitir varios tipos de usuarios:
 Autenticados:
@@ -146,16 +150,19 @@ Autenticados:
 
     ### Borrar y modificar únicamente las entradas que hayan creado ellos. YES
     Hace falta comprobar si es 
-    user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
+    user.rol === 'admin' && post.author === user.username
 
-    ### Borrar comentarios de sus entradas. NO
-    user.rol === 'admin' || user.rol === 'publisher' && post.author === user.username
-    
+    ### Borrar comentarios de sus entradas. SI
+    user.rol === 'admin' && post.author === user.username
+
     ### Añadir comentarios a otras entradas.SI
     No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
     user.rol === 'admin' || user.rol === 'publisher' 
 
-No autenticado: Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
+    ### acceder y modificar colección de offensive words SI
+    user.rol === 'admin';
+
+### No autenticado: Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
 
 ## hecho
 Cualquier usuario podrá registrarse en la aplicación y se le asignará el rol de “publisher”.  Para ello, se creará un endpoint de creación de usuarios. Para simplificar la implementación, un usuario no se puede borrar ni modificar.

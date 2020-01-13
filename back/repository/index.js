@@ -6,7 +6,7 @@ const OffensiveWords = require('./OffensiveWords');
 const Users = require('./Users.js');
 const url = "mongodb://localhost:27017/postsDB";
 //default
-const defaultUsers = require('../utils/defaultUsers.js');
+const defaultUserAdmins = require('../utils/loadAdmins.js');
 const defOffensiveWords = require('../utils/defOffensiveWords.js');
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
     async loadDefaultUsers() {      
         const allUsers = await this.usersCol.getAllUsers();
         if (allUsers.length === 0) {
-            await this.usersCol.insertDefaultUsers(defaultUsers);
+            await this.usersCol.loadAdminUsers(defaultUserAdmins);
             console.log('Default users have been inserted')
         }
     }
