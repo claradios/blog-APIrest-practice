@@ -71,15 +71,18 @@ routerPosts.delete('/:postId',
 routerPosts.put('/:postId',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
+        
         const id = req.params.postId;
         const user = req.user;
-        const post = await repository.postsCol.getPostById(id);
         const { rol, username } = user;
-        const { author } = post;
+        const post = await repository.postsCol.getPostById(id);        
+        const { author } = post;       
+ 
         if (
-            rol !== 'admin' && 
-            rol !== 'publisher' || username !== author 
-        ) {
+            (rol !== 'admin') && 
+            (rol !== 'publisher' || username !== author)
+        ) { 
+            console.log(rol);
             res.status(400).send('unauthorized');
         }
         else if (!post) {
