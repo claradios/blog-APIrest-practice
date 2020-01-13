@@ -125,50 +125,30 @@ Si te instalas morgan y dices app.use(morgan).
 const morgan = require('morgan-body');
 está en el ejercicio 1 del tema 10
 
- # tengo que conectar que cuando un autor haga el post, se me carguen sus datos nickname y nombre
-
- # USUARIOS
-
- Control de usuarios
-## toTO
 
 
--detectar bien el validator
+# USUARIOS AUTENTICADOS:
 
-## YES
--que si el usuario ya está no se pueda añadir
+### Administrador: 
+- Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
 
-## YES
--que el endpoint se llame signup
+### Publisher: 
+- Crear entradas del blog.   
+
+- Borrar y modificar únicamente las entradas que hayan creado ellos. 
+  
+- Borrar comentarios de sus entradas. 
+   
+- Añadir comentarios a otras entradas.  
+
+- acceder y modificar colección de offensive words.
+
+# USUARIOS NO AUTENTICADOS:
+
+### No autenticado: 
+- Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
 
 
-
-La aplicación tiene que permitir varios tipos de usuarios:
-Autenticados:
-- Administrador: Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
-- Publisher: Los usuarios de tipo publisher podrán:
-
-    ### Crear entradas del blog. YES
-    No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
-    user.rol === 'admin' || user.rol === 'publisher'
-
-    ### Borrar y modificar únicamente las entradas que hayan creado ellos. YES
-    Hace falta comprobar si es 
-    user.rol === 'admin' && post.author === user.username
-
-    ### Borrar comentarios de sus entradas. SI
-    user.rol === 'admin' && post.author === user.username
-
-    ### Añadir comentarios a otras entradas.SI
-    No haría falta comprobarlo, pues si tiene token ya es o admin o publisher.
-    user.rol === 'admin' || user.rol === 'publisher' 
-
-    ### acceder y modificar colección de offensive words SI
-    user.rol === 'admin';
-
-### No autenticado: Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
-
-## hecho
 Cualquier usuario podrá registrarse en la aplicación y se le asignará el rol de “publisher”.  Para ello, se creará un endpoint de creación de usuarios. Para simplificar la implementación, un usuario no se puede borrar ni modificar.
 
 ## hecho (revisar, tus usuarios están en un array)
