@@ -1,13 +1,20 @@
-const app = require('../server')
-const supertest = require('supertest')
+const initApp = require('../server');
+const supertest = require('supertest');
 
-const request = supertest(app)
+let request;
+
+beforeAll(async ()=>{
+    const app = await initApp();
+    request = supertest(app);
+})
 
 test('when get all posts then get test posts', async (done) => {
 
     const { body } = await request.get('/posts')
         .expect('Content-type', /json/)
         .expect(200)
+
+    console.log(body);
 
     expect(body[0].message).toBeTruthy();
     expect(body[0].author).toBeTruthy();

@@ -55,12 +55,11 @@ passport.use(new JwtStrategy(jwtOpts, async (payload, done) => {
     }
 }));
 
-async function loadAndConnect() {
+async function initApp() {
     await repository.dbConnect();
     await repository.loadDefaultWords();
     await repository.loadDefaultUsers();
+    return app;
 } 
 
-loadAndConnect();
-
-module.exports = app;
+module.exports = initApp;
