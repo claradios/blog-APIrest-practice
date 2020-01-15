@@ -59,7 +59,7 @@ async function initApp() {
     await repository.dbConnect();
     await repository.loadDefaultWords();
     await repository.loadDefaultUsers();
-    return app;
+    return app;    
 } 
 
 module.exports = initApp;

@@ -37,7 +37,7 @@ module.exports = class Users {
         array.forEach(async (user) => {
             await this.addUser(user)
         });
-    }
+    } 
 
 }
 

@@ -107,4 +107,5 @@ module.exports = class Posts {
             { $set: { "comments.$": newComment } }
         );
     }
+
 }

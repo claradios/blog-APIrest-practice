@@ -36,7 +36,11 @@ module.exports = {
             await this.usersCol.loadAdminUsers(defaultUserAdmins);
             console.log('Default users have been inserted')
         }
-    }
+    },
+    
+    async dbDisconnect () {         
+        await MongoClient.close();    
+     },
 };
 
 
