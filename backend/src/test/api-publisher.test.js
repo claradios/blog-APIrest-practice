@@ -1,9 +1,6 @@
 const initApp = require('../server');
 const supertest = require('supertest');
 
-// DEFINIR EN EL REPO UNA FUNCIÓN repository.dbDisconnect();
-// LLAMAR A ESA FUNCIÓN AL FINAL DE LOS TEST CON UN afterAll(()=>repository.dbDidsconnect());
-
 
 let request;
 
@@ -13,18 +10,15 @@ beforeAll(async () => {
     request = supertest(app);
 
 });
-// afterAll(() => {
-//     return repository.dbDisconnect();
-//   });
 
-describe('My API tests with ADMIN USER', function () {
+describe('My API tests with PUBLISHER USER', function () {
 
     let token = null;
-
+    
     beforeEach((done) => {
         request
             .post('/login/')
-            .auth('Pepa Flores', 'tombola3')
+            .auth('Carmen Sevilla', 'ovejitas')
             .end(function (err, res) {
 
                 token = res.body.token;
@@ -32,6 +26,7 @@ describe('My API tests with ADMIN USER', function () {
                 done();
             });
     });
+
     // BLOG-POST ENDPOINTS
     test('when get all POSTS then get test posts', async (done) => {
         const { body } = await request.get('/posts')
@@ -67,8 +62,8 @@ describe('My API tests with ADMIN USER', function () {
             .expect('Content-type', /json/)
             .expect(200)
 
-        expect(getBody.author).toEqual('Pepa Flores');
-        expect(getBody.nickname).toEqual('marisol');
+        expect(getBody.author).toEqual('Carmen Sevilla');
+        expect(getBody.nickname).toEqual('carmencita');
 
         done();
 
@@ -111,21 +106,20 @@ describe('My API tests with ADMIN USER', function () {
             .expect(200)
 
         expect(body._id).toBeTruthy();
-        expect(body.nickname).toEqual('marisol');
+        expect(body.nickname).toEqual('carmencita');
         expect(body.text).toEqual(newComment.text);
 
         done();
     });
 
       //PUT-comment
-    test('when modify COMMENT then this comment is updated', async (done) => {
+    test('when modify COMMENT of its own then this comment is updated', async (done) => {
         const post = await request.get('/posts');
         const lastPostId = post.body[post.body.length - 1]._id;
         const {body:getBody} = await request.get('/posts/'+lastPostId);
         const comments = getBody.comments;
         const lastCommentId = comments[comments.length-1]._id;
-       
-      
+             
 
         var updatedComment = {
             text: 'new text'
@@ -143,7 +137,7 @@ describe('My API tests with ADMIN USER', function () {
     });
   
     //DELETE-comment
-    test('when delete COMMENT then is effectively deleted', async (done) => {
+    test('when delete COMMENT then cannot delete comment', async (done) => {
         const post = await request.get('/posts');
         const lastPostId = post.body[post.body.length - 1]._id;
         const {body:getBody} = await request.get('/posts/'+lastPostId);
@@ -154,7 +148,7 @@ describe('My API tests with ADMIN USER', function () {
         const { body } = await request.delete('/posts/' + lastPostId + '/comments/' + lastCommentId)            
             .set('Authorization', 'bearer ' + token)
             //.expect('Content-type', /json/)
-            .expect(200)
+            .expect(400)
 
     
 
@@ -162,20 +156,16 @@ describe('My API tests with ADMIN USER', function () {
     });
 
     // OFFENSIVE WORDS ENDPOINTS
-    test('when get all OFFENSIVEWORDS then get OFFENSIVEWORDS list', async (done) => {
+    test('when get all OFFENSIVEWORDS then canT get OFFENSIVEWORDS list', async (done) => {
 
         const { body } = await request.get('/offensivewords')
-            .set('Authorization', 'bearer ' + token)
-            .expect('Content-type', /json/)
-            .expect(200)
+            .set('Authorization', 'bearer ' + token)            
+            .expect(400)
 
-        expect(body[0].level).toBeTruthy();
-        expect(body[0].word).toBeTruthy();
-        expect(body[0]._id).toBeTruthy();
         done();
     });
 
-    test('when create new OFFENSIVE WORD then this OFF. W. can be obtained', async (done) => {
+    test('when create new OFFENSIVE WORD then this OFF. W. canT be created', async (done) => {
 
         var newOffensiveWord = {
             word: 'testing',
@@ -184,65 +174,13 @@ describe('My API tests with ADMIN USER', function () {
 
         const { body } = await request.post('/offensivewords')
             .send(newOffensiveWord)
-            .set('Authorization', 'bearer ' + token)
-            .expect('Content-type', /json/)
-            .expect(200)
+            .set('Authorization', 'bearer ' + token)           
+            .expect(400)
 
-        const words = await request.get('/offensivewords')
-            .set('Authorization', 'bearer ' + token);
-
-        const lastWordId = words.body[words.body.length - 1];
-        const id = lastWordId._id;
-
-        const { body: getBody } = await request.get('/offensivewords/' + id)
-            .set('Authorization', 'bearer ' + token)
-            .expect('Content-type', /json/)
-            .expect(200)
-
-        expect(getBody.word).toEqual('testing');
-        expect(getBody.level).toEqual(2);
-
+        
         done();
 
     });
-
-    test('when update OFF. WORD then is effectively updated', async (done) => {
-        const word = await request.get('/offensivewords')
-            .set('Authorization', 'bearer ' + token);
-        const lastWordId = word.body[word.body.length - 1]._id
-        const updatedWord = { word: 'new word', level: 3 };
-
-        await request.put(`/offensivewords/${lastWordId}`)
-            .send(updatedWord)
-            .set('Authorization', 'bearer ' + token)
-            .expect('Content-type', /json/)
-            .expect(200)
-
-        var { body } = await request.get(`/offensivewords/${lastWordId}`)
-            .set('Authorization', 'bearer ' + token)
-            .expect('Content-type', /json/)
-            .expect(200)
-
-        expect(body.word).toEqual(updatedWord.word);
-        expect(body.level).toEqual(updatedWord.level);
-        done();
-
-    });
-
-    test('when delete OFF WORD then is effectively deleted', async (done) => {
-        const words = await request.get('/offensivewords')
-            .set('Authorization', 'bearer ' + token);
-        const lastWordId = words.body[words.body.length - 1]._id;
-
-        await request.delete(`/offensivewords/${lastWordId}`)
-            .set('Authorization', 'bearer ' + token)
-            .expect('Content-type', /json/)
-            .expect(200)
-
-        await request.get(`/offensivewords/${lastWordId}`)
-            .set('Authorization', 'bearer ' + token)
-            .expect(404)
-        done();
-    });
+   
 
 });

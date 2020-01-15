@@ -32,6 +32,13 @@ module.exports = class Users {
     findUser(username) {
         return this.collection.findOne({ username });
     }
+    // PARA ELIMINAR USUARIOS
+    // async deleteUser(user,password) {
+    //    const comparison = await bcrypt.compare(password, user,passwordHash);
+    //     if (comparison) {
+    //         return this.collection.deleteOne({username});
+    //     }
+    // }
 
     loadAdminUsers(array) {
         array.forEach(async (user) => {
