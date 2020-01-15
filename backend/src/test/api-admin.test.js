@@ -1,16 +1,11 @@
 const initApp = require('../server');
 const supertest = require('supertest');
 
-
 // probar a testear sin autorización --> 401
-//const repository = require('../repository');
+
 // DEFINIR EN EL REPO UNA FUNCIÓN repository.dbDisconnect();
 // LLAMAR A ESA FUNCIÓN AL FINAL DE LOS TEST CON UN afterAll(()=>repository.dbDidsconnect());
 
-//LOGEAR FALSO USER
-//https://medium.com/@internetross/a-pattern-for-creating-authenticated-sessions-for-routing-specs-with-supertest-and-jest-until-the-baf14d498e9d
-// AUTH TOKEIN
-//https://gist.github.com/bq1990/595c615970250e97f3ea
 
 let request;
 
@@ -27,13 +22,12 @@ beforeAll(async () => {
 
 describe('My API tests with ADMIN USER', function () {
 
-    var token = null;
+    let token = null;
 
     beforeEach((done) => {
         request
             .post('/login/')
             .auth('Pepa Flores', 'tombola3')
-            .send({ username: "Pepa Flores", password: "tombola3" })
             .end(function (err, res) {
 
                 token = res.body.token;
@@ -126,43 +120,49 @@ describe('My API tests with ADMIN USER', function () {
 
         done();
     });
-    // test('when modify comment then this comment is updated', async (done) => {
-    //     const {body:getBody} = await request.get('/posts');
-        
-    //     const post = getBody[getBody.length - 1];
-    //     const lastPostId = post._id;        
-    //     const commentId = post.comments[post.comments.length-1].id;
-    //     console.log(commentId)
 
-    //     var updatedComment = {
-    //         text: 'new text'
-    //     };
-
-    //     const { body } = await request.post('/posts/' + lastPostId + '/comments' + commentId)
-    //         .send(updatedComment)
-    //         .set('Authorization', 'bearer ' + token)
-    //         .expect('Content-type', /json/)
-    //         .expect(200)
-
-    //     expect(body._id).toBeTruthy();
-    //     expect(body.nickname).toEqual('marisol');
-    //     expect(body.text).toEqual(updatedComment.test);
-
-    //     done();
-    // });
-    //PUT-comment
-    //DELETE-comment
-    test('when delete post then is effectively deleted', async (done) => {
+      //PUT-comment
+    test('when modify comment then this comment is updated', async (done) => {
         const post = await request.get('/posts');
         const lastPostId = post.body[post.body.length - 1]._id;
+        const {body:getBody} = await request.get('/posts/'+lastPostId);
+        const comments = getBody.comments;
+        const lastCommentId = comments[comments.length-1]._id;
+        console.log(lastPostId)
+         console.log(lastCommentId)
+      
 
-        await request.delete(`/posts/${lastPostId}`)
+        var updatedComment = {
+            text: 'new text'
+        };
+
+        const { body } = await request.put('/posts/' + lastPostId + '/comments/' + lastCommentId)
+            .send(updatedComment)
             .set('Authorization', 'bearer ' + token)
             .expect('Content-type', /json/)
             .expect(200)
+      
+        expect(body.text).toEqual(updatedComment.text);
 
-        await request.get(`/posts/${lastPostId}`)
-            .expect(404)
+        done();
+    });
+  
+    //DELETE-comment
+    test('when delete COMMENT then is effectively deleted', async (done) => {
+        const post = await request.get('/posts');
+        const lastPostId = post.body[post.body.length - 1]._id;
+        const {body:getBody} = await request.get('/posts/'+lastPostId);
+        const comments = getBody.comments;
+        const lastCommentId = comments[comments.length-1]._id;    
+      
+
+        const { body } = await request.delete('/posts/' + lastPostId + '/comments/' + lastCommentId)            
+            .set('Authorization', 'bearer ' + token)
+            //.expect('Content-type', /json/)
+            .expect(200)
+
+    
+
         done();
     });
 
