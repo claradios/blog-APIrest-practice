@@ -1,7 +1,6 @@
 const initApp = require('../server');
 const supertest = require('supertest');
-var requestagent = require('superagent');
-const bcrypt = require('bcryptjs');
+
 
 // probar a testear sin autorización --> 401
 //const repository = require('../repository');
