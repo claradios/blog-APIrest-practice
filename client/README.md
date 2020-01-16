@@ -1,4 +1,4 @@
-# front-blog
+# client
 
 ## Project setup
 ```

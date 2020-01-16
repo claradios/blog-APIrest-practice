@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1579112911213" clover="3.2.0">
+  <project timestamp="1579112911213" name="All files">
+    <metrics statements="335" coveredstatements="269" conditionals="111" coveredconditionals="65" methods="53" coveredmethods="42" elements="499" coveredelements="376" complexity="0" loc="335" ncloc="335" packages="10" files="14" classes="14"/>
+    <package name="src">
+      <metrics statements="32" coveredstatements="29" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="3"/>
+      <file name="server.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/server.js">
+        <metrics statements="32" coveredstatements="29" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="34" count="18" type="stmt"/>
+        <line num="36" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="40" count="18" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="18" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="50" count="22" type="stmt"/>
+        <line num="51" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="22" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="61" count="3" type="stmt"/>
+        <line num="62" count="3" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controller">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/controller/index.js">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controller.comments">
+      <metrics statements="60" coveredstatements="52" conditionals="24" coveredconditionals="16" methods="3" coveredmethods="3"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/controller/comments/index.js">
+        <metrics statements="60" coveredstatements="52" conditionals="24" coveredconditionals="16" methods="3" coveredmethods="3"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="25" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="44" count="3" type="stmt"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="52" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="65" count="3" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="75" count="2" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="79" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="83" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="88" count="2" type="stmt"/>
+        <line num="89" count="2" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="93" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="94" count="0" type="stmt"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="98" count="2" type="stmt"/>
+        <line num="99" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="101" count="2" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="104" count="0" type="stmt"/>
+        <line num="110" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controller.login">
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/controller/login/index.js">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="15" count="18" type="stmt"/>
+        <line num="17" count="18" type="stmt"/>
+        <line num="18" count="18" type="stmt"/>
+        <line num="20" count="18" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controller.offensivewords">
+      <metrics statements="56" coveredstatements="48" conditionals="28" coveredconditionals="20" methods="5" coveredmethods="5"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/controller/offensivewords/index.js">
+        <metrics statements="56" coveredstatements="48" conditionals="28" coveredconditionals="20" methods="5" coveredmethods="5"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="37" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="40" count="4" type="stmt"/>
+        <line num="41" count="4" type="stmt"/>
+        <line num="45" count="3" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
+        <line num="49" count="3" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="51" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="56" count="2" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="84" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="88" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="100" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controller.posts">
+      <metrics statements="53" coveredstatements="36" conditionals="29" coveredconditionals="17" methods="5" coveredmethods="4"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/controller/posts/index.js">
+        <metrics statements="53" coveredstatements="36" conditionals="29" coveredconditionals="17" methods="5" coveredmethods="4"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="17" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="16" type="stmt"/>
+        <line num="34" count="16" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="38" count="10" type="stmt"/>
+        <line num="39" count="10" type="stmt"/>
+        <line num="40" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="10" type="stmt"/>
+        <line num="47" count="3" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="74" count="2" type="stmt"/>
+        <line num="76" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="81" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
+        <line num="87" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="92" count="0" type="stmt"/>
+        <line num="94" count="2" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="101" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.controller.users">
+      <metrics statements="17" coveredstatements="6" conditionals="7" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/controller/users/index.js">
+        <metrics statements="17" coveredstatements="6" conditionals="7" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.repository">
+      <metrics statements="82" coveredstatements="63" conditionals="11" coveredconditionals="3" methods="32" coveredmethods="24"/>
+      <file name="OffensiveWords.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/repository/OffensiveWords.js">
+        <metrics statements="22" coveredstatements="16" conditionals="6" coveredconditionals="1" methods="10" coveredmethods="8"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="13" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="18" type="stmt"/>
+        <line num="51" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+      </file>
+      <file name="Posts.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/repository/Posts.js">
+        <metrics statements="24" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="9"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="21" count="16" type="stmt"/>
+        <line num="25" count="12" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="97" count="2" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+      </file>
+      <file name="Users.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/repository/Users.js">
+        <metrics statements="14" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="18" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="33" count="40" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+      </file>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/repository/index.js">
+        <metrics statements="22" coveredstatements="17" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="3"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="35" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="defOffensiveWords.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/utils/defOffensiveWords.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+      </file>
+      <file name="loadAdmins.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/utils/loadAdmins.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.validator">
+      <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+      <file name="index.js" path="/home/clara/Documentos/misrepos/blog-APIrest-practice-/backend/src/validator/index.js">
+        <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="3" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="18" type="stmt"/>
+        <line num="5" count="18" type="stmt"/>
+        <line num="6" count="18" type="stmt"/>
+        <line num="7" count="98" type="stmt"/>
+        <line num="8" count="98" type="stmt"/>
+        <line num="9" count="98" type="stmt"/>
+        <line num="11" count="98" type="cond" truecount="4" falsecount="0"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="16" count="18" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

@@ -6,6 +6,53 @@
 	},
 	"item": [
 		{
+			"name": "login  POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48aba030-72ba-454d-b855-25bda21a807e",
+						"exec": [
+							"pm.environment.set(\"TOKEN\", pm.response.json().token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tombola3",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Pepa Flores",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3443/login/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "New User  POST",
 			"request": {
 				"method": "POST",
@@ -71,41 +118,6 @@
 			"response": []
 		},
 		{
-			"name": "login GET",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "tombola3",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "Pepa Flores",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:3443/login/",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"login",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "New Post POST",
 			"request": {
 				"auth": {
@@ -113,7 +125,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTE4MTQ1LCJleHAiOjE1Nzg5MTgyNjV9.xix0UnHLpy1utJbBYU6r11pjvWHyCCUWUkDDuA0eHpE",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
@@ -129,7 +141,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Caramen Os Habla\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
+					"raw": "{\n\t\"title\": \"Un Día Más Con ApiRest\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
 				},
 				"url": {
 					"raw": "https://localhost:3443/posts/",
@@ -187,40 +199,6 @@
 			"response": []
 		},
 		{
-			"name": "Delete Post DELETE",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTE5NTAwLCJleHAiOjE1Nzg5MTk2MjB9.nf5XuIXT6GckMR4Ga2TWDkKd7_zS4G4S5_fsIMvWsaQ",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:3443/posts/5e1c60685e3b3b449562f0d8",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"posts",
-						"5e1c60685e3b3b449562f0d8"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Modify Post PUT",
 			"request": {
 				"auth": {
@@ -228,7 +206,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTE5Mjg4LCJleHAiOjE1Nzg5MTk0MDh9.aaQaRzf04P8MW9elevTtSWQNbX2zN7bjMZnKN513MQk",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
@@ -267,115 +245,14 @@
 			"response": []
 		},
 		{
-			"name": "New Offensive Word POST",
+			"name": "Delete Post DELETE",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMDg1LCJleHAiOjE1Nzg5MzMyMDV9._beOh3H2Zz1zeYvS9U58mcuCUdGWJ5SghI6lI1jkFdM",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"word\": \"maricón\",\n\t\"level\":4}"
-				},
-				"url": {
-					"raw": "https://localhost:3443/offensivewords/",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"offensivewords",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Query Offensive Words GET",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMDg1LCJleHAiOjE1Nzg5MzMyMDV9._beOh3H2Zz1zeYvS9U58mcuCUdGWJ5SghI6lI1jkFdM",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:3443/offensivewords/",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"offensivewords",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Query Offensive Word GET",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMjMxLCJleHAiOjE1Nzg5MzMzNTF9.6KQ86IIB9Gf3NznwhgBppZ1BNH7wTpwZhpKyxm76fdY",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:3443/offensivewords/5e0a0b5029dc5d3e3a2580aa",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"offensivewords",
-						"5e0a0b5029dc5d3e3a2580aa"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Offensive Word DELETE",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzMjMxLCJleHAiOjE1Nzg5MzMzNTF9.6KQ86IIB9Gf3NznwhgBppZ1BNH7wTpwZhpKyxm76fdY",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
@@ -387,61 +264,15 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:3443/offensivewords/5e1c9b880983d167f5eb071d",
+					"raw": "https://localhost:3443/posts/5e1c60685e3b3b449562f0d8",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "3443",
 					"path": [
-						"offensivewords",
-						"5e1c9b880983d167f5eb071d"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Modify Offensive Word PUT",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTMzNDM5LCJleHAiOjE1Nzg5MzM1NTl9.rhvc00B91vaox9B69p7J8vY1ri170TXImU18egG04P8",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"word\": \"subnormal\",\n\t\"level\":2}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:3443/offensivewords/5e0a0b5029dc5d3e3a2580ac",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "3443",
-					"path": [
-						"offensivewords",
-						"5e0a0b5029dc5d3e3a2580ac"
+						"posts",
+						"5e1c60685e3b3b449562f0d8"
 					]
 				}
 			},
@@ -455,7 +286,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTMxNjcwLCJleHAiOjE1Nzg5MzE3OTB9.Wo-KlY_w8fra7X5Q_XI91fuIHfofEoirrkNWItEGJoY",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
@@ -498,7 +329,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlBlcGEgRmxvcmVzIiwiaWF0IjoxNTc4OTI5MTE0LCJleHAiOjE1Nzg5MjkyMzR9.CXDLnU8TH0UASbEt36tIvVMv44_3HBaGYUmxdyCBSgw",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
@@ -534,7 +365,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkNhcm1lbiBTZXZpbGxhIiwiaWF0IjoxNTc4OTMyMzU4LCJleHAiOjE1Nzg5MzI0Nzh9.n9-s9GER1LAQ-bm5RWd1kQPVW_ahoYdPwgb6ryeCRm0",
+							"value": "{{TOKEN}}",
 							"type": "string"
 						}
 					]
@@ -569,6 +400,187 @@
 						"5e160fcccc12600aad9a2b3c",
 						"comments",
 						"5e1c95ebaf1d58633d442982"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Offensive Words GET",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3443/offensivewords/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"offensivewords",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Offensive Word POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"word\": \"maricón\",\n\t\"level\":4}"
+				},
+				"url": {
+					"raw": "https://localhost:3443/offensivewords/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"offensivewords",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Offensive Word GET",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:3443/offensivewords/5e0a0b5029dc5d3e3a2580aa",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"offensivewords",
+						"5e0a0b5029dc5d3e3a2580aa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Offensive Word DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:3443/offensivewords/5e1c9b880983d167f5eb071d",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"offensivewords",
+						"5e1c9b880983d167f5eb071d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Offensive Word PUT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"word\": \"subnormal\",\n\t\"level\":2}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:3443/offensivewords/5e0a0b5029dc5d3e3a2580ac",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"offensivewords",
+						"5e0a0b5029dc5d3e3a2580ac"
 					]
 				}
 			},
