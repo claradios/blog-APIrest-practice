@@ -57,41 +57,6 @@ describe('My API tests with UNREGISTERED USER', function () {
         done();
     });
 
-    //PUT-comment
-    test('when modify COMMENT then canT', async (done) => {
-        const post = await request.get('/posts');
-        const lastPostId = post.body[post.body.length - 1]._id;
-        const { body: getBody } = await request.get('/posts/' + lastPostId);
-        const comments = getBody.comments;
-        const lastCommentId = comments[comments.length - 1]._id;
-
-        var updatedComment = {
-            text: 'new text'
-        };
-
-        const { body } = await request.put('/posts/' + lastPostId + '/comments/' + lastCommentId)
-            .send(updatedComment)
-            .expect(401)
-        done();
-    });
-
-    //DELETE-comment
-    test('when delete COMMENT then canT', async (done) => {
-        const post = await request.get('/posts');
-        const lastPostId = post.body[post.body.length - 1]._id;
-        const { body: getBody } = await request.get('/posts/' + lastPostId);
-        const comments = getBody.comments;
-        const lastCommentId = comments[comments.length - 1]._id;
-
-
-        const { body } = await request.delete('/posts/' + lastPostId + '/comments/' + lastCommentId)
-            .expect(401)
-
-
-
-        done();
-    });
-
     // OFFENSIVE WORDS ENDPOINTS
     test('when get all OFFENSIVEWORDS then canT get OFFENSIVEWORDS list', async (done) => {
 
