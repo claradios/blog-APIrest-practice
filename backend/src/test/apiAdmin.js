@@ -1,9 +1,6 @@
 const initApp = require('../server');
 const supertest = require('supertest');
-
-// DEFINIR EN EL REPO UNA FUNCIÓN repository.dbDisconnect();
-// LLAMAR A ESA FUNCIÓN AL FINAL DE LOS TEST CON UN afterAll(()=>repository.dbDidsconnect());
-
+const repository = require('../repository');
 
 let request;
 
@@ -13,6 +10,7 @@ beforeAll(async () => {
     request = supertest(app);
 
 });
+
 // afterAll(() => {
 //     return repository.dbDisconnect();
 //   });

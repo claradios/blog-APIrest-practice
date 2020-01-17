@@ -55,4 +55,8 @@ module.exports = class OffensiveWords {
     }
   }
 
+  closeIt() {
+    this.collection.close();
+  }
+
 }

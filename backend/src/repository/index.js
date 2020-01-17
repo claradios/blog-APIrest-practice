@@ -23,25 +23,27 @@ module.exports = {
     },
 
     async loadDefaultWords() {
-        const allWords = await this.offensiveWordsCol.getAllOffensiveWords();       
+        const allWords = await this.offensiveWordsCol.getAllOffensiveWords();
         if (allWords.length === 0) {
             await this.offensiveWordsCol.insertDefaultWords(defOffensiveWords);
             console.log('Default offensive words list has been inserted.')
         }
     },
 
-    async loadDefaultUsers() {      
+    async loadDefaultUsers() {
         const allUsers = await this.usersCol.getAllUsers();
         if (allUsers.length === 0) {
             await this.usersCol.loadAdminUsers(defaultUserAdmins);
             console.log('Default users have been inserted')
         }
     },
-    
-    async dbDisconnect () {         
-        await MongoClient.close();    
-     },
-};
 
+    async dbDisconnect() {      
+        await this.usersCol.closeIt();
+        await this.postsCol.closeIt();
+        await this.offensiveWordsCol.closeIt();
+        console.log('mongo disconnected');
+    }
+};
 
 

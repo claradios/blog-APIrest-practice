@@ -45,6 +45,9 @@ module.exports = class Users {
             await this.addUser(user)
         });
     } 
+    closeIt() {
+        this.collection.close();
+      }
 
 }
 

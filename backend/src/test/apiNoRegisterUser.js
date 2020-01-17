@@ -6,7 +6,6 @@ let request;
 beforeAll(async () => {
     const app = await initApp();
     request = supertest(app);
-
 });
 
 describe('My API tests with UNREGISTERED USER', function () {

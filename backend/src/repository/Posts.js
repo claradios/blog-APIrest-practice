@@ -107,5 +107,9 @@ module.exports = class Posts {
             { $set: { "comments.$": newComment } }
         );
     }
+    
+    closeIt() {
+        this.collection.close();
+      }
 
 }
