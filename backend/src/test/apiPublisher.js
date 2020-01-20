@@ -27,6 +27,12 @@ describe('My API tests with PUBLISHER USER', function () {
             });
     });
 
+    test('token has been generated', () => {
+        expect(token).toBeTruthy();
+        expect(token).not.toBeUndefined();
+        expect(typeof token).toBe('string');
+    });
+
     // BLOG-POST ENDPOINTS
     test('when get all POSTS then get test posts', async (done) => {
         const { body } = await request.get('/posts')
