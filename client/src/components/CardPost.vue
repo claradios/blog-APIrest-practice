@@ -3,15 +3,16 @@
     <div class="header level">
       <div class="level-left">
         <figure class="image is-32x32">
-          <img :src="post.userImage" :alt="post.username" />
+          <img :src="post.userImage" :alt="post.author" />
         </figure>
-        <span class="username">{{post.username}}</span>
+        <span class="author">{{post.author}}</span>
       </div>
     </div>
     <div class="image-container"
       :class="post.filter"
-      :style="{ backgroundImage: 'url(' + post.postImage + ')' }"
+      :style="{ backgroundImage: 'url(' + post.urlToImage + ')' }"
       @dblclick="like">
+      <h2 class="title">{{post.title}}</h2>
     </div>
     <div class="content">
       <div class="heart">
@@ -20,12 +21,13 @@
           </button>
       </div>
       <p class="likes">{{post.likes}} likes</p>
-      <p class="caption"><span>{{post.username}}</span> {{post.caption}}</p>
+      <p class="caption"><span>{{post.author}}</span> {{post.caption}}</p>
     </div>
   </article>
 </template>
 
 <script>
+console.log('hola')
 export default {
   name: 'cardPost',
   props: {
@@ -75,7 +77,7 @@ export default {
       width: 32px;
     }
 
-    .username {
+    .author {
       position: relative;
       padding-left: 5px;
       font-size: 0.9rem;
@@ -92,6 +94,14 @@ export default {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 45px;
+    color: white;
   }
 
   .content {
