@@ -1,6 +1,7 @@
 const express = require('express');
 const routerUsers = express.Router();
 const repository = require('../../repository');
+const passport = require('passport');
 
 routerUsers.post('/signup', async (req, res) => {
     const user = req.body;
@@ -21,9 +22,16 @@ routerUsers.post('/signup', async (req, res) => {
     }
 });
 
-routerUsers.get('/users', async (req, res) => {
-    const allUsers = await repository.usersCol.getAllUsers();
-    res.json(allUsers);
-});
+routerUsers.get('/users',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const {rol} = req.user;
+        if (rol !== 'admin') {
+            res.status(401).send('unauthorize');
+        } else {
+            const allUsers = await repository.usersCol.getAllUsers();
+            res.json(allUsers);
+        }
+    });
 
 module.exports = routerUsers;

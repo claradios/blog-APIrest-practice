@@ -38,7 +38,6 @@ describe('My API tests with UNREGISTERED USER', function () {
         done();
 
     });
-
   
     //POST-comment
     test('when create new COMMENT then  canT ', async (done) => {
@@ -81,5 +80,16 @@ describe('My API tests with UNREGISTERED USER', function () {
 
     });
 
+    test('non registered user CANNOT SIGN UP with an existent USER', async (done) => {
+        const user = {
+            password: 'tombola3',
+            username:'Pepa Flores',
+            nickname:'marsiol'
+        }
+        const {body} = await request.post('/signup')
+        .send(user)
+        .expect(400)
+        done();
+    });
 
 });

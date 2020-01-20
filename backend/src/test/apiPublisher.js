@@ -33,6 +33,14 @@ describe('My API tests with PUBLISHER USER', function () {
         expect(typeof token).toBe('string');
     });
 
+    test('when PUBLISHER you canT access to ALL users registration info', async (done) => {
+        const { body } = await request.get('/users')
+            .set('Authorization', 'bearer ' + token)        
+            .expect(401)
+            
+        done();
+    });
+
     // BLOG-POST ENDPOINTS
     test('when get all POSTS then get test posts', async (done) => {
         const { body } = await request.get('/posts')

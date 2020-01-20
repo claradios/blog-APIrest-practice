@@ -36,6 +36,16 @@ describe('My API tests with ADMIN USER', function () {
         expect(token).not.toBeUndefined();
         expect(typeof token).toBe('string');
     });
+
+    test('when admin you can access to ALL users registration info', async (done) => {
+        const { body } = await request.get('/users')
+            .set('Authorization', 'bearer ' + token)
+            .expect('Content-type', /json/)
+            .expect(200)
+            
+        done();
+    });
+
     // BLOG-POST ENDPOINTS
     test('when get all POSTS then get test posts', async (done) => {
         const { body } = await request.get('/posts')
@@ -121,36 +131,36 @@ describe('My API tests with ADMIN USER', function () {
         done();
     });
 
-        //POST-comment
-        test('when create new COMMENT with OFFENSIVE WORDS then fails and returns offensive words', async (done) => {
-            const post = await request.get('/posts');
-            const lastPostId = post.body[post.body.length - 1]._id;
-    
-            var newComment = {
-                text: 'Hola cerdo, qué tal estás?'
-            };
-    
-            const { body } = await request.post('/posts/' + lastPostId + '/comments')
-                .send(newComment)
-                .set('Authorization', 'bearer ' + token)
-                .expect('Content-type', /json/)
-                .expect(400)
-         
-            expect(Array.isArray(body)).toBeTruthy();
-            expect(body[0].word).toEqual('cerdo');
-    
-            done();
-        });
+    //POST-comment
+    test('when create new COMMENT with OFFENSIVE WORDS then fails and returns offensive words', async (done) => {
+        const post = await request.get('/posts');
+        const lastPostId = post.body[post.body.length - 1]._id;
 
-      //PUT-comment
+        var newComment = {
+            text: 'Hola cerdo, qué tal estás?'
+        };
+
+        const { body } = await request.post('/posts/' + lastPostId + '/comments')
+            .send(newComment)
+            .set('Authorization', 'bearer ' + token)
+            .expect('Content-type', /json/)
+            .expect(400)
+
+        expect(Array.isArray(body)).toBeTruthy();
+        expect(body[0].word).toEqual('cerdo');
+
+        done();
+    });
+
+    //PUT-comment
     test('when modify COMMENT then this comment is updated', async (done) => {
         const post = await request.get('/posts');
         const lastPostId = post.body[post.body.length - 1]._id;
-        const {body:getBody} = await request.get('/posts/'+lastPostId);
+        const { body: getBody } = await request.get('/posts/' + lastPostId);
         const comments = getBody.comments;
-        const lastCommentId = comments[comments.length-1]._id;
-       
-      
+        const lastCommentId = comments[comments.length - 1]._id;
+
+
 
         var updatedComment = {
             text: 'new text'
@@ -161,27 +171,27 @@ describe('My API tests with ADMIN USER', function () {
             .set('Authorization', 'bearer ' + token)
             .expect('Content-type', /json/)
             .expect(200)
-      
+
         expect(body.text).toEqual(updatedComment.text);
 
         done();
     });
-  
+
     //DELETE-comment
     test('when delete COMMENT then is effectively deleted', async (done) => {
         const post = await request.get('/posts');
         const lastPostId = post.body[post.body.length - 1]._id;
-        const {body:getBody} = await request.get('/posts/'+lastPostId);
+        const { body: getBody } = await request.get('/posts/' + lastPostId);
         const comments = getBody.comments;
-        const lastCommentId = comments[comments.length-1]._id;    
-      
+        const lastCommentId = comments[comments.length - 1]._id;
 
-        const { body } = await request.delete('/posts/' + lastPostId + '/comments/' + lastCommentId)            
+
+        const { body } = await request.delete('/posts/' + lastPostId + '/comments/' + lastCommentId)
             .set('Authorization', 'bearer ' + token)
             //.expect('Content-type', /json/)
             .expect(200)
 
-    
+
 
         done();
     });
