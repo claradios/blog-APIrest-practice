@@ -1,58 +1,71 @@
 <template>
-  <article class="card-post">
+  <article class="card-singlepost">
     <div class="header level">
       <div class="level-left">
         <figure class="image is-32x32">
-          <img :src="post.userImage" :alt="post.author" />
+          <img :src="singlepost.userImage" :alt="singlepost.author" />
         </figure>
-        <span class="author">{{post.author}}</span>
+        <span class="author">{{singlepost.author}}</span>
       </div>
     </div>
     <div
       class="image-container"
-      :class="post.filter"
-      :style="{ backgroundImage: 'url(' + post.urlToImage + ')' }"
+      :class="singlepost.filter"
+      :style="{ backgroundImage: 'url(' + singlepost.urlToImage + ')' }"
       @dblclick="like"
     >
-      <h2 class="title">{{post.title}}</h2>
+      <h2 class="title">{{singlepost.title}}</h2>
     </div>
     <div class="content">
       <div class="heart">
         <button @click="like" aria-label="You like">
-          <i class="far fa-heart fa-lg" :class="{'fas': this.post.hasBeenLiked}"></i>
+          <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
         </button>
       </div>
-      <p class="likes">{{post.likes}} likes</p>
+      <p class="likes">{{singlepost.likes}} likes</p>
     </div>
-    <section class="text">{{post.content}}</section>
+    <section class="text">{{singlepost.content}}</section>
+    <section class="comments">
+      <ul>
+        <li v-for="comment in singlepost.comments" :key="comment._id">
+          <card-comment :comment="comment" ></card-comment>
+        </li>
+      </ul>
+    </section>
   </article>
 </template>
 
 <script>
+import CardComment from './CardComment'
 export default {
-  name: 'readPost',
+  name: 'readsinglepost',
   props: {
-    post: Object
+    singlepost: Object
+  },
+  components: {
+    CardComment
   },
   methods: {
     like () {
-      this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++
-      this.post.hasBeenLiked = !this.post.hasBeenLiked
+      this.singlepost.hasBeenLiked
+        ? this.singlepost.likes--
+        : this.singlepost.likes++
+      this.singlepost.hasBeenLiked = !this.singlepost.hasBeenLiked
     }
   }
 }
 </script>
 
 <style lang="scss">
-.card-post {
+.card-singlepost {
   padding-top: 50px;
 }
 
-.card-post ~ .card-post {
+.card-singlepost ~ .card-singlepost {
   padding-top: 0;
 }
 
-.card-post {
+.card-singlepost {
   padding: 5px 0;
 
   .header {
@@ -135,7 +148,7 @@ export default {
   }
 }
 
-.card-post:last-child {
+.card-singlepost:last-child {
   margin-bottom: 50px;
 }
 </style>

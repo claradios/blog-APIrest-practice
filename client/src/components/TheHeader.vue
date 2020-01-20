@@ -1,8 +1,9 @@
 <template>
   <header>
-    <button v-if="step === 1" @click="handleGoToHome">
-      <i class="fab fa-vuejs"></i> Home
-    </button>
+     <router-link :to="'/'"> <i class="fab fa-vuejs"></i> Home</router-link>
+    <!-- <button v-if="step === 1" @click="handleGoToHome">
+
+    </button> -->
     <button v-if="step === 2 || step === 3" @click="handleGoToHome">
       <i class="fas fa-arrow-left"></i> Cancel
     </button>

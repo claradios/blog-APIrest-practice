@@ -7,7 +7,7 @@
       @share-post="handleSharePost"
     />
     <read-post
-      :posts="posts"
+      :singlepost="singlepost"
       :filters="filters"
       :image="image"
       @filter-selected="handleFilterSelected"
@@ -20,7 +20,7 @@
 import TheHeader from '@/components/TheHeader.vue'
 import ReadPost from '@/components/ReadPost.vue'
 import TheFooter from '@/components/TheFooter.vue'
-import posts from '@/data/posts'
+import singlepost from '@/data/singlepost'
 import filters from '@/data/filters'
 
 // @ is an alias to /src
@@ -29,7 +29,7 @@ export default {
   name: 'read',
   data () {
     return {
-      posts,
+      singlepost,
       filters,
       caption: '',
       image: ''
