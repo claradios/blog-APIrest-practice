@@ -1,37 +1,65 @@
+// import Vue from 'vue'
+// import Router from 'vue-router'
+// import Blog from '../components'
+// import Offensivewords from '../components';
+
+// Vue.use(Router)
+
+// export default new Router({
+//   mode: 'history',
+//   linkActiveClass: 'active',
+//   routes: [{
+//     path: '/',
+//     name: 'feed',
+//     component: Blog
+//   }, {
+//     path: '/by/:author',
+//     name: 'author',
+//     props: true,
+//     component: Blog
+//   }, {
+//     path: '/posts/',
+//     name: 'posts',
+//     props: true,
+//     component: Blog
+//   },{
+//     path: '/posts/:id',
+//     name: 'post',
+//     props: true,
+//     component: Blog
+//   },{
+//     path: '/offensivewords/',
+//     name: 'offensivewords',
+//     props: true,
+//     component: Offensivewords
+//   },
+// ]
+// })
+
 import Vue from 'vue'
-import Router from 'vue-router'
-import Blog from '../components'
-import Offensivewords from '../components';
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
-export default new Router({
-  mode: 'history',
-  linkActiveClass: 'active',
-  routes: [{
+const routes = [
+  {
     path: '/',
-    name: 'feed',
-    component: Blog
-  }, {
-    path: '/by/:author',
-    name: 'author',
-    props: true,
-    component: Blog
-  }, {
-    path: '/posts/',
-    name: 'posts',
-    props: true,
-    component: Blog
-  },{
-    path: '/posts/:id',
-    name: 'post',
-    props: true,
-    component: Blog
-  },{
-    path: '/offensivewords/',
-    name: 'offensivewords',
-    props: true,
-    component: Offensivewords
+    name: 'home',
+    component: Home
   },
+  {
+    path: '/about',
+    name: 'about',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  }
 ]
+
+const router = new VueRouter({
+  routes
 })
+
+export default router
