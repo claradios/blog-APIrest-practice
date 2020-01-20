@@ -1,35 +1,38 @@
 <template>
   <main>
     <div v-if="step === 1" class="feed">
-      <card-post v-for="post in posts"
-        :post="post"
-        :key="posts.indexOf(post)">
-      </card-post>
+      <card-post v-for="post in posts" :post="post" :key="posts.indexOf(post)"></card-post>
     </div>
     <div v-if="step === 2">
-      <div class="selected-image"
-          :class="selectedFilter"
-          :style="{ backgroundImage: 'url(' + image + ')' }"></div>
+      <div
+        class="selected-image"
+        :class="selectedFilter"
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+      ></div>
       <div class="filter-container">
-        <card-filter v-for="filter in filters"
+        <card-filter
+          v-for="filter in filters"
           :filter="filter"
           :image="image"
           :key="filters.indexOf(filter)"
-          @filter-selected="handleFilterSelected">
-        </card-filter>
+          @filter-selected="handleFilterSelected"
+        ></card-filter>
       </div>
     </div>
     <div v-if="step === 3">
-      <div class="selected-image"
+      <div
+        class="selected-image"
         :class="selectedFilter"
-        :style="{ backgroundImage: 'url(' + image + ')' }"></div>
+        :style="{ backgroundImage: 'url(' + image + ')' }"
+      ></div>
       <div class="caption-container">
-        <textarea class="caption-input"
+        <textarea
+          class="caption-input"
           placeholder="Write a caption..."
           type="text"
           :value="value"
-          @input="$emit('input', $event.target.value)">
-        </textarea>
+          @input="$emit('input', $event.target.value)"
+        ></textarea>
       </div>
     </div>
   </main>
@@ -72,6 +75,9 @@ main {
   height: calc(100vh);
   width: 100vw;
 }
+.main::-webkit-scrollbar {
+  display: none;
+  width: 0 !important }
 
 .caption-container {
   height: 210px;
@@ -110,4 +116,8 @@ main {
   overflow-x: hidden;
   padding: 50px 0;
 }
+
+.feed::-webkit-scrollbar {
+  display: none;
+  width: 0 !important }
 </style>

@@ -9,7 +9,6 @@ export default [
     userImage: 'https://www.mujerhoy.com/noticias/201908/27/media/rocio-jurado-libro.jpg',
     likes: 1200,
     hasBeenLiked: false,
-    caption: 'Ready to destroy the galaxy!',
     filter: 'perpetua'
   },
   {
@@ -32,7 +31,6 @@ export default [
       'https://cdne.diariocorreo.pe/thumbs/uploads/img/2019/06/03/guardianes-de-la-galaxia-vol-3-explicara-el-origen-890614-837600-jpg_604x0.jpg',
     likes: 600,
     hasBeenLiked: false,
-    caption: 'Ready to destroy the galaxy!',
     filter: 'clarendon'
   },
   {
@@ -42,7 +40,6 @@ export default [
       'https://images.alphacoders.com/691/thumb-1920-691565.jpg',
     likes: 800,
     hasBeenLiked: false,
-    caption: 'Ready to destroy the galaxy!',
     filter: 'lofi'
   },
   {
@@ -52,7 +49,6 @@ export default [
       'https://sm.ign.com/ign_latam/news/r/rumor-guar/rumor-guardians-of-the-galaxy-ride-taking-over-dis_991u.jpg',
     likes: 300,
     hasBeenLiked: false,
-    caption: 'Ready to destroy the galaxy!',
     filter: 'moon'
   }
 ]

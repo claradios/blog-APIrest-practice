@@ -15,6 +15,10 @@
       <label for="file">
         <i class="fas fa-camera-retro"></i>
       </label>
+      <button @click="handleGoToNewPost">
+        <i class="fas fa-plus-square"></i>
+        Crear Entrada
+      </button>
     </div>
   </footer>
 </template>
@@ -28,6 +32,9 @@ export default {
     },
     handleUploadImage (ev) {
       this.$emit('upload-image', ev)
+    },
+    handleToGoNewPost () {
+      this.$emit('go-to-newpost')
     }
   },
   props: {

@@ -24,13 +24,13 @@
       </div>
       <p class="likes">{{post.likes}} likes</p>
     </div>
-    <router-link :to="`/read/${post._id}`">leer más ...</router-link>
+    <section class="text">{{post.content}}</section>
   </article>
 </template>
 
 <script>
 export default {
-  name: 'cardPost',
+  name: 'readPost',
   props: {
     post: Object
   },
@@ -130,12 +130,8 @@ export default {
     font-weight: bold;
   }
 
-  .caption {
-    font-size: 0.85rem;
-
-    span {
-      font-weight: bold;
-    }
+  .text {
+    color: blue;
   }
 }
 

@@ -11,10 +11,9 @@
       :posts="posts"
       :filters="filters"
       :image="image"
-      v-model="caption"
       @filter-selected="handleFilterSelected"
     />
-    <the-footer :step="step" @go-to-home="handleGoToHome" @upload-image="handleUploadImage" />
+    <the-footer :step="step" @go-to-home="handleGoToHome" @upload-image="handleUploadImage" @go-to-newpost="handleGoToNewPost"/>
   </div>
 </template>
 
