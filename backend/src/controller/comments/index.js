@@ -12,7 +12,7 @@ const passport = require('passport');
 routerComments.post('/',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const user = req.user;     
+        const user = req.user;
         const { rol, nickname } = user;
         const postId = req.params.id;
         const comment = req.body;
@@ -53,7 +53,7 @@ routerComments.delete('/:commentId',
             res.status(400).send('Comment not found');
         } else if (
             rol !== 'admin' && nickname !== comment.nickname
-        ) {           
+        ) {
             res.status(400).send('unauthorized');
         } else {
             await repository.postsCol.deleteCommentById(postId, commentId);
@@ -67,28 +67,28 @@ routerComments.put('/:commentId',
     async (req, res) => {
         const commentId = req.params.commentId;
         const postId = req.params.id
-        
+
         const user = req.user;
-        const {rol,nickname} = user;
+        const { rol, nickname } = user;
 
         //FIND COMMENT TO EDIT
         const searchComment = await repository.postsCol.findSpecificComment(commentId);
-        const originalComment = searchComment[0].comments[0];       
+        const originalComment = searchComment[0].comments[0];
         const { date } = originalComment;
 
         if (searchComment.length === 0) {
 
             res.status(400).send('the comment doesnt match any of the existents');
 
-        } else if ( rol !== 'admin' && nickname !== originalComment.nickname ) {
+        } else if (rol !== 'admin' && nickname !== originalComment.nickname) {
 
             res.status(400).send('unauthorized');
 
-        } else {
+        } else {           
             const commentReq = req.body;
             const { text } = commentReq;
             commentReq.date = date;
-
+            
             //BODY VALIDATION
             if (typeof text != 'string') {
                 res.status(400).send('invalid BODY');
@@ -96,12 +96,13 @@ routerComments.put('/:commentId',
                 //WORDS VALIDATION
                 const wordsToCheck = await repository.offensiveWordsCol.getAllOffensiveWords();
                 const validation = await validator(text, wordsToCheck);
-                if (validation.length === 0) {
-                    //UPDATE RESOURCE 
-                    await repository.postsCol.modifyCommentById(postId, commentId, commentReq);
-                    res.json(commentReq);
-                } else {
+                if (validation.length !== 0) {
                     res.status(400).json(validation);
+                } else {
+                    //UPDATE RESOURCE 
+                    const updatedComment = await repository.postsCol.updateCommentObj(commentId, commentReq,nickname);
+                    await repository.postsCol.modifyCommentById(postId, commentId, updatedComment);
+                    res.json(updatedComment);
                 }
             }
         }

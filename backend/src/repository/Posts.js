@@ -29,17 +29,22 @@ module.exports = class Posts {
         return this.collection.deleteOne({ _id: new ObjectId(id) });
     }
 
-    modifyPost(user, postReq, id) {
+    updateObject(user, postReq, id) {
         const { username, nickname } = user;
         const { title, content, urlToImage } = postReq;
         const newPost = {
-            author:username,
+            author: username,
             nickname,
             title,
             content,
-            urlToImage
+            urlToImage,
+            _id: ObjectId(id)
         };
-        //UPDATE RESOURCE      
+        return newPost;
+    }
+
+    modifyPost(newPost, id) {
+
         return this.collection.updateOne(
             { _id: new ObjectId(id) },
             { $set: newPost }
@@ -67,7 +72,7 @@ module.exports = class Posts {
         ).toArray();
     }
 
-    findSpecificComment(id) {        
+    findSpecificComment(id) {
         return this.collection.aggregate([
             { "$match": { 'comments._id': ObjectId(id) } },
             {
@@ -92,24 +97,29 @@ module.exports = class Posts {
         );
     }
 
-    modifyCommentById(postId, id, commentReq) {
-        const { nickname, text, date } = commentReq;
+    updateCommentObj(id, commentReq,nickname) {
+        const { text, date } = commentReq;
         const newComment = {
             nickname,
             text,
             date,
             _id: ObjectId(id),
-            edited: `${new Date()} (last edited)`
+            edited: new Date()
         };
-        // https://blog.fullstacktraining.com/retrieve-only-queried-element-in-an-object-array-in-mongodb-collection/
+       
+        return newComment;
+    }
+
+    modifyCommentById(postId, id, newComment) {
+
         return this.collection.updateOne(
             { _id: ObjectId(postId), "comments._id": ObjectId(id) },
             { $set: { "comments.$": newComment } }
         );
     }
-    
+
     closeIt() {
         this.collection.close();
-      }
+    }
 
 }

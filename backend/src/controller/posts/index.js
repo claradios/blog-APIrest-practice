@@ -24,8 +24,8 @@ routerPosts.post('/',
         ) {
             res.status(400).send('invalid BODY');
         } else {
-            await repository.postsCol.addPost(post, user);
-            res.json(post);
+            const result = await repository.postsCol.addPost(post, user);
+            res.json(result.ops[0]);
         }
     });
 
@@ -75,8 +75,8 @@ routerPosts.put('/:postId',
 
         if (
             rol !== 'admin' && username !== author
-        ) {            
-            res.status(400).send('unauthorized');
+        ) {
+            res.status(401).send('unauthorized');
         }
         else if (!post) {
             res.status(404).send('not found');
@@ -91,9 +91,9 @@ routerPosts.put('/:postId',
             ) {
                 res.sendStatus(400);
             } else {
-                await repository.postsCol.modifyPost(user, postReq, id);
-                //Return new resource         
-                res.json(postReq);
+                const updatePost = repository.postsCol.updateObject(user, postReq, id);
+                await repository.postsCol.modifyPost(updatePost, id);
+                res.json(updatePost);
             }
         }
     });

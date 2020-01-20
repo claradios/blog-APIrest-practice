@@ -25,7 +25,7 @@ routerUsers.post('/signup', async (req, res) => {
 routerUsers.get('/users',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const {rol} = req.user;
+        const {rol} = req.user;       
         if (rol !== 'admin') {
             res.status(401).send('unauthorize');
         } else {
