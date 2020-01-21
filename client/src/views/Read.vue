@@ -1,10 +1,6 @@
 <template>
   <div>
     <the-header
-      :step="step"
-      @go-to-home="handleGoToHome"
-      @next-step="step++"
-      @share-post="handleSharePost"
     />
     <read-post
       :singlepost="singlepost"
@@ -12,7 +8,7 @@
       :image="image"
       @filter-selected="handleFilterSelected"
     />
-    <the-footer :step="step" @go-to-home="handleGoToHome" @upload-image="handleUploadImage" @go-to-newpost="handleGoToNewPost"/>
+    <the-footer/>
   </div>
 </template>
 
@@ -39,13 +35,6 @@ export default {
     TheHeader,
     ReadPost,
     TheFooter
-  },
-  methods: {
-    handleGoToHome () {
-      this.caption = ''
-      this.image = ''
-      this.step = 1
-    }
   }
 }
 </script>

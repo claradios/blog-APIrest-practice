@@ -1,20 +1,7 @@
 <template>
   <footer>
-    <button @click="handleGoToHome">
-      <i class="fas fa-home fa-lg"></i>
-    </button>
     <div class="footer-upload">
-      <!-- <input
-        type="file"
-        name="file"
-        id="file"
-        class="inputfile"
-        @change="handleUploadImage"
-      />
-      <label for="file">
-        <i class="fas fa-camera-retro"></i>
-      </label> -->
-      <button @click="handleGoToNewPost">
+      <button>
         <i class="fas fa-plus-square"></i>
         Crear Entrada
       </button>
@@ -24,19 +11,7 @@
 
 <script>
 export default {
-  name: 'TheFooter',
-  methods: {
-    handleGoToHome () {
-      this.$emit('go-to-home')
-    },
-    // handleUploadImage (ev) {
-    //   this.$emit('upload-image', ev)
-    // },
-    handleToGoNewPost () {
-      this.$emit('go-to-newpost')
-    }
-  }
-
+  name: 'TheFooter'
 }
 </script>
 

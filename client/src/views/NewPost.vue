@@ -1,20 +1,13 @@
 <template>
   <div>
-    <the-header
-      :step="step"
-      @go-to-home="handleGoToHome"
-      @next-step="step++"
-      @share-post="handleSharePost"
-    />
+    <the-header/>
     <the-container-create
       :filters="filters"
       @upload-image="handleUploadImage"
       @filter-selected="handleFilterSelected"
     />
     <card-new-post :post="post" />
-    <the-footer
-      @go-to-newpost="handleGoToNewPost"
-    />
+    <the-footer/>
   </div>
 </template>
 
@@ -35,12 +28,6 @@ export default {
     TheHeader,
     TheContainerCreate,
     TheFooter
-  },
-  methods: {
-    handleGoToHome () {
-      this.image = ''
-      this.step = 1
-    }
   }
 }
 </script>

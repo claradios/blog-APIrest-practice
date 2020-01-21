@@ -1,16 +1,6 @@
 <template>
   <header>
      <router-link :to="'/'"> <i class="fab fa-vuejs"></i> Home</router-link>
-    <!-- <button v-if="step === 1" @click="handleGoToHome">
-
-    </button> -->
-    <button v-if="step === 2 || step === 3" @click="handleGoToHome">
-      <i class="fas fa-arrow-left"></i> Cancel
-    </button>
-    <button v-if="step === 2" @click="handleNextStep">
-      Next <i class="fas fa-arrow-right"></i>
-    </button>
-    <button v-if="step === 3" @click="handleSharePost">Share</button>
   </header>
 </template>
 
@@ -22,18 +12,8 @@ export default {
       type: Number,
       default: 1
     }
-  },
-  methods: {
-    handleGoToHome () {
-      this.$emit('go-to-home')
-    },
-    handleSharePost () {
-      this.$emit('share-post')
-    },
-    handleNextStep () {
-      this.$emit('next-step')
-    }
   }
+
 }
 </script>
 

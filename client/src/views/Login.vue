@@ -1,11 +1,8 @@
 <template>
   <div>
-    <the-header
-      @go-to-home="handleGoToHome"
-    />
-    <card-login />
-    <the-footer
-    />
+    <the-header/>
+    <card-login/>
+    <the-footer/>
   </div>
 </template>
 

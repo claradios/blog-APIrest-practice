@@ -1,18 +1,8 @@
 <template>
   <div>
-    <the-header
-      :step="step"
-      @go-to-home="handleGoToHome"
-      @next-step="step++"
-      @share-post="handleSharePost"
-    />
-    <card-signup />
-    <the-footer
-      :step="step"
-      @go-to-home="handleGoToHome"
-      @upload-image="handleUploadImage"
-      @go-to-newpost="handleGoToNewPost"
-    />
+    <the-header/>
+    <card-signup/>
+    <the-footer/>
   </div>
 </template>
 
@@ -27,12 +17,6 @@ export default {
     TheHeader,
     CardSignup,
     TheFooter
-  },
-  methods: {
-    handleGoToHome () {
-      this.image = ''
-      this.step = 1
-    }
   }
 }
 </script>
