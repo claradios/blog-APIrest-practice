@@ -11,7 +11,7 @@ import TheHeader from '@/components/TheHeader.vue'
 import TheContainer from '@/components/TheContainer.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import posts from '@/data/posts'
-
+import loadPosts from '@/service/loadPosts.js'
 // @ is an alias to /src
 
 export default {
@@ -19,7 +19,13 @@ export default {
   data () {
     return {
       posts
+      // postsB: []
     }
+  },
+  async mounted () {
+    const result = await loadPosts()
+    console.log(result)
+    // this.postsB = result
   },
   components: {
     TheHeader,
