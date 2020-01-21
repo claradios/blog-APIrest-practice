@@ -1,11 +1,6 @@
 <template>
   <div>
-    <the-header
-      :step="step"
-      @go-to-home="handleGoToHome"
-      @next-step="step++"
-      @share-post="handleSharePost"
-    />
+    <the-header @go-to-home="handleGoToHome" @share-post="handleSharePost" />
     <the-container
       :step="step"
       :posts="posts"
@@ -13,7 +8,12 @@
       :image="image"
       @filter-selected="handleFilterSelected"
     />
-    <the-footer :step="step" @go-to-home="handleGoToHome" @upload-image="handleUploadImage" @go-to-newpost="handleGoToNewPost"/>
+    <the-footer
+      :step="step"
+      @go-to-home="handleGoToHome"
+      @upload-image="handleUploadImage"
+      @go-to-newpost="handleGoToNewPost"
+    />
   </div>
 </template>
 

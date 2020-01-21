@@ -4,17 +4,16 @@
       <i class="fas fa-home fa-lg"></i>
     </button>
     <div class="footer-upload">
-      <input
+      <!-- <input
         type="file"
         name="file"
         id="file"
         class="inputfile"
-        :disabled="step !== 1"
         @change="handleUploadImage"
       />
       <label for="file">
         <i class="fas fa-camera-retro"></i>
-      </label>
+      </label> -->
       <button @click="handleGoToNewPost">
         <i class="fas fa-plus-square"></i>
         Crear Entrada
@@ -30,19 +29,14 @@ export default {
     handleGoToHome () {
       this.$emit('go-to-home')
     },
-    handleUploadImage (ev) {
-      this.$emit('upload-image', ev)
-    },
+    // handleUploadImage (ev) {
+    //   this.$emit('upload-image', ev)
+    // },
     handleToGoNewPost () {
       this.$emit('go-to-newpost')
     }
-  },
-  props: {
-    step: {
-      type: Number,
-      default: 1
-    }
   }
+
 }
 </script>
 
