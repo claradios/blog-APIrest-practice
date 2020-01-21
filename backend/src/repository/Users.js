@@ -9,14 +9,15 @@ module.exports = class Users {
     }
 
     async addUser(user) {
-        const { nickname, password, username, rol = 'publisher' } = user;
+        const { nickname, password, username, rol = 'publisher', userImage } = user;
         const passwordHash = await bcrypt.hash(password, bcrypt.genSaltSync(8), null);
 
             const newUser = {
                 nickname,
                 username,
                 passwordHash,
-                rol
+                rol,
+                userImage
             }
             this.collection.insertOne(newUser);       
     }
@@ -31,14 +32,7 @@ module.exports = class Users {
 
     findUser(username) {
         return this.collection.findOne({ username });
-    }
-    // PARA ELIMINAR USUARIOS
-    // async deleteUser(user,password) {
-    //    const comparison = await bcrypt.compare(password, user,passwordHash);
-    //     if (comparison) {
-    //         return this.collection.deleteOne({username});
-    //     }
-    // }
+    }  
 
     loadAdminUsers(array) {
         array.forEach(async (user) => {

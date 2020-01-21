@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88% </span>
+        <span class="strong">88.89% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>22/25</span>
+        <span class='fraction'>24/27</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">78.57% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>9/12</span>
+        <span class='fraction'>11/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88% </span>
+        <span class="strong">88.89% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>22/25</span>
+        <span class='fraction'>24/27</span>
       </div>
     </div>
     <p class="quiet">
@@ -160,7 +160,17 @@
 <a name='L112'></a><a href='#L112'>112</a>
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -198,6 +208,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -269,6 +284,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -305,17 +325,22 @@ module.exports = class Posts {
 <span class="cstat-no" title="statement not covered" >        return this.collection.deleteOne({ _id: new ObjectId(id) });</span>
     }
 &nbsp;
-    modifyPost(user, postReq, id) {
+    updateObject(user, postReq, id) {
         const { username, nickname } = user;
         const { title, content, urlToImage } = postReq;
         const newPost = {
-            author:username,
+            author: username,
             nickname,
             title,
             content,
-            urlToImage
+            urlToImage,
+            _id: ObjectId(id)
         };
-        //UPDATE RESOURCE      
+        return newPost;
+    }
+&nbsp;
+    modifyPost(newPost, id) {
+&nbsp;
         return this.collection.updateOne(
             { _id: new ObjectId(id) },
             { $set: newPost }
@@ -343,7 +368,7 @@ module.exports = class Posts {
         ).toArray();
     }
 &nbsp;
-    findSpecificComment(id) {        
+    findSpecificComment(id) {
         return this.collection.aggregate([
             { "$match": { 'comments._id': ObjectId(id) } },
             {
@@ -368,25 +393,30 @@ module.exports = class Posts {
         );
     }
 &nbsp;
-    modifyCommentById(postId, id, commentReq) {
-        const { nickname, text, date } = commentReq;
+    updateCommentObj(id, commentReq,nickname) {
+        const { text, date } = commentReq;
         const newComment = {
             nickname,
             text,
             date,
             _id: ObjectId(id),
-            edited: `${new Date()} (last edited)`
+            edited: new Date()
         };
-        // https://blog.fullstacktraining.com/retrieve-only-queried-element-in-an-object-array-in-mongodb-collection/
+       
+        return newComment;
+    }
+&nbsp;
+    modifyCommentById(postId, id, newComment) {
+&nbsp;
         return this.collection.updateOne(
             { _id: ObjectId(postId), "comments._id": ObjectId(id) },
             { $set: { "comments.$": newComment } }
         );
     }
-    
+&nbsp;
 <span class="fstat-no" title="function not covered" >    cl</span>oseIt() {
 <span class="cstat-no" title="statement not covered" >        this.collection.close();</span>
-      }
+    }
 &nbsp;
 }</pre></td></tr>
 </table></pre>
@@ -394,7 +424,7 @@ module.exports = class Posts {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 20 2020 11:08:09 GMT+0100 (hora estándar de Europa central)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Jan 21 2020 18:32:48 GMT+0100 (hora estándar de Europa central)
 </div>
 </div>
 <script src="../../prettify.js"></script>

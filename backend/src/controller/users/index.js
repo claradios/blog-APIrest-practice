@@ -5,13 +5,14 @@ const passport = require('passport');
 
 routerUsers.post('/signup', async (req, res) => {
     const user = req.body;
-    const { nickname, password, username } = user;
+    const { nickname, password, username, userImage } = user;
     const isUser = repository.usersCol.findUser(user);
     //Validation
     if (
         typeof nickname != 'string' ||
         typeof password != 'string' ||
-        typeof username != 'string'
+        typeof username != 'string' ||
+        typeof userImage != 'string'
     ) {
         res.status(400).send('invalid BODY');
     } else if (isUser) {
