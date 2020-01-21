@@ -11,7 +11,6 @@ import CardPost from './CardPost'
 
 export default {
   name: 'TheContainer',
-
   props: {
     posts: Array
   },
@@ -30,8 +29,6 @@ main {
 .main::-webkit-scrollbar {
   display: none;
   width: 0 !important }
-
-
 
 .feed {
   height: 100%;
