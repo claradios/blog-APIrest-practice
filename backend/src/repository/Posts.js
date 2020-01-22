@@ -5,14 +5,17 @@ module.exports = class Posts {
         this.collection = this.conn.db().collection('posts');
     }
     addPost(post, user) {
-        const { username, nickname } = user;
-        const { title, content, urlToImage } = post;
+        const { username, nickname, userImage } = user;
+        const { title, content, urlToImage, filter } = post;
         const newPost = {
             author: username,
             nickname,
+            userImage,
             title,
             content,
-            urlToImage
+            urlToImage,
+            likes: 0,
+            filter 
         };
         return this.collection.insertOne(newPost);
     }
@@ -30,14 +33,17 @@ module.exports = class Posts {
     }
 
     updateObject(user, postReq, id) {
-        const { username, nickname } = user;
-        const { title, content, urlToImage } = postReq;
+        const { username, nickname, userImage } = user;
+        const { title, content, urlToImage, filter, likes } = postReq;
         const newPost = {
             author: username,
             nickname,
+            userImage,
             title,
             content,
             urlToImage,
+            likes,
+            filter,
             _id: ObjectId(id)
         };
         return newPost;
