@@ -1,6 +1,6 @@
 <template>
   <div :key=comment._id>
-    <span>{{comment.date}}holaaaa</span>
+    <span>{{comment.date}}</span>
     <p>{{comment.text}}</p>
     <div class="heart">
       <button @click="like" aria-label="You like">

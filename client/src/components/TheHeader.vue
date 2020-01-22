@@ -1,6 +1,7 @@
 <template>
   <header>
      <router-link :to="'/'"> <i class="fab fa-vuejs"></i> Home</router-link>
+     <router-link :to="'/login'"> <i class="fas fa-user"></i> Login</router-link>
   </header>
 </template>
 

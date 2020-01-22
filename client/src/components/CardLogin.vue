@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <h1>This is a Login Box</h1>
-    <form action="action_page.php" method="post">
+    <!-- <form action="action_page.php" method="post"> -->
       <div class="imgcontainer">
         <img src="img_avatar2.png" alt="Avatar" class="avatar" />
       </div>
@@ -10,14 +10,14 @@
         <label for="uname">
           <b>Username</b>
         </label>
-        <input type="text" placeholder="Enter Username" name="uname" required />
+        <input type="text" placeholder="Enter Username" name="username" v-model="username" required />
 
         <label for="psw">
           <b>Password</b>
         </label>
-        <input type="password" placeholder="Enter Password" name="psw" required />
+        <input type="password" placeholder="Enter Password" name="psw" v-model="password" required />
 
-        <button type="submit">Login</button>
+        <button @click="login()">Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember" /> Remember me
         </label>
@@ -30,14 +30,30 @@
           <a href="#">password?</a>
         </span>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </template>
 
 <script>
 
+import loginUser from '@/service/loginUser'
 export default {
-  name: 'cardLogin'
+  name: 'cardLogin',
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {      
+      const result = loginUser(this.username, this.password)
+      if (result) {
+              localStorage.setItem('user', this.username)
+      }
+    }
+
+  }
 }
 </script>
 
