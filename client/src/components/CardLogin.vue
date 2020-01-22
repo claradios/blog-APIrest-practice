@@ -46,10 +46,10 @@ export default {
     }
   },
   methods: {
-    login () {      
-      const result = loginUser(this.username, this.password)
+    async login () {
+      const result = await loginUser(this.username, this.password)
       if (result) {
-              localStorage.setItem('user', this.username)
+        localStorage.setItem('token', result.token)
       }
     }
 
