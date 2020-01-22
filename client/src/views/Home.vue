@@ -24,7 +24,6 @@ export default {
   },
   async mounted () {
     const data = await loadPosts()
-    console.log(data)
     this.posts = data
   },
   components: {

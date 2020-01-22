@@ -5,8 +5,6 @@
     <read-post
       :singlepost="singlepost"
       :filters="filters"
-      :image="image"
-      @filter-selected="handleFilterSelected"
     />
     <the-footer/>
   </div>
@@ -19,16 +17,12 @@ import TheFooter from '@/components/TheFooter.vue'
 import singlepost from '@/data/singlepost'
 import filters from '@/data/filters'
 
-// @ is an alias to /src
-
 export default {
   name: 'read',
   data () {
     return {
       singlepost,
-      filters,
-      caption: '',
-      image: ''
+      filters
     }
   },
   components: {
