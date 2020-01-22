@@ -6,7 +6,7 @@ const passport = require('passport');
 routerUsers.post('/signup', async (req, res) => {
     const user = req.body;
     const { nickname, password, username, userImage } = user;
-    const isUser = repository.usersCol.findUser(user);
+    const isUser = await repository.usersCol.findUser(username); 
     //Validation
     if (
         typeof nickname != 'string' ||
