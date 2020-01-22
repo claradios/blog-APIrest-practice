@@ -1,8 +1,7 @@
 import * as axios from 'axios'
-async function readPost (id) {
+async function readPostById (id) {
   let result = await axios.get('https://localhost:3443/posts/' + id)
-  console.log(result.data)
   return result.data
 }
 
-export default readPost
+export default readPostById
