@@ -1,41 +1,37 @@
 <template>
   <div class="login">
-    <h1>This is a Login Box</h1>
+    <h1>Login!</h1>
     <!-- <form action="action_page.php" method="post"> -->
-      <div class="imgcontainer">
-        <img src="img_avatar2.png" alt="Avatar" class="avatar" />
-      </div>
 
-      <div class="container">
+    <div class="container">
+      <div class="field-box">
         <label for="uname">
           <b>Username</b>
         </label>
         <input type="text" placeholder="Enter Username" name="username" v-model="username" required />
+      </div>
 
+      <div class="field-box">
         <label for="psw">
           <b>Password</b>
         </label>
         <input type="password" placeholder="Enter Password" name="psw" v-model="password" required />
+      </div>
 
-        <button @click="login()">Login</button>
+      <button @click="login()">Login</button>
+      <div class="field-box">
         <label>
           <input type="checkbox" checked="checked" name="remember" /> Remember me
         </label>
       </div>
+      <p>You don't have an account? <router-link :to="'/signup'"> Sign Up!</router-link></p>
+    </div>
 
-      <div class="container" style="background-color:#f1f1f1">
-        <button type="button" class="cancelbtn">Cancel</button>
-        <span class="psw">
-          Forgot
-          <a href="#">password?</a>
-        </span>
-      </div>
     <!-- </form> -->
   </div>
 </template>
 
 <script>
-
 import loginUser from '@/service/loginUser'
 export default {
   name: 'cardLogin',
@@ -52,13 +48,25 @@ export default {
         localStorage.setItem('token', result.token)
       }
     }
-
   }
 }
 </script>
 
 <style lang="scss">
+.login {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .container {
-  background-color: yellow;
+  background-color: lightgrey;
+}
+
+.field-box {
+  display: flex;
+  flex-direction: column;
 }
 </style>
