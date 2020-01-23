@@ -3,10 +3,7 @@
     <the-header :userData="userData"/>
     <the-container-create
       :filters="filters"
-      @upload-image="handleUploadImage"
-      @filter-selected="handleFilterSelected"
     />
-    <card-new-post :post="post" />
     <the-footer/>
   </div>
 </template>

@@ -34,7 +34,7 @@ main {
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 50px 0;
+  padding: 50px 0 90px 0;
 }
 
 .feed::-webkit-scrollbar {

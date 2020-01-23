@@ -1,62 +1,73 @@
 <template>
-  <main>
-    <div class="footer-upload">
-      <input type="file" name="file" id="file" class="inputfile" @change="handleUploadImage" />
-      <label for="file">
-        <i class="fas fa-camera-retro"></i>
-      </label>
-    </div>
+  <main class="newpost">
     <div>
       <div
         class="selected-image"
         :class="selectedFilter"
-        :style="{ backgroundImage: 'url(' + image + ')' }"
-      ></div>
+        :style="{ backgroundImage: 'url(' + urlToImage + ')' }"
+      >
+        <p>Pick a cover image!</p>
+        <span class="upload">
+          <input type="file" name="file" id="file" class="inputfile" @change="handleUploadImage" />
+          <label for="file">
+            <i class="fas fa-camera-retro"></i>
+          </label>
+        </span>
+      </div>
       <div class="filter-container">
         <card-filter
           v-for="filter in filters"
           :filter="filter"
-          :image="image"
+          :image="urlToImage"
           :key="filters.indexOf(filter)"
           @filter-selected="handleFilterSelected"
         ></card-filter>
       </div>
     </div>
     <div>
-      <div class="caption-container">
+      <div class="title-container">
+        <label for="input-title"></label>
+        <input
+        type="text"
+        v-model="title"
+        name="input-title"
+        placeholder="My Article's Title" />
+      </div>
+      <div class="content-container">
         <textarea
           class="caption-input"
           placeholder="Write your article..."
           type="text"
-          :value="value"
-          @input="$emit('input', $event.target.value)"
+          v-model="content"
         ></textarea>
       </div>
+      <button @click=addPost()>Post!</button>
     </div>
   </main>
 </template>
 
 <script>
 import CardFilter from './CardFilter'
+import addPost from '@/service/addPost'
 
 export default {
   name: 'TheContainerCreate',
   data () {
     return {
       selectedFilter: '',
-      image: ''
+      urlToImage: '',
+      title: '',
+      content: ''
     }
   },
   props: {
-    step: Number,
-    filters: Array,
-    // image: String,
-    value: String
+    filters: Array
   },
   components: {
     CardFilter
   },
   methods: {
+    addPost,
     handleFilterSelected (ev) {
       this.selectedFilter = ev.filter
       this.$emit('filter-selected', { filter: ev.filter })
@@ -68,7 +79,7 @@ export default {
       const reader = new FileReader()
       reader.readAsDataURL(files[0])
       reader.onload = ev => {
-        this.image = ev.target.result
+        this.urlToImage = ev.target.result
       }
       document.querySelector('#file').value = ''
     }
@@ -77,7 +88,11 @@ export default {
 </script>
 
 <style lang="scss">
-.footer-upload {
+.newpost {
+  padding: 50px 0 90px 0;
+  color: black;
+}
+.upload {
   p {
     font-size: 0.63rem;
     position: absolute;
@@ -109,17 +124,17 @@ main {
   width: 0 !important;
 }
 
-.caption-container {
+.content-container {
   height: 210px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   textarea {
-    border: 0;
-    font-size: 1rem;
-    padding: 10px;
-    border-bottom: 1px solid #eeeeee;
+    width: 600px;
+    height: 120px;
+    border: 3px solid #cccccc;
+    padding: 5px;
   }
 
   textarea:focus {

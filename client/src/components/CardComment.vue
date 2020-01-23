@@ -1,12 +1,15 @@
 <template>
-  <div :key=comment._id>
-    <span>{{prettyDate(comment.date)}}</span>
-    <p>{{comment.text}}</p>
-    <div class="heart">
+  <div :key=comment._id class="comment">
+    <div class="comment-head">
+    <h4>{{comment.nickname}}</h4>
+    <small>On {{prettyDate(comment.date)}}</small>
+    <span class="heart">
       <button @click="like" aria-label="You like">
         <i class="far fa-heart fa-lg" :class="{'fas': this.comment.hasBeenLiked}"></i>
       </button>
+    </span>
     </div>
+    <p class="comment-text">{{comment.text}}</p>
   </div>
 </template>
 
@@ -28,9 +31,11 @@ export default {
 </script>
 
 <style lang="scss">
+
  .heart button {
     border: 0 solid;
     padding: 0;
+    margin-left: 10px;
   }
 
   .far.fa-heart,
@@ -48,4 +53,17 @@ export default {
     font-size: 0.85rem;
     font-weight: bold;
   }
+
+  h4 {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  .comment-text {
+    background-color:lightgrey;
+    border-radius: 8px;
+    padding:15px;
+    margin:10px;
+  }
+
 </style>

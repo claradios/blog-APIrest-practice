@@ -25,7 +25,7 @@
       <p class="likes">{{singlepost.likes}} likes</p>
     </div>
     <section class="text">{{singlepost.content}}</section>
-    <section class="comments">Comments
+    <section class="comments">
       <ul class="comments-list">
         <li v-for="comment in singlepost.comments" :key="comment._id">
           <card-comment :comment="comment" ></card-comment>
