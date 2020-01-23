@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header/>
+    <the-header :userData="userData"/>
     <the-container-create
       :filters="filters"
       @upload-image="handleUploadImage"
@@ -23,6 +23,9 @@ export default {
     return {
       filters
     }
+  },
+  props: {
+    userData: Object
   },
   components: {
     TheHeader,

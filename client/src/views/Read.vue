@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header />
+    <the-header :userData="userData"/>
     <read-post :singlepost="singlepost" :filters="filters" />
     <the-footer />
   </div>
@@ -20,6 +20,9 @@ export default {
       singlepost: {},
       filters
     }
+  },
+  props: {
+    userData: Object
   },
   async mounted () {
     const id = this.$route.params.id

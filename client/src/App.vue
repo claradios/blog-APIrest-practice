@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view :isLogged="isLogged" :token="token" :username="username" />
+    <router-view :userData="userData" />
   </div>
 </template>
 <script>
@@ -8,9 +8,11 @@ export default {
   name: 'app',
   data () {
     return {
-      isLogged: false,
-      token: '',
-      username: ''
+      userData: {
+        isLogged: false,
+        token: '',
+        username: ''
+      }
     }
   },
   mounted () {
@@ -18,9 +20,9 @@ export default {
     const username = localStorage.getItem('username')
     const isLogged = JSON.parse(localStorage.getItem('isLogged'))
     if (username && token && isLogged) {
-      this.token = token
-      this.username = username
-      this.isLogged = !this.isLogged
+      this.userData.token = token
+      this.userData.username = username
+      this.userData.isLogged = !this.isLogged
       console.log(token, username, isLogged)
     }
   },

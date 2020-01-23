@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header :isLogged="isLogged" :token="token" :username="username" />
+    <the-header :userData="userData" />
     <the-container :posts="posts" />
     <the-footer />
   </div>
@@ -27,9 +27,7 @@ export default {
     this.posts = data
   },
   props: {
-    isLogged: Boolean,
-    token: String,
-    username: String
+    userData: Object
   },
   components: {
     TheHeader,

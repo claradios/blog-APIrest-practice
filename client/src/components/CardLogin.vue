@@ -51,6 +51,7 @@ export default {
         localStorage.setItem('isLogged', true)
         localStorage.setItem('token', result.token)
         localStorage.setItem('username', this.username)
+        this.$router.push('/')
       }
     }
   }

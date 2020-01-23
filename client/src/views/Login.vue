@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header/>
+    <the-header :userData="userData"/>
     <card-login/>
     <the-footer/>
   </div>
@@ -13,6 +13,9 @@ import TheFooter from '@/components/TheFooter.vue'
 
 export default {
   name: 'login',
+  props: {
+    userData: Object
+  },
   components: {
     TheHeader,
     CardLogin,

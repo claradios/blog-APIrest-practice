@@ -1,10 +1,10 @@
 <template>
-  <header>
+  <header :key="componentKey">
     <router-link :to="'/'" class="routes">
       <i class="fab fa-vuejs"></i> Home
     </router-link>
-    <div v-if="isLogged">
-      <i class="fas fa-user"></i> {{username}}
+    <div v-if="logValidation">
+      <i class="fas fa-user"></i> {{userData.username}}
       <button @click="logOut"><i class="fas fa-sign-out-alt"></i></button>
     </div>
     <div v-else>
@@ -16,17 +16,31 @@
 </template>
 
 <script>
+// import Vue from 'vue'
+// Vue.forceUpdate()
 export default {
   name: 'TheHeader',
+  data () {
+    return {
+      componentKey: 0
+    }
+  },
   props: {
-    isLogged: Boolean,
-    token: String,
-    username: String
+    userData: Object
+  },
+  computed: {
+    logValidation () {
+      return this.userData.isLogged
+    }
   },
   methods: {
     logOut () {
       localStorage.clear()
+      this.$router.go()
     }
+    // forceRerender() {
+    //   this.componentKey += 1;
+    // }
   }
 }
 </script>

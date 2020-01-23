@@ -1,6 +1,6 @@
 <template>
   <div :key=comment._id>
-    <span>{{comment.date}}</span>
+    <span>{{prettyDate(comment.date)}}</span>
     <p>{{comment.text}}</p>
     <div class="heart">
       <button @click="like" aria-label="You like">
@@ -11,12 +11,14 @@
 </template>
 
 <script>
+import { prettyDate } from '../helpers'
 export default {
   name: 'cardComment',
   props: {
     comment: Object
   },
   methods: {
+    prettyDate,
     like () {
       this.comment.hasBeenLiked ? this.comment.likes-- : this.comment.likes++
       this.comment.hasBeenLiked = !this.comment.hasBeenLiked

@@ -25,8 +25,8 @@
       <p class="likes">{{singlepost.likes}} likes</p>
     </div>
     <section class="text">{{singlepost.content}}</section>
-    <section class="comments">
-      <ul>
+    <section class="comments">Comments
+      <ul class="comments-list">
         <li v-for="comment in singlepost.comments" :key="comment._id">
           <card-comment :comment="comment" ></card-comment>
         </li>
@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .card-singlepost {
   padding-top: 50px;
 }
@@ -142,6 +143,10 @@ export default {
     font-size: 0.85rem;
     font-weight: bold;
   }
+
+  .comments-list {
+  list-style: none;
+}
 
   .text {
     text-align:left;
