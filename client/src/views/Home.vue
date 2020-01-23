@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header />
+    <the-header :isLogged="isLogged" :token="token" :username="username" />
     <the-container :posts="posts" />
     <the-footer />
   </div>
@@ -25,6 +25,11 @@ export default {
   async mounted () {
     const data = await loadPosts()
     this.posts = data
+  },
+  props: {
+    isLogged: Boolean,
+    token: String,
+    username: String
   },
   components: {
     TheHeader,

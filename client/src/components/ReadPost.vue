@@ -144,7 +144,8 @@ export default {
   }
 
   .text {
-    color: blue;
+    text-align:left;
+    padding:20px;
   }
 }
 

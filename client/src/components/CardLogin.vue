@@ -24,7 +24,10 @@
           <input type="checkbox" checked="checked" name="remember" /> Remember me
         </label>
       </div>
-      <p>You don't have an account? <router-link :to="'/signup'"> Sign Up!</router-link></p>
+      <p>
+        You don't have an account?
+        <router-link :to="'/signup'" class="routes">Sign Up!</router-link>
+      </p>
     </div>
 
     <!-- </form> -->
@@ -45,7 +48,9 @@ export default {
     async login () {
       const result = await loginUser(this.username, this.password)
       if (result) {
+        localStorage.setItem('isLogged', true)
         localStorage.setItem('token', result.token)
+        localStorage.setItem('username', this.username)
       }
     }
   }
@@ -53,6 +58,11 @@ export default {
 </script>
 
 <style lang="scss">
+.routes {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 .login {
   text-align: center;
   display: flex;

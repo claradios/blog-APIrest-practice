@@ -1,58 +1,38 @@
 <template>
   <div class="login">
-    <h1>This is a Sign Up Box</h1>
+    <h1>Sign Up!</h1>
     <!-- <form action="action_page.php" method="post"> -->
-      <div class="imgcontainer">
-        <img src="img_avatar2.png" alt="Avatar" class="avatar" />
-      </div>
-
-      <div class="container">
+    <div class="container">
+      <div class="field-box">
         <label for="uname">
           <b>Username</b>
         </label>
-        <input
-          type="text"
-          placeholder="Enter Username"
-          name="uname"
-          v-model="username"
-          required
-        />
+        <input type="text" placeholder="Enter Username" name="uname" v-model="username" required />
+      </div>
 
+      <div class="field-box">
         <label for="nickname">
           <b>Nickname</b>
         </label>
-        <input
-          type="text"
-          placeholder="Enter Nickname"
-          name="nickname"
-          v-model="nickname"
-          required
-        />
+        <input type="text" placeholder="Enter Nickname" name="nickname" v-model="nickname" required />
+      </div>
 
+      <div class="field-box">
         <label for="psw">
           <b>Password</b>
         </label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          v-model="password"
-          required
-        />
+        <input type="password" placeholder="Enter Password" name="psw" v-model="password" required />
+      </div>
 
+      <div class="field-box">
         <label for="picture">
           <b>Picture</b>
         </label>
-        <input
-          type="text"
-          placeholder="Enter url"
-          name="picture"
-          v-model="userImage"
-          required
-        />
-
-        <button @click="sign()">Sign up</button>
+        <input type="text" placeholder="Enter url" name="picture" v-model="userImage" required />
       </div>
+
+      <button @click="sign()">Sign up</button>
+    </div>
     <!-- </form> -->
   </div>
 </template>
@@ -73,14 +53,32 @@ export default {
   methods: {
     async sign () {
       // const {username,nickname,password,userImage}= this.user;
-      await signUpUser(this.username, this.nickname, this.password, this.userImage)
+      await signUpUser(
+        this.username,
+        this.nickname,
+        this.password,
+        this.userImage
+      )
     }
   }
 }
 </script>
 
 <style lang="scss">
+.login {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .container {
-  background-color: yellow;
+  background-color: lightgrey;
+}
+
+.field-box {
+  display: flex;
+  flex-direction: column;
 }
 </style>

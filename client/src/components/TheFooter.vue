@@ -2,8 +2,7 @@
   <footer>
     <div class="footer-upload">
       <button>
-        <i class="fas fa-plus-square"></i>
-        Crear Entrada
+        <router-link :to="'/new-post'" class="routes"> <i class="fas fa-plus-square"></i>new</router-link>
       </button>
     </div>
   </footer>
@@ -16,6 +15,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.routes{
+  color:#ffffff;
+  text-decoration:none;
+}
 footer {
   position: fixed;
   left: 0;
@@ -49,6 +52,7 @@ footer {
   }
 
   button {
+    background-color:#041e30;
     color: #ffffff;
   }
 }

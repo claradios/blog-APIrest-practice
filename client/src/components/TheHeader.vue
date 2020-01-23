@@ -1,7 +1,17 @@
 <template>
   <header>
-     <router-link :to="'/'"> <i class="fab fa-vuejs"></i> Home</router-link>
-     <router-link :to="'/login'"> <i class="fas fa-user"></i> Login</router-link>
+    <router-link :to="'/'" class="routes">
+      <i class="fab fa-vuejs"></i> Home
+    </router-link>
+    <div v-if="isLogged">
+      <i class="fas fa-user"></i> {{username}}
+      <button @click="logOut"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+    <div v-else>
+      <router-link :to="'/login'" class="routes">
+        <i class="fas fa-user"></i> Log In
+      </router-link>
+    </div>
   </header>
 </template>
 
@@ -9,16 +19,24 @@
 export default {
   name: 'TheHeader',
   props: {
-    step: {
-      type: Number,
-      default: 1
+    isLogged: Boolean,
+    token: String,
+    username: String
+  },
+  methods: {
+    logOut () {
+      localStorage.clear()
     }
   }
-
 }
 </script>
 
 <style scoped lang="scss">
+.routes {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 header {
   position: absolute;
   top: 0;
@@ -26,6 +44,7 @@ header {
   right: 0;
   height: 50px;
   background-color: #041e30;
+  color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
