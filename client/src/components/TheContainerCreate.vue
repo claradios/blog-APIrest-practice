@@ -3,8 +3,8 @@
     <div>
       <div
         class="selected-image"
-        :class="selectedFilter"
-        :style="{ backgroundImage: 'url(' + urlToImage + ')' }"
+        :class="postData.selectedFilter"
+        :style="{ backgroundImage: 'url(' + postData.urlToImage + ')' }"
       >
         <p>Pick a cover image!</p>
         <span class="upload">
@@ -18,7 +18,7 @@
         <card-filter
           v-for="filter in filters"
           :filter="filter"
-          :image="urlToImage"
+          :image="postData.urlToImage"
           :key="filters.indexOf(filter)"
           @filter-selected="handleFilterSelected"
         ></card-filter>
@@ -28,20 +28,21 @@
       <div class="title-container">
         <label for="input-title"></label>
         <input
-        type="text"
-        v-model="title"
-        name="input-title"
-        placeholder="My Article's Title" />
+          type="text"
+          v-model="postData.title"
+          name="input-title"
+          placeholder="My Article's Title"
+        />
       </div>
       <div class="content-container">
         <textarea
           class="caption-input"
           placeholder="Write your article..."
           type="text"
-          v-model="content"
+          v-model="postData.content"
         ></textarea>
       </div>
-      <button @click=addPost()>Post!</button>
+      <button @click="sendPost()">Post!</button>
     </div>
   </main>
 </template>
@@ -54,10 +55,12 @@ export default {
   name: 'TheContainerCreate',
   data () {
     return {
-      selectedFilter: '',
-      urlToImage: '',
-      title: '',
-      content: ''
+      postData: {
+        selectedFilter: '',
+        urlToImage: '',
+        title: '',
+        content: ''
+      }
     }
   },
   props: {
@@ -67,9 +70,17 @@ export default {
     CardFilter
   },
   methods: {
-    addPost,
+    sendPost () {
+      const token = localStorage.getItem('token')
+      if (token) {
+        const newPost = addPost(token, this.postData)
+        if (newPost) {
+          this.$router.push('/')
+        }
+      }
+    },
     handleFilterSelected (ev) {
-      this.selectedFilter = ev.filter
+      this.postData.selectedFilter = ev.filter
       this.$emit('filter-selected', { filter: ev.filter })
     },
     handleUploadImage (ev) {
@@ -79,7 +90,7 @@ export default {
       const reader = new FileReader()
       reader.readAsDataURL(files[0])
       reader.onload = ev => {
-        this.urlToImage = ev.target.result
+        this.postData.urlToImage = ev.target.result
       }
       document.querySelector('#file').value = ''
     }
