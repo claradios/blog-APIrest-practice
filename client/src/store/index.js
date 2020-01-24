@@ -1,4 +1,4 @@
-import login from '../resources/login'
+import login from '../service/loginUser.js'
 
 export default {
   state: {

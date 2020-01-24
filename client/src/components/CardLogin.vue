@@ -47,13 +47,7 @@ export default {
   methods: {
     async login () {
       await userInfo.logUser(this.username, this.password)
-      // const result = await loginUser(this.username, this.password)
-      // if (result) {
-      //   localStorage.setItem('isLogged', true)
-      //   localStorage.setItem('token', result.token)
-      //   localStorage.setItem('username', this.username)
-      //   this.$router.push('/')
-      // }
+      this.$router.push('/')
     }
   }
 }
