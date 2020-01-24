@@ -38,24 +38,10 @@ routerUsers.get('/users',
 routerUsers.get('/myuser',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const { rol, username } = req.user;
-        if (rol !== 'admin') {
-            res.status(401).send('unauthorize');
-        } else {
-            const allUsers = await repository.usersCol.findUser(username);
-            res.json(allUsers);
-        }
+        const { username } = req.user;
+        const myUser = await repository.usersCol.findUser(username);
+        res.json(myUser);
     });
 
-// routerUsers.get('/usersone',
-//     passport.authenticate('jwt', { session: false })),
-//     async (req, res) => {
-//         console.log('hola')
-//         const { username } = req.user;
-//         console.log(username)
-//         const userFound = await repository.usersCol.findUser(username);
-//         console.log(userFound)
-//         res.json(userFound)
-//     }
 
 module.exports = routerUsers;

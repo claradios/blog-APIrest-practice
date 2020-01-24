@@ -12,12 +12,18 @@ routerLogin.post('/',
     passport.authenticate('basic', { session: false }),
     (req, res) => {
         
-        const { username } = req.user;
+        const { username, rol, nickname, userImage } = req.user;
 
-        const opts = { expiresIn: 120 }; //token expires in 2min
+        const userData = {
+            username,
+            rol,
+            nickname,
+            userImage
+        }
+        const opts = { expiresIn: 6000 }; 
         const token = jwt.sign({ username }, SECRET_KEY, opts);
 
-        return res.status(200).json({ message: "Auth Passed", token });
+        return res.status(200).json({ message: "Auth Passed", token, userData });
 
     });
 
