@@ -12,4 +12,3 @@ async function deletePostById (token, id) {
 }
 
 export default deletePostById
-

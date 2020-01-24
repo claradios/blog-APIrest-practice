@@ -1,15 +1,41 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import login from '../resources/login'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default {
   state: {
+    token: null,
+    userData: null
   },
-  mutations: {
+
+  async logUser (username, password) {
+    const result = await login(username, password)
+
+    if (result) {
+      this.state.token = result.token
+      this.state.userData = result.userData
+
+      localStorage.setItem('token', this.state.token)
+      localStorage.setItem('userData', JSON.stringify(this.state.userData))
+    }
+
+    return result
   },
-  actions: {
-  },
-  modules: {
+  getFromLocalStorage () {
+    this.state.token = localStorage.getItem('token')
+    this.state.userData = JSON.parse(localStorage.getItem('userData'))
   }
-})
+}
+// import Vue from 'vue'
+// import Vuex from 'vuex'
+
+// Vue.use(Vuex)
+
+// export default new Vuex.Store({
+//   state: {
+//   },
+//   mutations: {
+//   },
+//   actions: {
+//   },
+//   modules: {
+//   }
+// })

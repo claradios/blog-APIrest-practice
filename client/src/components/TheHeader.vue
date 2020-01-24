@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import userInfo from '@/store/'
 export default {
   name: 'TheHeader',
   data () {
@@ -25,10 +26,11 @@ export default {
   },
   computed: {
     isLogged () {
-      return JSON.parse(localStorage.getItem('isLogged'))
+      return userInfo.state.token
+      // return JSON.parse(localStorage.getItem('isLogged'))
     },
     username () {
-      return localStorage.getItem('username')
+      return userInfo.state.userData.username
     }
   },
   methods: {

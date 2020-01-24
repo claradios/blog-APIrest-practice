@@ -33,7 +33,7 @@
         <router-link :to="`/edit/${post._id}`">
             <i class="fas fa-edit"></i>
         </router-link>
-      </div>     
+      </div>
     </div>
     <router-link :to="`/read/${post._id}`">leer más ...</router-link>
   </article>

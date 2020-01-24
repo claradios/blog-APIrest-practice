@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import loginUser from '@/service/loginUser'
+import userInfo from '@/store/'
 export default {
   name: 'cardLogin',
   data () {
@@ -46,13 +46,14 @@ export default {
   },
   methods: {
     async login () {
-      const result = await loginUser(this.username, this.password)
-      if (result) {
-        localStorage.setItem('isLogged', true)
-        localStorage.setItem('token', result.token)
-        localStorage.setItem('username', this.username)
-        this.$router.push('/')
-      }
+      await userInfo.logUser(this.username, this.password)
+      // const result = await loginUser(this.username, this.password)
+      // if (result) {
+      //   localStorage.setItem('isLogged', true)
+      //   localStorage.setItem('token', result.token)
+      //   localStorage.setItem('username', this.username)
+      //   this.$router.push('/')
+      // }
     }
   }
 }
