@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header :userData="userData" />
+    <the-header />
     <the-container :posts="posts" />
     <the-footer />
   </div>
@@ -12,6 +12,7 @@ import TheContainer from '@/components/TheContainer.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import defaultPosts from '@/data/posts'
 import loadPosts from '@/service/loadPosts.js'
+
 // @ is an alias to /src
 
 export default {
@@ -26,9 +27,7 @@ export default {
     const data = await loadPosts()
     this.posts = data
   },
-  props: {
-    userData: Object
-  },
+
   components: {
     TheHeader,
     TheContainer,

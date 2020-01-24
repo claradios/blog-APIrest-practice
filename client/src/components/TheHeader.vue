@@ -3,8 +3,8 @@
     <router-link :to="'/'" class="routes">
       <i class="fab fa-vuejs"></i> Home
     </router-link>
-    <div v-if="logValidation">
-      <i class="fas fa-user"></i> {{userData.username}}
+    <div v-if="isLogged">
+      <i class="fas fa-user"></i> {{username}}
       <button @click="logOut"><i class="fas fa-sign-out-alt"></i></button>
     </div>
     <div v-else>
@@ -16,8 +16,6 @@
 </template>
 
 <script>
-// import Vue from 'vue'
-// Vue.forceUpdate()
 export default {
   name: 'TheHeader',
   data () {
@@ -25,12 +23,12 @@ export default {
       componentKey: 0
     }
   },
-  props: {
-    userData: Object
-  },
   computed: {
-    logValidation () {
-      return this.userData.isLogged
+    isLogged () {
+      return JSON.parse(localStorage.getItem('isLogged'))
+    },
+    username () {
+      return localStorage.getItem('username')
     }
   },
   methods: {
@@ -38,9 +36,6 @@ export default {
       localStorage.clear()
       this.$router.go()
     }
-    // forceRerender() {
-    //   this.componentKey += 1;
-    // }
   }
 }
 </script>

@@ -1,21 +1,22 @@
 <template>
   <div>
-    <the-header/>
-    <card-login/>
-    <the-footer/>
+    <the-header />
+    <!-- <the-container :posts="posts" /> -->
+    <the-footer />
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/TheHeader.vue'
-import CardLogin from '@/components/CardLogin.vue'
 import TheFooter from '@/components/TheFooter.vue'
 
+// @ is an alias to /src
+
 export default {
-  name: 'login',
+  name: 'edit',
+
   components: {
     TheHeader,
-    CardLogin,
     TheFooter
   }
 }

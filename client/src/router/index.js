@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Read from '../views/Read.vue'
 import NewPost from '../views/NewPost.vue'
 import Signup from '../views/Signup.vue'
+import Edit from '../views/Edit.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,12 @@ const routes = [
     name: 'read',
     props: true,
     component: Read
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
+    props: true,
+    component: Edit
   },
   {
     path: '/new-post',

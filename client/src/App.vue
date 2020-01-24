@@ -1,31 +1,11 @@
 <template>
   <div id="app">
-    <router-view :userData="userData" />
+    <router-view />
   </div>
 </template>
 <script>
 export default {
   name: 'app',
-  data () {
-    return {
-      userData: {
-        isLogged: false,
-        token: '',
-        username: ''
-      }
-    }
-  },
-  mounted () {
-    const token = localStorage.getItem('token')
-    const username = localStorage.getItem('username')
-    const isLogged = JSON.parse(localStorage.getItem('isLogged'))
-    if (username && token && isLogged) {
-      this.userData.token = token
-      this.userData.username = username
-      this.userData.isLogged = !this.isLogged
-      console.log(token, username, isLogged)
-    }
-  },
   beforeDestroy () {
     localStorage.clear()
   }

@@ -17,12 +17,13 @@
       <h2 class="title">{{singlepost.title}}</h2>
     </div>
     <div class="content">
+      <h4>by {{this.singlepost.author}} </h4>
       <div class="heart">
         <button @click="like" aria-label="You like">
           <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
         </button>
       </div>
-      <p class="likes">{{singlepost.likes}} likes</p>
+      <span class="likes">{{singlepost.likes}} likes</span>
     </div>
     <section class="text">{{singlepost.content}}</section>
     <section class="comments">

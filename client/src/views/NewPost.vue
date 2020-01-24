@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header :userData="userData"/>
+    <the-header />
     <the-container-create
       :filters="filters"
     />
@@ -20,9 +20,6 @@ export default {
     return {
       filters
     }
-  },
-  props: {
-    userData: Object
   },
   components: {
     TheHeader,

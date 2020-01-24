@@ -24,13 +24,32 @@
       </div>
       <p class="likes">{{post.likes}} likes</p>
     </div>
+    <!-- <div v-if="isLogged && (isAdmin || isAuthor)"> -->
+    <div>
+      <button @click="deleteThisPost()">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+      <!-- <button> -->
+      <div>
+        <router-link :to="`/edit/${post._id}`">
+            <i class="fas fa-edit"></i>
+        </router-link>
+      </div>
+      <!-- </button> -->
+    </div>
     <router-link :to="`/read/${post._id}`">leer más ...</router-link>
   </article>
 </template>
 
 <script>
+import deletePostById from '@/service/deletePostById'
 export default {
   name: 'cardPost',
+  // data () {
+  //   return {
+  //     id: post.Id
+  //   }
+  // }
   props: {
     post: Object
   },
@@ -38,6 +57,9 @@ export default {
     like () {
       this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++
       this.post.hasBeenLiked = !this.post.hasBeenLiked
+    },
+    async deleteThisPost () {
+      await deletePostById(this.post._id)
     }
   }
 }
