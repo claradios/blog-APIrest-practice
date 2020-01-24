@@ -29,13 +29,11 @@
       <button @click="deleteThisPost()">
         <i class="fa fa-trash" aria-hidden="true"></i>
       </button>
-      <!-- <button> -->
       <div>
         <router-link :to="`/edit/${post._id}`">
             <i class="fas fa-edit"></i>
         </router-link>
-      </div>
-      <!-- </button> -->
+      </div>     
     </div>
     <router-link :to="`/read/${post._id}`">leer más ...</router-link>
   </article>
