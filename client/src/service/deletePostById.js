@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-async function deletePostById (token, id, body) {
+async function deletePostById (token, id) {
   let result = await axios.request({
     url: 'https://localhost:3443/posts/' + id,
     headers: {
