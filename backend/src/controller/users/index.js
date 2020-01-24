@@ -6,7 +6,7 @@ const passport = require('passport');
 routerUsers.post('/signup', async (req, res) => {
     const user = req.body;
     const { nickname, password, username, userImage } = user;
-    const isUser = await repository.usersCol.findUser(username); 
+    const isUser = await repository.usersCol.findUser(username);
     //Validation
     if (
         typeof nickname != 'string' ||
@@ -26,7 +26,7 @@ routerUsers.post('/signup', async (req, res) => {
 routerUsers.get('/users',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-        const {rol} = req.user;       
+        const { rol } = req.user;
         if (rol !== 'admin') {
             res.status(401).send('unauthorize');
         } else {
@@ -34,5 +34,28 @@ routerUsers.get('/users',
             res.json(allUsers);
         }
     });
+
+routerUsers.get('/myuser',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        const { rol, username } = req.user;
+        if (rol !== 'admin') {
+            res.status(401).send('unauthorize');
+        } else {
+            const allUsers = await repository.usersCol.findUser(username);
+            res.json(allUsers);
+        }
+    });
+
+// routerUsers.get('/usersone',
+//     passport.authenticate('jwt', { session: false })),
+//     async (req, res) => {
+//         console.log('hola')
+//         const { username } = req.user;
+//         console.log(username)
+//         const userFound = await repository.usersCol.findUser(username);
+//         console.log(userFound)
+//         res.json(userFound)
+//     }
 
 module.exports = routerUsers;
