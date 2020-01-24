@@ -1,23 +1,29 @@
 <template>
   <footer>
-    <div class="footer-upload">
-      <button>
-        <router-link :to="'/new-post'" class="routes"> <i class="fas fa-plus-square"></i>new</router-link>
-      </button>
+    <div v-if="isLogged" class="footer-post">
+      <router-link :to="'/new-post'" class="routes">
+        <i class="fas fa-plus-square"></i> New Post
+      </router-link>
     </div>
   </footer>
 </template>
 
 <script>
+import userInfo from '@/store/'
 export default {
-  name: 'TheFooter'
+  name: 'TheFooter',
+  computed: {
+    isLogged () {
+      return userInfo.state.token
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.routes{
-  color:#ffffff;
-  text-decoration:none;
+.routes {
+  color: #ffffff;
+  text-decoration: none;
 }
 footer {
   position: fixed;
@@ -33,7 +39,7 @@ footer {
   justify-content: space-around;
   z-index: 10;
 
-  .footer-upload {
+  .footer-post {
     p {
       font-size: 0.63rem;
       position: absolute;
@@ -52,7 +58,7 @@ footer {
   }
 
   button {
-    background-color:#041e30;
+    background-color: #041e30;
     color: #ffffff;
   }
 }

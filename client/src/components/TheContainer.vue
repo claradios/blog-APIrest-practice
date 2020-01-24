@@ -8,12 +8,12 @@
 
 <script>
 import CardPost from './CardPost'
-
 export default {
   name: 'TheContainer',
   props: {
     posts: Array
   },
+
   components: {
     CardPost
   }
@@ -28,7 +28,8 @@ main {
 }
 .main::-webkit-scrollbar {
   display: none;
-  width: 0 !important }
+  width: 0 !important;
+}
 
 .feed {
   height: 100%;
@@ -39,5 +40,6 @@ main {
 
 .feed::-webkit-scrollbar {
   display: none;
-  width: 0 !important }
+  width: 0 !important;
+}
 </style>

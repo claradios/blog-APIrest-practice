@@ -2,8 +2,8 @@ import login from '../service/loginUser.js'
 
 export default {
   state: {
-    token: null,
-    userData: null
+    token: false,
+    userData: false
   },
 
   async logUser (username, password) {

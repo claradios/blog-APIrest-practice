@@ -24,14 +24,13 @@
       </div>
       <p class="likes">{{post.likes}} likes</p>
     </div>
-    <!-- <div v-if="isLogged && (isAdmin || isAuthor)"> -->
-    <div>
+    <div v-if="roltype === 'admin' || name === post.author">
       <button @click="deleteThisPost()">
         <i class="fa fa-trash" aria-hidden="true"></i>
       </button>
       <div>
         <router-link :to="`/edit/${post._id}`">
-            <i class="fas fa-edit"></i>
+          <i class="fas fa-edit"></i>
         </router-link>
       </div>
     </div>
@@ -40,16 +39,20 @@
 </template>
 
 <script>
+import userInfo from '@/store/'
 import deletePostById from '@/service/deletePostById'
 export default {
   name: 'cardPost',
-  // data () {
-  //   return {
-  //     id: post.Id
-  //   }
-  // }
   props: {
     post: Object
+  },
+  computed: {
+    roltype () {
+      return userInfo.state.userData.rol
+    },
+    name () {
+      return userInfo.state.userData.username
+    }
   },
   methods: {
     like () {

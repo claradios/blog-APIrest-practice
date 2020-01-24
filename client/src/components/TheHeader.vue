@@ -4,12 +4,15 @@
       <i class="fab fa-vuejs"></i> Home
     </router-link>
     <div v-if="isLogged">
-      <i class="fas fa-user"></i> {{username}}
-      <button @click="logOut"><i class="fas fa-sign-out-alt"></i></button>
+      <i class="fas fa-user"></i>
+      {{username}}
+      <button @click="logOut">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
     </div>
     <div v-else>
       <router-link :to="'/login'" class="routes">
-        <i class="fas fa-user"></i> Log In
+        <i class="fas fa-user-plus"></i> Log In
       </router-link>
     </div>
   </header>
@@ -24,10 +27,10 @@ export default {
       componentKey: 0
     }
   },
+
   computed: {
     isLogged () {
       return userInfo.state.token
-      // return JSON.parse(localStorage.getItem('isLogged'))
     },
     username () {
       return userInfo.state.userData.username

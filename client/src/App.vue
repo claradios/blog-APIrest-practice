@@ -4,15 +4,17 @@
   </div>
 </template>
 <script>
-import userInfo from '@/store/'
+// import userInfo from '@/store/'
 export default {
-  name: 'app',
-  mounted () {
-    userInfo.getFromLocalStorage()
-  },
-  beforeDestroy () {
-    localStorage.clear()
-  }
+  name: 'app'
+  // beforeMount () {
+  //   console.log('montando')
+  //   userInfo.getFromLocalStorage()
+  // }
+  // ,
+  // beforeDestroy () {
+  //   localStorage.clear()
+  // }
 }
 </script>
 <style>
