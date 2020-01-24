@@ -5,6 +5,7 @@
         <i class="fas fa-plus-square"></i> New Post
       </router-link>
     </div>
+    <div v-else><span>©ClaraDios</span></div>
   </footer>
 </template>
 

@@ -60,7 +60,12 @@ export default {
       this.post.hasBeenLiked = !this.post.hasBeenLiked
     },
     async deleteThisPost () {
-      await deletePostById(this.post._id)
+      const { _id } = this.post
+      const { token } = userInfo.state
+      const deletion = await deletePostById(token, _id)
+      if (deletion) {
+        this.$router.push('/')
+      }
     }
   }
 }
