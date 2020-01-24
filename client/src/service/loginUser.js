@@ -12,4 +12,5 @@ async function loginUser (username, password) {
   })
   return result.data
 }
+
 export default loginUser

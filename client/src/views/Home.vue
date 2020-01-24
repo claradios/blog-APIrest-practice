@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header />
+    <the-header/>
     <the-container :posts="posts" />
     <the-footer />
   </div>

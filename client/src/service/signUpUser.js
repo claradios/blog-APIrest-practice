@@ -7,7 +7,6 @@ async function signUpUser (username, nickname, password, userImage) {
     data,
     method: 'post'
   })
-  console.log(result.data)
   return result.data
 }
 export default signUpUser
