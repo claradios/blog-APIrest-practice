@@ -76,7 +76,7 @@ export default {
   computed: {
     organizedComments () {
       const coms = this.singlepost.comments
-      return coms.reverse()
+      if (coms) { return coms.reverse() } else { return false }
     },
     roltype () {
       return userInfo.state.userData.rol
@@ -100,6 +100,7 @@ export default {
       const { _id } = this.singlepost
       const { text } = this.commentData
       await addComment(token, _id, text)
+      // this.$router.go()
     }
   }
 }
@@ -197,6 +198,8 @@ export default {
 
   .comments-list {
     list-style: none;
+    padding: 40px 30px;
+    margin: 20px, 0;
   }
 
   .text {

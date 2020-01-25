@@ -9,19 +9,22 @@
         </button>
       </span>
     </div>
+    <div class="comment-body">
     <p class="comment-text">{{comment.text}}</p>
      <div v-if="roltype === 'admin' || name === comment.nickname">
-    <button class="tools" @click="deleteThisComment()">
-      <span>
-        <i class="fa fa-trash" aria-hidden="true"></i>
-      </span>
-    </button>
-    <button class="tools" @click="editThisComment()">
-      <span>
-        <i class="fas fa-edit"></i>
-      </span>
-    </button>
+      <button class="tools" @click="deleteThisComment()">
+        <span>
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </span>
+      </button>
+      <button class="tools" @click="editThisComment()">
+        <span>
+          <i class="fas fa-edit"></i>
+        </span>
+      </button>
     </div>
+    </div>
+
   </div>
 </template>
 
@@ -56,7 +59,6 @@ export default {
       const postId = this.motherId
 
       await deleteComment(token, postId, _id)
- 
     },
     async editThisComment () {
       console.log('edit')
@@ -95,10 +97,10 @@ h4 {
   margin-right: 10px;
 }
 
-.comment-text {
+.comment-body {
   background-color: lightgrey;
   border-radius: 8px;
-  padding: 15px;
+  padding: 5px;
   margin: 10px;
 }
 
