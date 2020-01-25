@@ -44,7 +44,7 @@
       <div v-if="organizedComments">
         <ul class="comments-list">
           <li v-for="comment in organizedComments" :key="comment._id">
-            <card-comment :comment="comment"></card-comment>
+            <card-comment :comment="comment" :motherId="singlepost._id"></card-comment>
           </li>
         </ul>
       </div>
@@ -95,11 +95,11 @@ export default {
     openBoxComment () {
       this.closedBox = !this.closedBox
     },
-    sendComment () {
+    async sendComment () {
       const { token } = userInfo.state
       const { _id } = this.singlepost
       const { text } = this.commentData
-      addComment(token, _id, text)
+      await addComment(token, _id, text)
     }
   }
 }
