@@ -17,7 +17,7 @@
       <h2 class="title">{{singlepost.title}}</h2>
     </div>
     <div class="content">
-      <h4>by {{this.singlepost.author}} </h4>
+      <h4>by {{this.singlepost.author}}</h4>
       <div class="heart">
         <button @click="like" aria-label="You like">
           <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
@@ -26,25 +26,57 @@
       <span class="likes">{{singlepost.likes}} likes</span>
     </div>
     <section class="text">{{singlepost.content}}</section>
+
     <section class="comments">
-      <ul class="comments-list">
-        <li v-for="comment in singlepost.comments" :key="comment._id">
-          <card-comment :comment="comment" ></card-comment>
-        </li>
-      </ul>
+      <div v-if="roltype==='admin' || roltype==='publisher'">
+        <button @click="openBoxComment()">
+          add a comment
+          <i class="far fa-comment"></i>
+        </button>
+        <div :class="{'hidden-box':closedBox}">
+          <textarea placeholder="Write your comment..." type="text"></textarea>
+          <button>Publish</button>
+        </div>
+      </div>
+
+      <div v-if="organizedComments">
+        <ul class="comments-list">
+          <li v-for="comment in organizedComments" :key="comment._id">
+            <card-comment :comment="comment"></card-comment>
+          </li>
+        </ul>
+      </div>
     </section>
   </article>
 </template>
 
 <script>
+import userInfo from '@/store/'
 import CardComment from './CardComment'
 export default {
   name: 'readsinglepost',
+  data () {
+    return {
+      closedBox: true
+    }
+  },
   props: {
     singlepost: Object
   },
   components: {
     CardComment
+  },
+  computed: {
+    organizedComments () {
+      const coms = this.singlepost.comments
+      return coms.reverse()
+    },
+    roltype () {
+      return userInfo.state.userData.rol
+    },
+    name () {
+      return userInfo.state.userData.username
+    }
   },
   methods: {
     like () {
@@ -52,13 +84,18 @@ export default {
         ? this.singlepost.likes--
         : this.singlepost.likes++
       this.singlepost.hasBeenLiked = !this.singlepost.hasBeenLiked
+    },
+    openBoxComment () {
+      this.closedBox = !this.closedBox
     }
   }
 }
 </script>
 
 <style lang="scss">
-
+.hidden-box {
+  display: none;
+}
 .card-singlepost {
   padding-top: 50px;
 }
@@ -146,12 +183,12 @@ export default {
   }
 
   .comments-list {
-  list-style: none;
-}
+    list-style: none;
+  }
 
   .text {
-    text-align:left;
-    padding:20px;
+    text-align: left;
+    padding: 20px;
   }
 }
 
