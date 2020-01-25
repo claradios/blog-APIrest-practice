@@ -28,16 +28,18 @@
     <section class="text">{{singlepost.content}}</section>
 
     <section class="comments">
+
       <div v-if="roltype==='admin' || roltype==='publisher'">
         <button @click="openBoxComment()">
-          add a comment
+          add comment
           <i class="far fa-comment"></i>
         </button>
         <div :class="{'hidden-box':closedBox}">
-          <textarea placeholder="Write your comment..." type="text"></textarea>
-          <button>Publish</button>
+          <textarea placeholder="Write your comment..." type="text" v-model="commentData.text"></textarea>
+          <button @click="sendComment()">Publish</button>
         </div>
       </div>
+      <div v-else >You must be <router-link :to="'/login'">logged in </router-link>to post a comment</div>
 
       <div v-if="organizedComments">
         <ul class="comments-list">
@@ -53,11 +55,16 @@
 <script>
 import userInfo from '@/store/'
 import CardComment from './CardComment'
+import addComment from '@/service/addComment.js'
+
 export default {
   name: 'readsinglepost',
   data () {
     return {
-      closedBox: true
+      closedBox: true,
+      commentData: {
+        text: ''
+      }
     }
   },
   props: {
@@ -87,6 +94,12 @@ export default {
     },
     openBoxComment () {
       this.closedBox = !this.closedBox
+    },
+    sendComment () {
+      const { token } = userInfo.state
+      const { _id } = this.singlepost
+      const { text } = this.commentData
+      addComment(token, _id, text)
     }
   }
 }

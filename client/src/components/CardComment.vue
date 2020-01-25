@@ -15,6 +15,8 @@
 
 <script>
 import { prettyDate } from '../helpers'
+// import deleteComment from "@/service/deleteComment.js";
+// import editComment from "@/service/editComment.js";
 export default {
   name: 'cardComment',
   props: {

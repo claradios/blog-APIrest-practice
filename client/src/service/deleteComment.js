@@ -2,7 +2,7 @@ import * as axios from 'axios'
 
 async function deleteComment (token, postId, commentId) {
   const result = await axios.request({
-    url: `https://localhost:3443/posts/${postId}/${commentId}`,
+    url: `https://localhost:3443/posts/${postId}/comments/${commentId}`,
     headers: {
       Authorization: `Bearer ${token}`
     },

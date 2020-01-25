@@ -1,8 +1,8 @@
 import * as axios from 'axios'
-async function editCommentById (token, postId, commentId, body) {
+async function editComment (token, postId, commentId, body) {
   const data = body
   let result = await axios.request({
-    url: `https://localhost:3443/posts/${postId}/${commentId}`,
+    url: `https://localhost:3443/posts/${postId}/comments/${commentId}`,
     headers: {
       Authorization: `Bearer ${token}`
     },
@@ -12,4 +12,4 @@ async function editCommentById (token, postId, commentId, body) {
   return result.data
 }
 
-export default editCommentById
+export default editComment
