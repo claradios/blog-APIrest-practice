@@ -1,55 +1,62 @@
 <template>
-  <article class="card-singlepost">
-    <div class="header level">
-      <div class="level-left">
-        <figure class="image is-32x32">
-          <img :src="singlepost.userImage" :alt="singlepost.author" />
-        </figure>
-        <span class="author">{{singlepost.author}}</span>
-      </div>
+  <main>
+    <div v-if="errorMsg.length > 0" class="error-box">
+      <p>{{errorMsg}}</p>
     </div>
-    <div
-      class="image-container"
-      :class="singlepost.filter"
-      :style="{ backgroundImage: 'url(' + singlepost.urlToImage + ')' }"
-      @dblclick="like"
-    >
-      <h2 class="title">{{singlepost.title}}</h2>
-    </div>
-    <div class="content">
-      <h4>by {{this.singlepost.author}}</h4>
-      <div class="heart">
-        <button @click="like" aria-label="You like">
-          <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
-        </button>
-      </div>
-      <span class="likes">{{singlepost.likes}} likes</span>
-    </div>
-    <section class="text">{{singlepost.content}}</section>
-
-    <section class="comments">
-
-      <div v-if="roltype==='admin' || roltype==='publisher'">
-        <button @click="openBoxComment()">
-          add comment
-          <i class="far fa-comment"></i>
-        </button>
-        <div :class="{'hidden-box':closedBox}">
-          <textarea placeholder="Write your comment..." type="text" v-model="commentData.text"></textarea>
-          <button @click="sendComment()">Publish</button>
+    <article v-else class="card-singlepost">
+      <div class="header level">
+        <div class="level-left">
+          <figure class="image is-32x32">
+            <img :src="singlepost.userImage" :alt="singlepost.author" />
+          </figure>
+          <span class="author">{{singlepost.author}}</span>
         </div>
       </div>
-      <div v-else >You must be <router-link :to="'/login'">logged in </router-link>to post a comment</div>
-
-      <div v-if="organizedComments">
-        <ul class="comments-list">
-          <li v-for="comment in organizedComments" :key="comment._id">
-            <card-comment :comment="comment" :motherId="singlepost._id"></card-comment>
-          </li>
-        </ul>
+      <div
+        class="image-container"
+        :class="singlepost.filter"
+        :style="{ backgroundImage: 'url(' + singlepost.urlToImage + ')' }"
+        @dblclick="like"
+      >
+        <h2 class="title">{{singlepost.title}}</h2>
       </div>
-    </section>
-  </article>
+      <div class="content">
+        <h4>by {{this.singlepost.author}}</h4>
+        <div class="heart">
+          <button @click="like" aria-label="You like">
+            <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
+          </button>
+        </div>
+        <span class="likes">{{singlepost.likes}} likes</span>
+      </div>
+      <section class="text">{{singlepost.content}}</section>
+
+      <section class="comments">
+        <div v-if="roltype==='admin' || roltype==='publisher'">
+          <button @click="openBoxComment()">
+            add comment
+            <i class="far fa-comment"></i>
+          </button>
+          <div :class="{'hidden-box':closedBox}">
+            <textarea placeholder="Write your comment..." type="text" v-model="commentData.text"></textarea>
+            <button @click="sendComment()">Publish</button>
+          </div>
+        </div>
+        <div v-else>
+          You must be
+          <router-link :to="'/login'">logged in</router-link>to post a comment
+        </div>
+
+        <div v-if="organizedComments">
+          <ul class="comments-list">
+            <li v-for="comment in organizedComments" :key="comment._id">
+              <card-comment :comment="comment" :motherId="singlepost._id"></card-comment>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </article>
+  </main>
 </template>
 
 <script>
@@ -68,7 +75,8 @@ export default {
     }
   },
   props: {
-    singlepost: Object
+    singlepost: Object,
+    errorMsg: String
   },
   components: {
     CardComment
@@ -76,7 +84,11 @@ export default {
   computed: {
     organizedComments () {
       const coms = this.singlepost.comments
-      if (coms) { return coms.reverse() } else { return false }
+      if (coms) {
+        return coms.reverse()
+      } else {
+        return false
+      }
     },
     roltype () {
       return userInfo.state.userData.rol
@@ -210,5 +222,13 @@ export default {
 
 .card-singlepost:last-child {
   margin-bottom: 50px;
+}
+
+.error-box {
+  height: 100vh;
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

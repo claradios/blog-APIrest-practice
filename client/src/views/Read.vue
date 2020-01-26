@@ -1,7 +1,7 @@
 <template>
   <div>
     <the-header />
-    <the-main-read :singlepost="singlepost" :filters="filters" />
+    <the-main-read :singlepost="singlepost" :filters="filters" :errorMsg="errorMsg"/>
     <the-footer />
   </div>
 </template>
@@ -18,13 +18,19 @@ export default {
   data () {
     return {
       singlepost: {},
-      filters
+      filters,
+      errorMsg: ''
     }
   },
   async mounted () {
-    const id = this.$route.params.id
-    const data = await readPostById(id)
-    this.singlepost = data
+    try {
+      const id = this.$route.params.id
+      const data = await readPostById(id)
+      this.singlepost = data
+    } catch (error) {
+      console.log(error)
+      this.errorMsg = error.message
+    }
   },
   components: {
     TheHeader,
