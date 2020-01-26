@@ -1,7 +1,7 @@
 <template>
   <div>
-    <the-header/>
-    <the-container :posts="posts" />
+    <the-header />
+    <the-container :posts="posts" :errorMsg="errorMsg"/>
     <the-footer />
   </div>
 </template>
@@ -10,7 +10,6 @@
 import TheHeader from '@/components/TheHeader.vue'
 import TheContainer from '@/components/TheContainer.vue'
 import TheFooter from '@/components/TheFooter.vue'
-import defaultPosts from '@/data/posts'
 import loadPosts from '@/service/loadPosts.js'
 
 // @ is an alias to /src
@@ -20,12 +19,17 @@ export default {
   data () {
     return {
       posts: [],
-      defaultPosts
+      errorMsg: ''
     }
   },
   async mounted () {
-    const data = await loadPosts()
-    this.posts = data
+    try {
+      const data = await loadPosts()
+      this.posts = data
+    } catch (error) {
+      console.log(error)
+      this.errorMsg = error.message
+    }
   },
 
   components: {
