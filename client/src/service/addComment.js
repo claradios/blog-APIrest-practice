@@ -12,6 +12,7 @@ async function addComment (token, postId, text) {
     data,
     method: 'post'
   })
-  return result.data
+
+  return result.response
 }
 export default addComment

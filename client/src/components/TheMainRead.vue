@@ -38,8 +38,21 @@
             <i class="far fa-comment"></i>
           </button>
           <div :class="{'hidden-box':closedBox}">
-            <textarea placeholder="Write your comment..." type="text" v-model="commentData.text"></textarea>
-            <button @click="sendComment()">Publish</button>
+            <textarea
+              placeholder="Write your comment..."
+              type="text"
+              v-model="commentData.text"
+              :disabled="success"
+            ></textarea>
+            <div v-if="success">Tu comentario ha sido añadido!</div>
+            <div v-else-if="badWords.length !== 0">
+              <p>Tu comentario es ofensivo, revisa estas palabras:</p>
+              <ul>
+                <li v-for="badWord in badWords" :key="badWord._id">{{badWord.word}}</li>
+              </ul>
+            </div>
+            <!-- <div v-else-if="errorHandleMsg"> errorHandleMsg</div> -->
+            <button @click="sendComment()" :disabled="success">Publish</button>
           </div>
         </div>
         <div v-else>
@@ -68,7 +81,10 @@ export default {
   name: 'TheMainRead',
   data () {
     return {
+      badWords: [],
+      // errorHandleMsg: '',
       closedBox: true,
+      success: false,
       commentData: {
         text: ''
       }
@@ -106,12 +122,23 @@ export default {
     },
     openBoxComment () {
       this.closedBox = !this.closedBox
+      this.success = false
     },
     async sendComment () {
-      const { token } = userInfo.state
-      const { _id } = this.singlepost
-      const { text } = this.commentData
-      await addComment(token, _id, text)
+      try {
+        const { token } = userInfo.state
+        const { _id } = this.singlepost
+        const { text } = this.commentData
+        const result = await addComment(token, _id, text)
+        this.success = true
+        console.log(result)
+        // cambiar de color el botón al deshabilitarlo
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response.data)
+          this.badWords = error.response.data
+        }
+      }
       // this.$router.go()
     }
   }
