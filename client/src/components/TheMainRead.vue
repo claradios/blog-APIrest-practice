@@ -58,7 +58,7 @@ import CardComment from './CardComment'
 import addComment from '@/service/addComment.js'
 
 export default {
-  name: 'readsinglepost',
+  name: 'TheMainRead',
   data () {
     return {
       closedBox: true,

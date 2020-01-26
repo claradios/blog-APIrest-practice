@@ -4,6 +4,7 @@
   </div>
 </template>
 <script>
+
 // import userInfo from '@/store/'
 export default {
   name: 'app'

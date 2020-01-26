@@ -1,21 +1,21 @@
 <template>
   <div>
     <the-header/>
-    <card-signup/>
+    <the-main-signup/>
     <the-footer/>
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/TheHeader.vue'
-import CardSignup from '@/components/CardSignup.vue'
+import TheMainSignup from '@/components/TheMainSignup.vue'
 import TheFooter from '@/components/TheFooter.vue'
 
 export default {
   name: 'signup',
   components: {
     TheHeader,
-    CardSignup,
+    TheMainSignup,
     TheFooter
   }
 }

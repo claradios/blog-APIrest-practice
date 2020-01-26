@@ -1,14 +1,14 @@
 <template>
   <div>
     <the-header />
-    <the-container :posts="posts" :errorMsg="errorMsg"/>
+    <the-main-feed :posts="posts" :errorMsg="errorMsg"/>
     <the-footer />
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/TheHeader.vue'
-import TheContainer from '@/components/TheContainer.vue'
+import TheMainFeed from '@/components/TheMainFeed.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import loadPosts from '@/service/loadPosts.js'
 
@@ -34,7 +34,7 @@ export default {
 
   components: {
     TheHeader,
-    TheContainer,
+    TheMainFeed,
     TheFooter
   }
 }

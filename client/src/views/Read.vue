@@ -1,14 +1,14 @@
 <template>
   <div>
     <the-header />
-    <read-post :singlepost="singlepost" :filters="filters" />
+    <the-main-read :singlepost="singlepost" :filters="filters" />
     <the-footer />
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/TheHeader.vue'
-import ReadPost from '@/components/ReadPost.vue'
+import TheMainRead from '@/components/TheMainRead.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import filters from '@/data/filters'
 import readPostById from '@/service/readPostById.js'
@@ -28,7 +28,7 @@ export default {
   },
   components: {
     TheHeader,
-    ReadPost,
+    TheMainRead,
     TheFooter
   }
 }

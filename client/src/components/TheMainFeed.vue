@@ -10,7 +10,7 @@
 <script>
 import CardPost from './CardPost'
 export default {
-  name: 'TheContainer',
+  name: 'TheMainFeed',
   props: {
     posts: Array,
     errorMsg: String
