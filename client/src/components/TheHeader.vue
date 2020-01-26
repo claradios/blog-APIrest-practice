@@ -67,6 +67,7 @@ header {
   z-index: 10;
 
   button {
+    cursor: pointer;
     color: #ffffff;
     font-weight: bold;
     background-color: transparent;

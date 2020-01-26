@@ -98,14 +98,26 @@ h4 {
 }
 
 .comment-body {
-  background-color: lightgrey;
+  background-color: rgb(230, 230, 230);
   border-radius: 8px;
   padding: 5px;
   margin: 10px;
 }
 
-.tools button {
+.tools {
+  cursor: pointer;
   border: 0 solid;
   padding: 0;
+  color:lightsalmon;
+    background-color: transparent;
+    border: 0px solid;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    -webkit-appearance: none;
+    &:hover {
+      color:#041e30;
+    }
 }
+
 </style>

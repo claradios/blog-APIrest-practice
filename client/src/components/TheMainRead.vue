@@ -33,32 +33,36 @@
 
       <section class="comments">
         <div v-if="roltype==='admin' || roltype==='publisher'">
-          <button @click="openBoxComment()">
+          <button @click="openBoxComment()" class="btn">
             add comment
             <i class="far fa-comment"></i>
           </button>
           <div :class="{'hidden-box':closedBox}">
+            <div class="comment-box">
             <textarea
               placeholder="Write your comment..."
               type="text"
               v-model="commentData.text"
               :disabled="success"
             ></textarea>
-            <div v-if="success">Tu comentario ha sido añadido!</div>
-            <div v-else-if="badWords.length !== 0">
+          </div>
+          <button @click="sendComment()" :disabled="success" class="btn">Publish </button>
+            <p v-if="success" class="success">Tu comentario ha sido añadido!</p>
+            <div class="info" v-else-if="badWords.length !== 0">
               <p>Tu comentario es ofensivo, revisa estas palabras:</p>
               <ul>
                 <li v-for="badWord in badWords" :key="badWord._id">{{badWord.word}}</li>
               </ul>
             </div>
             <!-- <div v-else-if="errorHandleMsg"> errorHandleMsg</div> -->
-            <button @click="sendComment()" :disabled="success">Publish</button>
+
           </div>
         </div>
-        <div v-else>
+        <p v-else class="info">
           You must be
-          <router-link :to="'/login'">logged in</router-link>to post a comment
-        </div>
+          <router-link :to="'/login'">logged in</router-link>
+          to post a comment
+        </p>
 
         <div v-if="organizedComments">
           <ul class="comments-list">
@@ -122,16 +126,18 @@ export default {
     },
     openBoxComment () {
       this.closedBox = !this.closedBox
-      this.success = false
+      // this.success = false
     },
     async sendComment () {
       try {
         const { token } = userInfo.state
         const { _id } = this.singlepost
         const { text } = this.commentData
-        const result = await addComment(token, _id, text)
+        await addComment(token, _id, text)
         this.success = true
-        console.log(result)
+        this.closedBox = true
+        this.commentData.text = ''
+
         // cambiar de color el botón al deshabilitarlo
       } catch (error) {
         if (error.response) {
@@ -146,9 +152,7 @@ export default {
 </script>
 
 <style lang="scss">
-.hidden-box {
-  display: none;
-}
+
 .card-singlepost {
   padding-top: 50px;
 }
@@ -250,7 +254,21 @@ export default {
 .card-singlepost:last-child {
   margin-bottom: 50px;
 }
-
+.info {
+  background-color: lightpink;
+  color: #f06595;
+  font-weight: 700;
+  padding:7px;
+}
+.hidden-box {
+  display: none;
+}
+.success {
+    background-color: rgb(93, 226, 153);
+  color: #041e30;
+  font-weight: 700;
+  padding:7px;
+}
 .error-box {
   height: 100vh;
   background-color: yellow;
@@ -258,4 +276,42 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px;
+  textarea {
+    background-color: rgb(230, 230, 230);
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 8px;
+    font-family: inherit;
+    color: inherit;
+  }
+}
+.btn {
+    color: #ffffff;
+    background-color: lightsalmon;
+    border: 0px solid;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    -webkit-appearance: none;
+    &:hover {
+      background-color:#041e30;
+    }
+  }
+.btn-icon {
+    color:lightsalmon;
+    background-color: transparent;
+    border: 0px solid;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    -webkit-appearance: none;
+    &:hover {
+      background-color:#041e30;
+    }
+  }
+
 </style>
