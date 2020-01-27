@@ -40,14 +40,15 @@ export default {
   name: 'cardComment',
   data () {
     return {
+      isEditing: false,
       editedComment: {
         text: this.comment.text
       }
     }
   },
   props: {
-    comment: Object,
-    isEditing: Boolean
+    comment: Object
+    // isEditing: Boolean
   },
   computed: {
     roltype () {
@@ -66,11 +67,12 @@ export default {
     handleDeleteThisComment (ev) {
       this.$emit('delete-this-comment', ev)
     },
-    handleEditThisComment (ev) {
-      this.$emit('edit-this-comment', ev)
+    handleEditThisComment () {
+      this.isEditing = !this.isEditing
     },
     handleSendEditedComment (ev) {
       this.$emit('send-edited-comment', ev, this.editedComment)
+      this.isEditing = false
     }
   }
 }

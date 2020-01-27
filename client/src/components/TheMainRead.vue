@@ -39,11 +39,7 @@
           </button>
           <div :class="{'hidden-box':closedBox}">
             <div class="comment-box">
-              <textarea
-                placeholder="Write your comment..."
-                type="text"
-                v-model="commentData.text"
-              ></textarea>
+              <textarea placeholder="Write your comment..." type="text" v-model="commentData.text"></textarea>
             </div>
             <button @click="sendComment()" class="btn">Publish</button>
           </div>
@@ -65,12 +61,11 @@
           <ul class="comments-list">
             <li v-for="comment in organizedComments" :key="comment._id">
               <card-comment
-              :isEditing="isEditing"
-              :comment="comment"
-              :motherId="singlepost._id"
-              @delete-this-comment="handleDeleteThisComment"
-              @edit-this-comment="handleEditThisComment"
-              @send-edited-comment="handleSendEditedComment"></card-comment>
+                :comment="comment"
+                :motherId="singlepost._id"
+                @delete-this-comment="handleDeleteThisComment"
+                @send-edited-comment="handleSendEditedComment"
+              ></card-comment>
             </li>
           </ul>
         </div>
@@ -90,7 +85,7 @@ export default {
   data () {
     return {
       badWords: [],
-      isEditing: false,
+      // isEditing: false,
       closedBox: true,
       successMsg: false,
       commentData: {
@@ -166,19 +161,18 @@ export default {
         console.log('halgo falló', error)
       }
     },
-    async handleEditThisComment (ev) {
-      if (ev.id === this.singlepost.comments.id) { this.isEditing = !this.isEditing }
-    },
+
     async handleSendEditedComment (ev, body) {
       try {
-        console.log(body)
         const _id = ev.currentTarget.id
-        console.log(ev)
         const postId = this.singlepost._id
-        console.log(postId)
         const { token } = userInfo.state
-        console.log(token)
         await editComment(token, postId, _id, body)
+        const hasThisId = element => element._id === _id
+        const newArray = this.organizedComments.reverse()
+        const index = newArray.findIndex(hasThisId)
+        console.log(index)
+        this.singlepost.comments.splice(index, 1, body)
       } catch (error) {
         console.log(error)
       }
