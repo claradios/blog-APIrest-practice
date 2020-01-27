@@ -151,7 +151,6 @@ export default {
       try {
         const { token } = userInfo.state
         const _id = ev.currentTarget.id
-        console.log(_id)
         const postId = this.singlepost._id
         await deleteComment(token, postId, _id)
         const hasThisId = element => element._id === _id
@@ -168,10 +167,10 @@ export default {
         const postId = this.singlepost._id
         const { token } = userInfo.state
         await editComment(token, postId, _id, body)
+
         const hasThisId = element => element._id === _id
         const newArray = this.organizedComments.reverse()
         const index = newArray.findIndex(hasThisId)
-        console.log(index)
         this.singlepost.comments.splice(index, 1, body)
       } catch (error) {
         console.log(error)

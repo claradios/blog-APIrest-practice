@@ -42,7 +42,10 @@ export default {
     return {
       isEditing: false,
       editedComment: {
-        text: this.comment.text
+        text: this.comment.text,
+        date: this.comment.date,
+        nickname: this.comment.nickname,
+        _id: this.comment._id
       }
     }
   },
