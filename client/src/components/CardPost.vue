@@ -16,6 +16,7 @@
     >
       <h2 class="title">{{post.title}}</h2>
     </div>
+    <div class="icons-container">
     <div class="content">
       <div class="heart">
         <button @click="like" aria-label="You like">
@@ -24,17 +25,25 @@
       </div>
       <p class="likes">{{post.likes}} likes</p>
     </div>
-    <div v-if="roltype === 'admin' || name === post.author">
-      <button @click="handleDeleteThisPost" :id="post._id">
+
+      <button
+      v-if="roltype === 'admin' || name === post.author"
+      class="tools"
+      @click="handleDeleteThisPost" :id="post._id">
         <i class="fa fa-trash" aria-hidden="true"></i>
       </button>
-      <div>
-        <router-link :to="`/edit/${post._id}`">
+      <div
+      v-if="roltype === 'admin' || name === post.author"
+      class="tools">
+        <router-link :to="`/edit/${post._id}`" class="links">
           <i class="fas fa-edit"></i>
         </router-link>
       </div>
+
+    <div class="tools">
+    <router-link :to="`/read/${post._id}`" class="links">leer más ...</router-link>
     </div>
-    <router-link :to="`/read/${post._id}`">leer más ...</router-link>
+    </div>
   </article>
 </template>
 
@@ -66,6 +75,35 @@ export default {
 </script>
 
 <style lang="scss">
+.links {
+  text-decoration: none;
+  color:  #041e30;
+  font-size: 14px;
+   &:hover {
+    color: lightsalmon;
+  }
+}
+// .tools {
+//   cursor: pointer;
+//   border: 0 solid;
+//   padding: 0;
+//   color: #041e30;
+//   background-color: transparent;
+//   border: 0px solid;
+//   border-radius: 5px;
+//   padding: 5px;
+//   font-size: 18px;
+//   -webkit-appearance: none;
+//   &:hover {
+//     color: lightsalmon;
+//   }
+// }
+.icons-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 .card-post {
   padding-top: 50px;
 }
@@ -128,7 +166,8 @@ export default {
   }
 
   .content {
-    margin: 7.5px 10px;
+    margin: 0 5px;
+    padding: 5px;
   }
 
   .heart button {

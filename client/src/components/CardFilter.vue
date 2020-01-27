@@ -1,11 +1,11 @@
 <template>
   <div class="card-filter">
-    <p>{{filter.name}}</p>
     <div class="img"
       :class="filter.name"
       :id="filter.name"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="selectFilter">
+        <p>{{filter.name}}</p>
     </div>
   </div>
 </template>
@@ -39,9 +39,12 @@ export default {
   }
   .img {
     cursor: pointer;
-    height: 100px;
+    height: 50px;
     background-size: cover;
     background-position: center center;
+    p {
+      padding-top: 10px;
+    }
   }
 }
 .card-filter:last-child {

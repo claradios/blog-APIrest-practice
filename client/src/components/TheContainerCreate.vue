@@ -6,13 +6,13 @@
         :class="postData.selectedFilter"
         :style="{ backgroundImage: 'url(' + postData.urlToImage + ')' }"
       >
-        <p>Pick a cover image!</p>
-        <span class="upload">
+        <div class="upload">
           <input type="file" name="file" id="file" class="inputfile" @change="handleUploadImage" />
           <label for="file">
-            <i class="fas fa-camera-retro"></i>
+            upload your cover!
+            <i class="fas fa-camera-retro links"></i>
           </label>
-        </span>
+        </div>
       </div>
       <div class="filter-container">
         <card-filter
@@ -70,13 +70,15 @@ export default {
     CardFilter
   },
   methods: {
-    sendPost () {
-      const token = localStorage.getItem('token')
-      if (token) {
-        const newPost = addPost(token, this.postData)
-        if (newPost) {
+    async sendPost () {
+      try {
+        const token = localStorage.getItem('token')
+        if (token) {
+          await addPost(token, this.postData)
           this.$router.push('/')
         }
+      } catch (error) {
+        console.log(error)
       }
     },
     handleFilterSelected (ev) {
@@ -100,17 +102,14 @@ export default {
 
 <style lang="scss">
 .newpost {
-  margin:0;
+  margin: 0;
   padding: 50px 0 90px 0;
-  color: black;
 }
 .upload {
-  p {
-    font-size: 0.63rem;
-    position: absolute;
-    left: -25px;
-    top: 5px;
+  input {
+    width: 0px;
   }
+  font-size: 20px;
 }
 
 input[name="file"] {
@@ -143,6 +142,8 @@ main {
   justify-content: center;
 
   textarea {
+    font-family: inherit;
+    color: inherit;
     width: 600px;
     height: 120px;
     border: 3px solid #cccccc;
@@ -159,12 +160,16 @@ main {
   background-size: cover;
   background-position: center center;
   height: 330px;
+  background-color: lightpink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .filter-container {
   display: grid;
   grid-template-columns: auto auto auto auto;
-  padding: 30px 10px;
+  padding: 15px 10px;
 }
 
 .feed {

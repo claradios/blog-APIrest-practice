@@ -10,14 +10,19 @@
       </span>
     </div>
     <div class="comment-body">
-      <p class="comment-text">{{comment.text}}</p>
+      <p v-if="!isEditing" class="comment-text">{{comment.text}}</p>
+      <div v-if="isEditing">
+        <textarea v-model="editedComment.text"></textarea>
+        <button :id="comment._id" @click="handleSendEditedComment">Update</button>
+        </div>
+
       <div v-if="roltype === 'admin' || name === comment.nickname">
         <button :id="comment._id" class="tools" @click="handleDeleteThisComment">
           <span>
             <i class="fa fa-trash" aria-hidden="true"></i>
           </span>
         </button>
-        <button class="tools" @click="editThisComment()">
+        <button :id="comment._id" class="tools" @click="handleEditThisComment">
           <span>
             <i class="fas fa-edit"></i>
           </span>
@@ -31,11 +36,18 @@
 import { prettyDate } from '../helpers'
 import userInfo from '@/store/'
 
-import editComment from '@/service/editComment.js'
 export default {
   name: 'cardComment',
+  data () {
+    return {
+      editedComment: {
+        text: this.comment.text
+      }
+    }
+  },
   props: {
-    comment: Object
+    comment: Object,
+    isEditing: Boolean
   },
   computed: {
     roltype () {
@@ -54,10 +66,11 @@ export default {
     handleDeleteThisComment (ev) {
       this.$emit('delete-this-comment', ev)
     },
-    async editThisComment () {
-      console.log('edit')
-      const { token } = userInfo.state
-      await editComment(token)
+    handleEditThisComment (ev) {
+      this.$emit('edit-this-comment', ev)
+    },
+    handleSendEditedComment (ev) {
+      this.$emit('send-edited-comment', ev, this.editedComment)
     }
   }
 }
