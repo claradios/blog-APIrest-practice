@@ -42,7 +42,8 @@
           v-model="postData.content"
         ></textarea>
       </div>
-      <button @click="sendPost()">Post!</button>
+      <button v-if="!isEditing" @click="sendPost()">Post!</button>
+      <button v-if="isEditing" @click="updatePost()">Update!</button>
     </div>
   </main>
 </template>
@@ -50,11 +51,15 @@
 <script>
 import CardFilter from './CardFilter'
 import addPost from '@/service/addPost'
+import readPostById from '@/service/readPostById'
+import editPostById from '@/service/editPostById'
+import userInfo from '@/store/'
 
 export default {
   name: 'TheContainerCreate',
   data () {
     return {
+      isEditing: false,
       postData: {
         selectedFilter: '',
         urlToImage: 'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
@@ -69,6 +74,20 @@ export default {
   components: {
     CardFilter
   },
+  async mounted () {
+    const id = this.$route.params.id
+    if (id) {
+      this.isEditing = true
+      try {
+        const result = await readPostById(id)
+        this.postData = result
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      console.log('no estamos editando')
+    }
+  },
   methods: {
     async sendPost () {
       try {
@@ -79,6 +98,18 @@ export default {
         }
       } catch (error) {
         console.log(error)
+      }
+    },
+
+    async updatePost () {
+      try {
+        const { token } = userInfo.state
+        const id = this.$route.params.id
+        const body = this.postData
+        await editPostById(token, id, body)
+        this.$router.push(`/read/${id}`)
+      } catch (error) {
+        console.log('ha habido un error actualizando este post')
       }
     },
     handleFilterSelected (ev) {

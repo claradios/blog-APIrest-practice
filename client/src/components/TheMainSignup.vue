@@ -46,7 +46,7 @@ export default {
       username: '',
       nickname: '',
       password: '',
-      userImage: ''
+      userImage: 'https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-512.png'
     }
   },
 

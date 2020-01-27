@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import TheHeader from '@/components/TheHeader.vue'
+import TheFooter from '@/components/TheFooter.vue'
 import TheContainerCreate from '@/components/TheContainerCreate.vue'
 import filters from '@/data/filters.js'
 // le va a pasar una respuesta de axios con la info del post, para ponerla en los campos de value más lo editable
@@ -21,7 +23,9 @@ export default {
     }
   },
   components: {
-    TheContainerCreate
+    TheContainerCreate,
+    TheHeader,
+    TheFooter
   }
 }
 </script>
