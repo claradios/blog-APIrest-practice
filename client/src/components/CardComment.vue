@@ -12,8 +12,8 @@
     <div class="comment-body">
       <p v-if="!isEditing" class="comment-text">{{comment.text}}</p>
       <div v-if="isEditing">
-        <textarea v-model="editedComment.text"></textarea>
-        <button :id="comment._id" @click="handleSendEditedComment">Update</button>
+        <textarea class="edit-box" v-model="editedComment.text"></textarea>
+        <button class="btn" :id="comment._id" @click="handleSendEditedComment">Update</button>
         </div>
 
       <div v-if="roltype === 'admin' || name === comment.nickname">
@@ -82,6 +82,17 @@ export default {
 </script>
 
 <style lang="scss">
+.edit-box{
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: darkcyan;
+  border: 2px solid lightsalmon;
+  width: 95%;
+  padding:10px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
 .heart button {
   border: 0 solid;
   padding: 0;
