@@ -46,18 +46,23 @@ export default {
       username: '',
       nickname: '',
       password: '',
-      userImage: 'https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-512.png'
+      userImage:
+        'https://cdn0.iconfinder.com/data/icons/user-collection-4/512/user-512.png'
     }
   },
 
   methods: {
     async sign () {
-      await signUpUser(
-        this.username,
-        this.nickname,
-        this.password,
-        this.userImage
-      )
+      try {
+        await signUpUser(
+          this.username,
+          this.nickname,
+          this.password,
+          this.userImage
+        )
+      } catch (error) {
+        console.log('ha habido un error en el registro')
+      }
     }
   }
 }

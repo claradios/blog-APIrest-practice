@@ -39,7 +39,7 @@ export default {
   methods: {
     logOut () {
       localStorage.clear()
-      this.$router.push('/')
+      this.$router.go()
     }
   }
 }
