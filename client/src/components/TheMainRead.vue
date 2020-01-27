@@ -39,29 +39,26 @@
           </button>
           <div :class="{'hidden-box':closedBox}">
             <div class="comment-box">
-            <textarea
-              placeholder="Write your comment..."
-              type="text"
-              v-model="commentData.text"
-              :disabled="success"
-            ></textarea>
-          </div>
-          <button @click="sendComment()" :disabled="success" class="btn">Publish </button>
-            <p v-if="success" class="success">Tu comentario ha sido añadido!</p>
-            <div class="info" v-else-if="badWords.length !== 0">
-              <p>Tu comentario es ofensivo, revisa estas palabras:</p>
-              <ul>
-                <li v-for="badWord in badWords" :key="badWord._id">{{badWord.word}}</li>
-              </ul>
+              <textarea
+                placeholder="Write your comment..."
+                type="text"
+                v-model="commentData.text"
+              ></textarea>
             </div>
-            <!-- <div v-else-if="errorHandleMsg"> errorHandleMsg</div> -->
-
+            <button @click="sendComment()" class="btn">Publish</button>
           </div>
+          <p v-if="successMsg" class="success">Tu comentario ha sido añadido!</p>
+          <div class="info" v-if="badWords.length !== 0">
+            <p>Tu comentario es ofensivo, revisa estas palabras:</p>
+            <ul>
+              <li v-for="badWord in badWords" :key="badWord._id">{{badWord.word}}</li>
+            </ul>
+          </div>
+          <!-- <div v-else-if="errorHandleMsg"> errorHandleMsg</div> -->
         </div>
         <p v-else class="info">
           You must be
-          <router-link :to="'/login'">logged in</router-link>
-          to post a comment
+          <router-link :to="'/login'">logged in</router-link>to post a comment
         </p>
 
         <div v-if="organizedComments">
@@ -89,6 +86,8 @@ export default {
       // errorHandleMsg: '',
       closedBox: true,
       success: false,
+      successMsg: false,
+      // failMsg: false,
       commentData: {
         text: ''
       }
@@ -126,23 +125,28 @@ export default {
     },
     openBoxComment () {
       this.closedBox = !this.closedBox
-      // this.success = false
+      this.successMsg = false
+      this.badWords = []
     },
     async sendComment () {
       try {
         const { token } = userInfo.state
         const { _id } = this.singlepost
         const { text } = this.commentData
-        await addComment(token, _id, text)
+        const result = await addComment(token, _id, text)
         this.success = true
         this.closedBox = true
         this.commentData.text = ''
-
+        this.successMsg = true
+        this.badWords = []
+        console.log(result)
+        this.singlepost.comments.push(result)
         // cambiar de color el botón al deshabilitarlo
       } catch (error) {
         if (error.response) {
           console.log(error.response.data)
           this.badWords = error.response.data
+          // this.failMsg = true
         }
       }
       // this.$router.go()
@@ -152,7 +156,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .card-singlepost {
   padding-top: 50px;
 }
@@ -258,16 +261,16 @@ export default {
   background-color: lightpink;
   color: #f06595;
   font-weight: 700;
-  padding:7px;
+  padding: 7px;
 }
 .hidden-box {
   display: none;
 }
 .success {
-    background-color: rgb(93, 226, 153);
+  background-color: rgb(93, 226, 153);
   color: #041e30;
   font-weight: 700;
-  padding:7px;
+  padding: 7px;
 }
 .error-box {
   height: 100vh;
@@ -290,28 +293,27 @@ export default {
   }
 }
 .btn {
-    color: #ffffff;
-    background-color: lightsalmon;
-    border: 0px solid;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 14px;
-    -webkit-appearance: none;
-    &:hover {
-      background-color:#041e30;
-    }
+  color: #ffffff;
+  background-color: lightsalmon;
+  border: 0px solid;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  -webkit-appearance: none;
+  &:hover {
+    background-color: #041e30;
   }
+}
 .btn-icon {
-    color:lightsalmon;
-    background-color: transparent;
-    border: 0px solid;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 14px;
-    -webkit-appearance: none;
-    &:hover {
-      background-color:#041e30;
-    }
+  color: lightsalmon;
+  background-color: transparent;
+  border: 0px solid;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  -webkit-appearance: none;
+  &:hover {
+    background-color: #041e30;
   }
-
+}
 </style>
