@@ -51,7 +51,6 @@ export default {
   },
   props: {
     comment: Object
-    // isEditing: Boolean
   },
   computed: {
     roltype () {

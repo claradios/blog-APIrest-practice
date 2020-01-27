@@ -54,7 +54,7 @@
         </div>
         <p v-else class="info">
           You must be
-          <router-link :to="'/login'">logged in</router-link>to post a comment
+          <router-link :to="'/login'">logged in</router-link> to post a comment
         </p>
 
         <div v-if="organizedComments">
@@ -106,7 +106,7 @@ export default {
       if (coms) {
         return coms.reverse()
       } else {
-        return false
+        return []
       }
     },
     roltype () {
@@ -139,7 +139,13 @@ export default {
         this.commentData.text = ''
         this.successMsg = true
         this.badWords = []
-        this.singlepost.comments.push(result)
+        if (!this.singlepost.comments) {
+          console.log('no existe la propiedad comments')
+          this.organizedComments = []
+          this.organizedComments.push(result)
+        } else {
+          this.singlepost.comments.push(result)
+        }
         // cambiar de color el botón al deshabilitarlo
       } catch (error) {
         if (error.response) {

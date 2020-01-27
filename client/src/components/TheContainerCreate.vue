@@ -57,7 +57,7 @@ export default {
     return {
       postData: {
         selectedFilter: '',
-        urlToImage: '',
+        urlToImage: 'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
         title: '',
         content: ''
       }
