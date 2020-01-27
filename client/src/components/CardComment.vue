@@ -10,34 +10,32 @@
       </span>
     </div>
     <div class="comment-body">
-    <p class="comment-text">{{comment.text}}</p>
-     <div v-if="roltype === 'admin' || name === comment.nickname">
-      <button class="tools" @click="deleteThisComment()">
-        <span>
-          <i class="fa fa-trash" aria-hidden="true"></i>
-        </span>
-      </button>
-      <button class="tools" @click="editThisComment()">
-        <span>
-          <i class="fas fa-edit"></i>
-        </span>
-      </button>
+      <p class="comment-text">{{comment.text}}</p>
+      <div v-if="roltype === 'admin' || name === comment.nickname">
+        <button :id="comment._id" class="tools" @click="handleDeleteThisComment">
+          <span>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button class="tools" @click="editThisComment()">
+          <span>
+            <i class="fas fa-edit"></i>
+          </span>
+        </button>
+      </div>
     </div>
-    </div>
-
   </div>
 </template>
 
 <script>
 import { prettyDate } from '../helpers'
 import userInfo from '@/store/'
-import deleteComment from '@/service/deleteComment.js'
+
 import editComment from '@/service/editComment.js'
 export default {
   name: 'cardComment',
   props: {
-    comment: Object,
-    motherId: String
+    comment: Object
   },
   computed: {
     roltype () {
@@ -53,12 +51,8 @@ export default {
       this.comment.hasBeenLiked ? this.comment.likes-- : this.comment.likes++
       this.comment.hasBeenLiked = !this.comment.hasBeenLiked
     },
-    async deleteThisComment () {
-      const { token } = userInfo.state
-      const { _id } = this.comment
-      const postId = this.motherId
-
-      await deleteComment(token, postId, _id)
+    handleDeleteThisComment (ev) {
+      this.$emit('delete-this-comment', ev)
     },
     async editThisComment () {
       console.log('edit')
@@ -108,16 +102,15 @@ h4 {
   cursor: pointer;
   border: 0 solid;
   padding: 0;
-  color:lightsalmon;
-    background-color: transparent;
-    border: 0px solid;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 14px;
-    -webkit-appearance: none;
-    &:hover {
-      color:#041e30;
-    }
+  color: lightsalmon;
+  background-color: transparent;
+  border: 0px solid;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+  -webkit-appearance: none;
+  &:hover {
+    color: #041e30;
+  }
 }
-
 </style>

@@ -25,7 +25,7 @@
       <p class="likes">{{post.likes}} likes</p>
     </div>
     <div v-if="roltype === 'admin' || name === post.author">
-      <button @click="deleteThisPost()">
+      <button @click="handleDeleteThisPost" :id="post._id">
         <i class="fa fa-trash" aria-hidden="true"></i>
       </button>
       <div>
@@ -40,7 +40,6 @@
 
 <script>
 import userInfo from '@/store/'
-import deletePostById from '@/service/deletePostById'
 export default {
   name: 'cardPost',
   props: {
@@ -59,13 +58,8 @@ export default {
       this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++
       this.post.hasBeenLiked = !this.post.hasBeenLiked
     },
-    async deleteThisPost () {
-      const { _id } = this.post
-      const { token } = userInfo.state
-      const deletion = await deletePostById(token, _id)
-      if (deletion) {
-        this.$router.push('/')
-      }
+    handleDeleteThisPost (ev) {
+      this.$emit('delete-this-post', ev)
     }
   }
 }

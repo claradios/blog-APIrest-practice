@@ -64,7 +64,10 @@
         <div v-if="organizedComments">
           <ul class="comments-list">
             <li v-for="comment in organizedComments" :key="comment._id">
-              <card-comment :comment="comment" :motherId="singlepost._id"></card-comment>
+              <card-comment
+              :comment="comment"
+              :motherId="singlepost._id"
+              @delete-this-comment="handleDeleteThisComment" ></card-comment>
             </li>
           </ul>
         </div>
@@ -77,6 +80,7 @@
 import userInfo from '@/store/'
 import CardComment from './CardComment'
 import addComment from '@/service/addComment.js'
+import deleteComment from '@/service/deleteComment.js'
 
 export default {
   name: 'TheMainRead',
@@ -85,9 +89,7 @@ export default {
       badWords: [],
       // errorHandleMsg: '',
       closedBox: true,
-      success: false,
       successMsg: false,
-      // failMsg: false,
       commentData: {
         text: ''
       }
@@ -134,22 +136,31 @@ export default {
         const { _id } = this.singlepost
         const { text } = this.commentData
         const result = await addComment(token, _id, text)
-        this.success = true
+
         this.closedBox = true
         this.commentData.text = ''
         this.successMsg = true
         this.badWords = []
-        console.log(result)
         this.singlepost.comments.push(result)
         // cambiar de color el botón al deshabilitarlo
       } catch (error) {
         if (error.response) {
-          console.log(error.response.data)
           this.badWords = error.response.data
-          // this.failMsg = true
         }
       }
-      // this.$router.go()
+    },
+    async handleDeleteThisComment (ev) {
+      try {
+        const { token } = userInfo.state
+        const _id = ev.currentTarget.id
+        const postId = this.singlepost._id
+        await deleteComment(token, postId, _id)
+        const hasThisId = element => element._id === _id
+        const index = this.singlepost.comments.findIndex(hasThisId)
+        this.singlepost.comments.splice(index, 1)
+      } catch (error) {
+        console.log('halgo falló', error)
+      }
     }
   }
 }
