@@ -1,6 +1,11 @@
 import * as axios from 'axios'
-async function editOffensiveWord (token, id, word) {
-  const data = { word }
+async function editOffensiveWord (token, id, offensiveWord) {
+  const { word, level } = offensiveWord
+  const data = {
+    word,
+    level: parseInt(level)
+  }
+  console.log(data)
   let result = await axios.request({
     url: 'https://localhost:3443/offensivewords/' + id,
     headers: {

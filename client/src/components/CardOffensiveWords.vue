@@ -8,8 +8,8 @@
     </div>
 
     <div v-if="isEditing">
-      <input type="text" v-model="badWord.word" />
-      <input type="text" v-model="badWord.level" />
+      <input type="text" v-model="editedWord.word" />
+      <input type="text" v-model="editedWord.level" />
       <button @click="handleEditThisWord">update</button>
     </div>
     <div>
@@ -49,7 +49,8 @@ export default {
       this.isEditing = !this.isEditing
     },
     handleEditThisWord (ev) {
-      this.$emit('send-edited-word', ev, this.editedWord)
+      console.log('hola', this.editedWord)
+      this.$emit('edit-this-word', ev, this.editedWord)
       this.isEditing = false
     }
   }

@@ -62,6 +62,7 @@ export default {
       try {
         const { _id } = body
         const { token } = userInfo.state
+        console.log(token, _id, body)
         await editOffensiveWord(token, _id, body)
       } catch (error) {
         this.errorMsg = error.message
