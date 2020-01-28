@@ -5,7 +5,7 @@ async function editOffensiveWord (token, id, offensiveWord) {
     word,
     level: parseInt(level)
   }
-  console.log(data)
+
   let result = await axios.request({
     url: 'https://localhost:3443/offensivewords/' + id,
     headers: {

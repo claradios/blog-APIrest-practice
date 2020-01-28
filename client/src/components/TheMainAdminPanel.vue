@@ -46,6 +46,9 @@ export default {
       try {
         const { token } = userInfo.state
         await deleteOffensiveWord(token, id)
+        const hasThisId = element => element._id === id
+        const index = this.offensiveWords.findIndex(hasThisId)
+        this.offensiveWords.splice(index, 1)
       } catch (error) {
         this.errorMsg = error.message
       }
@@ -53,7 +56,9 @@ export default {
     async addThisWord () {
       try {
         const { token } = userInfo.state
-        await addOffensiveWord(token, this.newOffensiveW)
+        const result = await addOffensiveWord(token, this.newOffensiveW)
+        this.offensiveWords.push(result)
+        console.log(result)
       } catch (error) {
         this.errorMsg = error.message
       }
@@ -64,6 +69,10 @@ export default {
         const { token } = userInfo.state
         console.log(token, _id, body)
         await editOffensiveWord(token, _id, body)
+
+        const hasThisId = element => element._id === _id
+        const index = this.offensiveWords.findIndex(hasThisId)
+        this.offensiveWords.splice(index, 1, body)
       } catch (error) {
         this.errorMsg = error.message
       }

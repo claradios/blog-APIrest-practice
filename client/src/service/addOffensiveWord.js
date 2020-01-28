@@ -6,7 +6,7 @@ async function addOffensiveWord (token, offensiveWord) {
     word,
     level: parseInt(level)
   }
-  console.log(data)
+
   const result = await axios.request({
     url: 'https://localhost:3443/offensivewords/',
     headers: {
@@ -15,6 +15,7 @@ async function addOffensiveWord (token, offensiveWord) {
     data,
     method: 'post'
   })
+  console.log(result.data)
   return result.data
 }
 export default addOffensiveWord

@@ -3,7 +3,7 @@
     <router-link :to="'/'" class="routes">
       <i class="fab fa-vuejs"></i> Home
     </router-link>
-    <router-link v-if="isAdmin" :to="'/admin/settings/offensivewords'" class="routes">
+    <router-link v-if="isAdmin === 'admin'" :to="'/admin/settings/offensivewords'" class="routes">
       <i class="fas fa-cog"></i> settings
     </router-link>
     <div v-if="isLogged">
