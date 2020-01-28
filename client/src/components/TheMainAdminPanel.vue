@@ -3,14 +3,24 @@
     <h2>This list of words are not allowed</h2>
     <ul>
       <li v-for="badWord in offensiveWords" :key="badWord._id">
-          <card-offensive-words
+        <card-offensive-words
           :badWord="badWord"
           @delete-this-word="handleDeleteThisWord"
           @edit-this-word="handleEditThisWord"
-          @add-this-word="handleAddThisWord"
-          />
+        />
       </li>
     </ul>
+    <div>
+      <div>
+        <label for="new-word">Añadir palabra:</label>
+        <input type="text" name="new-word" v-model="newOffensiveW.word" placeholder="cabronazo" />
+      </div>
+      <div>
+        <label for="new-level">Nivel de Ofensividad (1-5):</label>
+        <input type="text" name="new-level" v-model="newOffensiveW.level" placeholder="3" />
+      </div>
+      <button @click="addThisWord">add +</button>
+    </div>
   </main>
 </template>
 
@@ -22,38 +32,37 @@ import userInfo from '@/store/'
 import CardOffensiveWords from '@/components/CardOffensiveWords.vue'
 export default {
   name: 'theMainAdminPanel',
-  //   data () {
-  //     return {
-  //       //isEditing: false,
-  //     }
-  //   },
+  data () {
+    return {
+      errorMsg: '',
+      newOffensiveW: {}
+    }
+  },
   props: {
     offensiveWords: Array
   },
   methods: {
     async handleDeleteThisWord (ev, id) {
       try {
-        // const id = 'aqui traer id'
-        console.log(id)
         const { token } = userInfo.state
         await deleteOffensiveWord(token, id)
       } catch (error) {
         this.errorMsg = error.message
       }
     },
-    async handleAddThisWord (word) {
+    async addThisWord () {
       try {
         const { token } = userInfo.state
-        await addOffensiveWord(token, word)
+        await addOffensiveWord(token, this.newOffensiveW)
       } catch (error) {
         this.errorMsg = error.message
       }
     },
-    async handleEditThisWord (ev, word) {
+    async handleEditThisWord (ev, body) {
       try {
-        const id = 'aqui traer id'
+        const { _id } = body
         const { token } = userInfo.state
-        await editOffensiveWord(token, id, word)
+        await editOffensiveWord(token, _id, body)
       } catch (error) {
         this.errorMsg = error.message
       }
@@ -68,9 +77,9 @@ export default {
 
 <style lang="scss">
 .main-settings {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 ul {
-    padding: 0;
+  padding: 0;
 }
 </style>

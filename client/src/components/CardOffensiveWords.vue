@@ -55,7 +55,3 @@ export default {
   }
 }
 </script>
-
-          @delete-this-word="handleDeleteThisWord"
-          @edit-this-word="handleEditThisWord"
-          @add-this-word="handleAddThisWord"
