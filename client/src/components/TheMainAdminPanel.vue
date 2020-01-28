@@ -3,57 +3,65 @@
     <h2>This list of words are not allowed</h2>
     <ul>
       <li v-for="badWord in offensiveWords" :key="badWord._id">
-        <div v-if="!isEditing">
-          <p>{{badWord.word}}</p>
-          <span>
-            <strong>{{badWord.level}}</strong>
-          </span>
-        </div>
-        <div v-if="isEditing">
-          <input type ="text" v-model="badWord.word"/>
-          <input type="text" v-model="badWord.level"/>
-          <button @click="handleSendEditedWord">update</button>
-        </div>
-        <div>
-          <button @click="handleEditThisWord">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button @click="handleDeleteThisWord">
-            <i class="fa fa-trash"></i>
-          </button>
-        </div>
+          <card-offensive-words
+          :badWord="badWord"
+          @delete-this-word="handleDeleteThisWord"
+          @edit-this-word="handleEditThisWord"
+          @add-this-word="handleAddThisWord"
+          />
       </li>
     </ul>
   </main>
 </template>
 
 <script>
+import addOffensiveWord from '@/service/addOffensiveWord.js'
+import deleteOffensiveWord from '@/service/deleteOffensiveWord.js'
+import editOffensiveWord from '@/service/editOffensiveWord.js'
+import userInfo from '@/store/'
+import CardOffensiveWords from '@/components/CardOffensiveWords.vue'
 export default {
   name: 'theMainAdminPanel',
-  data () {
-    return {
-      isEditing: false,
-      badWord: {}
-    //   editedWord: {
-    //     word: this.badWord.word,
-    //     level: this.badWord.level
-    //   }
-    }
-  },
+  //   data () {
+  //     return {
+  //       //isEditing: false,
+  //     }
+  //   },
   props: {
     offensiveWords: Array
   },
   methods: {
-    handleDeleteThisWord (ev) {
-      this.$emit('delete-this-word', this.word._id)
+    async handleDeleteThisWord (ev, id) {
+      try {
+        // const id = 'aqui traer id'
+        console.log(id)
+        const { token } = userInfo.state
+        await deleteOffensiveWord(token, id)
+      } catch (error) {
+        this.errorMsg = error.message
+      }
     },
-    handleEditThisWord () {
-      this.isEditing = !this.isEditing
+    async handleAddThisWord (word) {
+      try {
+        const { token } = userInfo.state
+        await addOffensiveWord(token, word)
+      } catch (error) {
+        this.errorMsg = error.message
+      }
     },
-    handleSendEditedWord (ev) {
-      this.$emit('send-edited-word', ev, this.editedWord)
-      this.isEditing = false
+    async handleEditThisWord (ev, word) {
+      try {
+        const id = 'aqui traer id'
+        const { token } = userInfo.state
+        await editOffensiveWord(token, id, word)
+      } catch (error) {
+        this.errorMsg = error.message
+      }
     }
+  },
+
+  components: {
+    CardOffensiveWords
   }
 }
 </script>
