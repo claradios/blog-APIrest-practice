@@ -1,32 +1,35 @@
 <template>
   <div class="login">
-    <h1>Login!</h1>
-    <!-- <form action="action_page.php" method="post"> -->
+    <h1>Log In!</h1>
+    <!-- <form> -->
 
     <div class="container">
       <div class="field-box">
         <label for="uname">
           <b>Username</b>
         </label>
-        <input type="text" placeholder="Enter Username" name="username" v-model="username" required />
+        <input type="text" placeholder="Jane Doe" name="username" v-model="username" required />
       </div>
 
       <div class="field-box">
         <label for="psw">
           <b>Password</b>
         </label>
-        <input type="password" placeholder="Enter Password" name="psw" v-model="password" required />
+        <input type="password" placeholder="12345678" name="psw" v-model="password" required />
       </div>
 
-      <button @click="login()">Login</button>
-      <div class="field-box">
+      <button @click="login()" class="btn">Login</button>
+      <!-- <div class="field-box">
         <label>
           <input type="checkbox" checked="checked" name="remember" /> Remember me
         </label>
-      </div>
+      </div>-->
+      <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
+      <p>You don't have an account?</p>
       <p>
-        You don't have an account?
-        <router-link :to="'/signup'" class="routes">Sign Up!</router-link>
+        <router-link :to="'/signup'">
+          <strong>Sign Up!</strong>
+        </router-link>
       </p>
     </div>
 
@@ -41,13 +44,22 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      errorMsg: ''
     }
   },
   methods: {
     async login () {
-      await userInfo.logUser(this.username, this.password)
-      this.$router.push('/')
+      if (!this.username || !this.password) {
+        this.errorMsg = 'all fields are mandatory'
+      } else {
+        try {
+          await userInfo.logUser(this.username, this.password)
+          this.$router.push('/')
+        } catch (error) {
+          this.errorMsg = 'Incorrect username or password.'
+        }
+      }
     }
   }
 }
@@ -65,14 +77,22 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100vh;
 }
 
 .container {
-  background-color: lightgrey;
+  background-color: rgb(235, 223, 223);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .field-box {
   display: flex;
   flex-direction: column;
+  margin: 10px 0;
+}
+input {
+  padding: 5px;
+  text-align: center;
 }
 </style>

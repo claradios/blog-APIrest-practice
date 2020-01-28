@@ -7,21 +7,21 @@
         <label for="uname">
           <b>Username</b>
         </label>
-        <input type="text" placeholder="Enter Username" name="uname" v-model="username" required />
+        <input type="text" placeholder="Jane Doe" name="uname" v-model="username" required />
       </div>
 
       <div class="field-box">
         <label for="nickname">
           <b>Nickname</b>
         </label>
-        <input type="text" placeholder="Enter Nickname" name="nickname" v-model="nickname" required />
+        <input type="text" placeholder="Jenny" name="nickname" v-model="nickname" required />
       </div>
 
       <div class="field-box">
         <label for="psw">
           <b>Password</b>
         </label>
-        <input type="password" placeholder="Enter Password" name="psw" v-model="password" required />
+        <input type="password" placeholder="12345678" name="psw" v-model="password" required />
       </div>
 
       <div class="field-box">
@@ -31,9 +31,10 @@
         <input type="text" placeholder="Enter url" name="picture" v-model="userImage" required />
       </div>
 
-      <button @click="sign()">Sign up</button>
+      <button @click="sign()" class="btn">Sign up</button>
     </div>
     <!-- </form> -->
+    <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
   </div>
 </template>
 
@@ -43,6 +44,7 @@ export default {
   name: 'TheMainSignup',
   data () {
     return {
+      errorMsg: '',
       username: '',
       nickname: '',
       password: '',
@@ -61,7 +63,11 @@ export default {
           this.userImage
         )
       } catch (error) {
-        console.log('ha habido un error en el registro')
+        console.log(error.message)
+
+        this.errorMsg = error.message
+
+        // this.errorMsg = err.status
       }
     }
   }
@@ -75,10 +81,13 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100vh
 }
 
 .container {
-  background-color: lightgrey;
+  background-color: rgb(235, 223, 223);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .field-box {
