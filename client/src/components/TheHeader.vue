@@ -4,6 +4,11 @@
       <i class="fab fa-vuejs"></i> Home
     </router-link>
     <div v-if="isLogged">
+      <div v-if="isAdmin">
+        <router-link :to="'/admin/settings/offensivewords'" class="routes">
+        <i class="fas fa-cog"></i> Log In
+      </router-link>
+      </div>
       <i class="fas fa-user"></i>
       {{username}}
       <button @click="logOut">
@@ -29,6 +34,9 @@ export default {
   },
 
   computed: {
+    isAdmin () {
+      return userInfo.state.userData.rol
+    },
     isLogged () {
       return userInfo.state.token
     },

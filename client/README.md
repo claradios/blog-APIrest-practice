@@ -37,3 +37,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - hacer que los likes se coordinen y lleguen al back
 - hacer test end to end
 
+- hacer el offensive words

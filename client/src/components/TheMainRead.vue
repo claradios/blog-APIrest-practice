@@ -85,7 +85,6 @@ export default {
   data () {
     return {
       badWords: [],
-      // isEditing: false,
       closedBox: true,
       successMsg: false,
       commentData: {

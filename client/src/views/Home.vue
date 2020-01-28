@@ -12,8 +12,6 @@ import TheMainFeed from '@/components/TheMainFeed.vue'
 import TheFooter from '@/components/TheFooter.vue'
 import loadPosts from '@/service/loadPosts.js'
 
-// @ is an alias to /src
-
 export default {
   name: 'home',
   data () {

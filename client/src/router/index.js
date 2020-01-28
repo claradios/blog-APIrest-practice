@@ -6,6 +6,7 @@ import Read from '../views/Read.vue'
 import NewPost from '../views/NewPost.vue'
 import Signup from '../views/Signup.vue'
 import Edit from '../views/Edit.vue'
+import OffensiveWords from '../views/OffensiveWords.vue'
 
 Vue.use(VueRouter)
 
@@ -42,10 +43,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+  },
+  {
+    path: '/admin/settings/offensivewords',
+    name: 'offensivewords',
+    component: OffensiveWords
   }
 ]
 
