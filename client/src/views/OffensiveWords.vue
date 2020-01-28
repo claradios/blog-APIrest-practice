@@ -13,7 +13,7 @@ import TheFooter from '@/components/TheFooter.vue'
 
 import addOffensiveWord from '@/service/addOffensiveWord.js'
 import deleteOffensiveWord from '@/service/deleteOffensiveWord.js'
-import loadOffensiveWord from '@/service/loadOffensiveWord.js'
+import loadOffensiveWord from '@/service/loadOffensiveWords.js'
 import editOffensiveWord from '@/service/editOffensiveWord.js'
 
 import userInfo from '@/store/'
