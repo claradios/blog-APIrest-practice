@@ -1,6 +1,6 @@
 <template>
   <main class="main-settings">
-    <h2>This list of words are not allowed</h2>
+    <h2>Hi admin! This is your offensive list</h2>
     <ul>
       <li v-for="badWord in offensiveWords" :key="badWord._id">
         <card-offensive-words
@@ -10,16 +10,16 @@
         />
       </li>
     </ul>
-    <div>
-      <div>
+    <div class="add-word-container">
+      <div class="field-box">
         <label for="new-word">Añadir palabra:</label>
         <input type="text" name="new-word" v-model="newOffensiveW.word" placeholder="cabronazo" />
       </div>
-      <div>
+      <div class="field-box">
         <label for="new-level">Nivel de Ofensividad (1-5):</label>
         <input type="text" name="new-level" v-model="newOffensiveW.level" placeholder="3" />
       </div>
-      <button @click="addThisWord">add +</button>
+      <button @click="addThisWord" class="btn">add +</button>
     </div>
   </main>
 </template>
@@ -87,8 +87,9 @@ export default {
 
 <style lang="scss">
 .main-settings {
-  margin-top: 50px;
+  margin: 70px 0;
 }
+
 ul {
   padding: 0;
 }
