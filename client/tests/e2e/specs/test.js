@@ -33,18 +33,19 @@ describe('Log in and add comments', () => {
   })
 
   it('adds a NEW POST', () => {
-    cy.contains('New Post').click({ force: true })
+    cy.contains('New Post').click()
     cy.get('input[name="input-title"]').type('Write Your Test With Cypress')
     cy.get('textarea')
       .type(
-        `This is a relatively straightforward test, but consider how much code has been covered by it, both on the client and the server!
-
-        For the remainder of this guide, we’ll explore the basics of Cypress that make this example work. We’ll demystify the rules Cypress follows so you can productively test your application to act as much like a user as possible, as well as discuss how to take shortcuts when it’s useful.`
+        `This is a relatively straightforward test, but consider how much code has been covered by it, both on the client and the server!`
       )
-    // cy.get('input[name="file"]')
     cy.get('.post-btn').click()
-    cy.contains('Home').click()
-    // cy.url().should('contains', '/#/')
-    cy.contains('Write Your Test With Cypress')
+  })
+  it('goes to SETTING and add Offensive Word', () => {
+    cy.contains('settings').click()
+    cy.get('input[name="new-word"]').type('aweonao')
+    cy.get('input[name="new-level"]').type('2')
+    cy.contains('add +').click()
+    cy.get('.fa-trash').last().click()
   })
 })
