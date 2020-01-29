@@ -8,14 +8,14 @@
         <label for="uname">
           <b>Username</b>
         </label>
-        <input type="text" placeholder="Jane Doe" name="username" v-model="username" required />
+        <input type="text" class="username" placeholder="Jane Doe" name="username" v-model="username" required />
       </div>
 
       <div class="field-box">
         <label for="psw">
           <b>Password</b>
         </label>
-        <input type="password" placeholder="12345678" name="psw" v-model="password" required />
+        <input type="password" class="password" placeholder="12345678" name="psw" v-model="password" required />
       </div>
 
       <button @click="login()" class="btn">Login</button>

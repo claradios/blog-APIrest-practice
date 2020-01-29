@@ -14,7 +14,7 @@
       :style="{ backgroundImage: 'url(' + post.urlToImage + ')' }"
       @dblclick="like"
     >
-      <h2 class="title">{{post.title}}</h2>
+      <h2><router-link class="title-post" :to="`/read/${post._id}`">{{post.title}}</router-link></h2>
     </div>
     <div class="icons-container">
     <div class="content">
@@ -39,11 +39,8 @@
           <i class="fas fa-edit"></i>
         </router-link>
       </div>
-
-    <div class="tools">
-    <router-link :to="`/read/${post._id}`" class="links">leer más ...</router-link>
     </div>
-    </div>
+    <router-link class="title-post" :to="`/read/${post._id}`">leer</router-link>
   </article>
 </template>
 
@@ -83,21 +80,7 @@ export default {
     color: lightsalmon;
   }
 }
-// .tools {
-//   cursor: pointer;
-//   border: 0 solid;
-//   padding: 0;
-//   color: #041e30;
-//   background-color: transparent;
-//   border: 0px solid;
-//   border-radius: 5px;
-//   padding: 5px;
-//   font-size: 18px;
-//   -webkit-appearance: none;
-//   &:hover {
-//     color: lightsalmon;
-//   }
-// }
+
 .icons-container {
   margin-top: 10px;
   display: flex;
@@ -160,7 +143,7 @@ export default {
     align-items: center;
   }
 
-  .title {
+  .title-post {
     font-size: 45px;
     color: white;
   }

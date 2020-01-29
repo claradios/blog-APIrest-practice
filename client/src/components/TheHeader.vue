@@ -3,6 +3,7 @@
     <router-link :to="'/'" class="routes">
       <i class="fab fa-vuejs"></i> Home
     </router-link>
+    <h1>my blog</h1>
     <router-link v-if="isAdmin === 'admin'" :to="'/admin/settings/offensivewords'" class="routes">
       <i class="fas fa-cog"></i> settings
     </router-link>
@@ -15,7 +16,7 @@
     </div>
     <div v-else>
       <router-link :to="'/login'" class="routes">
-        <i class="fas fa-user-plus"></i> Log In
+        <i class="fas fa-user-plus"></i><span> Log in</span>
       </router-link>
     </div>
   </header>
@@ -71,7 +72,10 @@ header {
   align-items: center;
   padding: 0 20px;
   z-index: 10;
-
+  h1 {
+    font-size: 16px;
+    //font-style: italic;
+  }
   button {
     cursor: pointer;
     color: #ffffff;

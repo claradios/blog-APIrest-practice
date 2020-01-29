@@ -39,7 +39,7 @@
           </button>
           <div :class="{'hidden-box':closedBox}">
             <div class="comment-box">
-              <textarea placeholder="Write your comment..." type="text" v-model="commentData.text"></textarea>
+              <textarea placeholder="Write your comment..." type="text" v-model="commentData.text" class="comment-area"></textarea>
             </div>
             <button @click="sendComment()" class="btn">Publish</button>
           </div>
