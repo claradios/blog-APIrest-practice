@@ -46,14 +46,12 @@ export default {
   },
   methods: {
     handleDeleteThisWord (ev) {
-      console.log(this.badWord._id)
       this.$emit('delete-this-word', ev, this.badWord._id)
     },
     handleEditBox () {
       this.isEditing = !this.isEditing
     },
     handleEditThisWord (ev) {
-      console.log('hola', this.editedWord)
       this.$emit('edit-this-word', ev, this.editedWord)
       this.isEditing = false
     }

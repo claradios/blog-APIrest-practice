@@ -28,8 +28,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - terminar palabras ofensivas
 - hacer que los likes se coordinen y lleguen al back
 - manejar el unouthorize de cuando se termina la sesión y ya no vale el token pidiendo que inicie sesión otra vez o darle al token mucho más tiempo de validez
-- gestión de añadido de posts, revisar
-- hacer fijo el header en el container create
+- hacer fijo el header en el container create yl header del offensivewords
 - mejorar un poco el estilo del textaera del container create
 - en el offensive words, recoger el id con el que se crea la palabra en el back , para poder pintarla bien en el front.
 - meter vuetify a las offensive words para practicar

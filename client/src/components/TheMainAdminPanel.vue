@@ -1,5 +1,7 @@
 <template>
   <main class="main-settings">
+    <div v-if="rol!=='admin'" class="no-access-screen"><p>Acceso denegado</p></div>
+    <div v-if="rol==='admin'"  class="settings-wrapper"  >
     <h2>Hi admin! This is your offensive list</h2>
     <ul>
       <li v-for="badWord in offensiveWords" :key="badWord._id">
@@ -20,6 +22,8 @@
         <input type="text" name="new-level" v-model="newOffensiveW.level" placeholder="3" />
       </div>
       <button @click="addThisWord" class="btn">add +</button>
+      <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
+    </div>
     </div>
   </main>
 </template>
@@ -41,6 +45,11 @@ export default {
   props: {
     offensiveWords: Array
   },
+  computed: {
+    rol () {
+      return userInfo.state.userData.rol
+    }
+  },
   methods: {
     async handleDeleteThisWord (ev, id) {
       try {
@@ -58,9 +67,9 @@ export default {
         const { token } = userInfo.state
         const result = await addOffensiveWord(token, this.newOffensiveW)
         this.offensiveWords.push(result)
-        console.log(result)
+        this.errorMsg = ''
       } catch (error) {
-        this.errorMsg = error.message
+        this.errorMsg = error.message + '. Recuerda, level entre 1 y 5'
       }
     },
     async handleEditThisWord (ev, body) {
@@ -87,10 +96,24 @@ export default {
 
 <style lang="scss">
 .main-settings {
-  margin: 70px 0;
+  margin-bottom: 70px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
-
+.settings-wrapper {
+  max-width: 500px;
+}
+.no-access-screen {
+  height:100vh;
+  width: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
 ul {
   padding: 0;
+  list-style:none;
 }
 </style>
