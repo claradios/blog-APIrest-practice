@@ -25,7 +25,7 @@ routerOffensiveWords.post('/',
         } else if (repository.offensiveWordsCol.isAlreadyIncluded(offensiveWord, allWords)) {
             res.status(400).send('Offensive Word is already included.')
         } else {
-            await repository.offensiveWordsCol.addOffensiveWord(offensiveWord);
+            await repository.offensiveWordsCol.addOffensiveWord(offensiveWord);            
             res.json(offensiveWord);
         }
     });

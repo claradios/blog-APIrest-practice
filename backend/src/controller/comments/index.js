@@ -36,6 +36,7 @@ routerComments.post('/',
                 res.json(comment);
             } else {
                 res.status(400).json(validation);
+                //res.status(400).send({ error: validation })
             }
         }
     });
