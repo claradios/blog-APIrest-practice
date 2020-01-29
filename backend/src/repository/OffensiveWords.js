@@ -5,13 +5,14 @@ module.exports = class OffensiveWords {
     this.collection = this.conn.db().collection('offensiveWords');
   }
 
-  addOffensiveWord(offensiveWord) {
+  async addOffensiveWord(offensiveWord) {
     const { word, level } = offensiveWord
     const newOffensiveWord = {
       word: word.toLowerCase(),
       level
     };
-    this.collection.insertOne(newOffensiveWord);
+   await this.collection.insertOne(newOffensiveWord);
+   return await this.collection.findOne({word:newOffensiveWord.word})   
   }
 
   getAllOffensiveWords() {
