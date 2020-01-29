@@ -28,6 +28,19 @@
           </button>
         </div>
         <span class="likes">{{singlepost.likes}} likes</span>
+        <button
+          v-if="roltype === 'admin' || name === singlepost.author"
+          class="tools"
+          @click="deletePost"
+          :id="singlepost._id"
+        >
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+        <div v-if="roltype === 'admin' || name === singlepost.author" class="tools">
+          <router-link :to="`/edit/${singlepost._id}`" class="links">
+            <i class="fas fa-edit"></i>
+          </router-link>
+        </div>
       </div>
       <section class="text">{{singlepost.content}}</section>
 
@@ -39,7 +52,12 @@
           </button>
           <div :class="{'hidden-box':closedBox}">
             <div class="comment-box">
-              <textarea placeholder="Write your comment..." type="text" v-model="commentData.text" class="comment-area"></textarea>
+              <textarea
+                placeholder="Write your comment..."
+                type="text"
+                v-model="commentData.text"
+                class="comment-area"
+              ></textarea>
             </div>
             <button @click="sendComment()" class="btn">Publish</button>
           </div>
@@ -54,7 +72,7 @@
         </div>
         <p v-else class="info">
           You must be
-          <router-link :to="'/login'">logged in</router-link> to post a comment
+          <router-link :to="'/login'">logged in</router-link>to post a comment
         </p>
 
         <div v-if="organizedComments">
@@ -77,6 +95,7 @@
 <script>
 import userInfo from '@/store/'
 import CardComment from './CardComment'
+import deletePostById from '@/service/deletePostById'
 import addComment from '@/service/addComment.js'
 import deleteComment from '@/service/deleteComment.js'
 import editComment from '@/service/editComment.js'
@@ -121,6 +140,16 @@ export default {
         ? this.singlepost.likes--
         : this.singlepost.likes++
       this.singlepost.hasBeenLiked = !this.singlepost.hasBeenLiked
+    },
+    async deletePost () {
+      try {
+        const { _id } = this.singlepost
+        const { token } = userInfo.state
+        await deletePostById(token, _id)
+        this.$router.push('/')
+      } catch (error) {
+        console.log(error)
+      }
     },
     openBoxComment () {
       this.closedBox = !this.closedBox

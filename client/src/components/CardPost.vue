@@ -39,8 +39,8 @@
           <i class="fas fa-edit"></i>
         </router-link>
       </div>
+
     </div>
-    <router-link class="title-post" :to="`/read/${post._id}`">leer</router-link>
   </article>
 </template>
 
