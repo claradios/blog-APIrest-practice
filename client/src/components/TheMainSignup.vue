@@ -32,6 +32,14 @@
       </div>
 
       <button @click="sign()" class="btn">Sign up</button>
+      <div  v-if="successMsg" class="success">
+      <p>Conseguido!</p>
+      <p>
+        <router-link :to="'/login'">
+          <strong>Haz log in!</strong>
+        </router-link>
+      </p>
+      </div>
     </div>
     <!-- </form> -->
     <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
@@ -44,6 +52,7 @@ export default {
   name: 'TheMainSignup',
   data () {
     return {
+      successMsg: false,
       errorMsg: '',
       username: '',
       nickname: '',
@@ -62,12 +71,11 @@ export default {
           this.password,
           this.userImage
         )
+        this.successMsg = true
       } catch (error) {
         console.log(error.message)
 
         this.errorMsg = error.message
-
-        // this.errorMsg = err.status
       }
     }
   }
@@ -81,7 +89,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh
+  height: 100vh;
 }
 
 .container {

@@ -42,8 +42,8 @@
           v-model="postData.content"
         ></textarea>
       </div>
-      <button v-if="!isEditing" @click="sendPost()" class="post-btn">Post!</button>
-      <button v-if="isEditing" @click="updatePost()">Update!</button>
+      <button v-if="!isEditing" @click="sendPost()" class="post-btn btn">Post!</button>
+      <button v-if="isEditing" @click="updatePost()" class="btn">Update!</button>
     </div>
   </main>
 </template>
@@ -132,9 +132,25 @@ export default {
 </script>
 
 <style lang="scss">
+main {
+  overflow: auto;
+  height: calc(100vh);
+  width: 100%;
+}
+.newpost::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}
+main::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+}
 .newpost {
   margin: 0;
   padding: 50px 0 90px 0;
+  overflow: auto;
+  height: calc(100vh);
+  width: 100%;
 }
 .upload {
   input {
@@ -154,16 +170,6 @@ label {
 
 button {
   color: #ffffff;
-}
-
-main {
-  overflow: auto;
-  height: calc(100vh);
-  width: 100vw;
-}
-.main::-webkit-scrollbar {
-  display: none;
-  width: 0 !important;
 }
 
 .content-container {
