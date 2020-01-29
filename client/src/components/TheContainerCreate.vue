@@ -42,7 +42,7 @@
           v-model="postData.content"
         ></textarea>
       </div>
-      <button v-if="!isEditing" @click="sendPost()">Post!</button>
+      <button v-if="!isEditing" @click="sendPost()" class="post-btn">Post!</button>
       <button v-if="isEditing" @click="updatePost()">Update!</button>
     </div>
   </main>

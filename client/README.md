@@ -25,13 +25,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### To start Cypress:
 `npx cypress open`
-- manejar los errores en el envío de formularios ... si se completó el registro)
-
+- avisar si se completó el registro de usuario si se completó el registro
 - manejar el unouthorize de cuando se termina la sesión y ya no vale el token pidiendo que inicie sesión otra vez
-
 - quitar margen y scroll raro del the container create
 - poner función enter en helpers
 - hacer que los likes se coordinen y lleguen al back
-- hacer test end to end
-
+- hacer que se pueda ir a editar y eliminar los posts desde el panel de lectura
 - en el offensive words, recoger el id con el que se crea la palabra en el back , para poder pintarla bien en el front.
