@@ -147,7 +147,7 @@ main::-webkit-scrollbar {
 }
 .newpost {
   margin: 0;
-  padding: 50px 0 90px 0;
+  //padding: 50px 0 90px 0;
   overflow: auto;
   height: calc(100vh);
   width: 100%;

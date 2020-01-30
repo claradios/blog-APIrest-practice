@@ -25,21 +25,6 @@
       </div>
       <p class="likes">{{post.likes}} likes</p>
     </div>
-
-      <button
-      v-if="roltype === 'admin' || name === post.author"
-      class="tools"
-      @click="handleDeleteThisPost" :id="post._id">
-        <i class="fa fa-trash" aria-hidden="true"></i>
-      </button>
-      <div
-      v-if="roltype === 'admin' || name === post.author"
-      class="tools">
-        <router-link :to="`/edit/${post._id}`" class="links">
-          <i class="fas fa-edit"></i>
-        </router-link>
-      </div>
-
     </div>
   </article>
 </template>
@@ -63,10 +48,8 @@ export default {
     like () {
       this.post.hasBeenLiked ? this.post.likes-- : this.post.likes++
       this.post.hasBeenLiked = !this.post.hasBeenLiked
-    },
-    handleDeleteThisPost (ev) {
-      this.$emit('delete-this-post', ev)
     }
+
   }
 }
 </script>

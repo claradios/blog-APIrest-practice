@@ -22,7 +22,7 @@
         <input type="text" name="new-level" v-model="newOffensiveW.level" placeholder="3" />
       </div>
       <button @click="addThisWord" class="btn">add +</button>
-      <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
+      <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
     </div>
     </div>
   </main>

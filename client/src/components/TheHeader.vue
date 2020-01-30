@@ -12,23 +12,23 @@
         </v-list-item>
 
         <div v-if="isLogged">
-          <v-list-item>
-            <v-list-item-action>
-            <v-btn icon ripple @click="logOut()">
-              <v-icon>mdi-logout</v-icon>
-            </v-btn>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Log out</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-
           <v-list-item link to="/new-post">
             <v-list-item-action>
               <v-icon>mdi-plus-box</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>new post</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-action>
+              <v-btn class="no-margin" icon ripple @click="logOut()">
+                <v-icon>mdi-logout</v-icon>
+              </v-btn>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Log out</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </div>
@@ -54,7 +54,6 @@
             </v-list-item-content>
           </v-list-item>
         </div>
-
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="dark-blue" dark>
@@ -96,6 +95,10 @@ export default {
 }
 </script>
 
-// <style scoped lang="scss">
-
+<style scoped lang="scss">
+.no-margin {
+  margin: 0;
+  width: 26px;
+  height: 26px;
+}
 </style>

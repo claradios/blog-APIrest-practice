@@ -42,7 +42,7 @@
       </div>
     </div>
     <!-- </form> -->
-    <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
+    <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
   </div>
 </template>
 

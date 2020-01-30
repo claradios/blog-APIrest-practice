@@ -24,7 +24,7 @@
           <input type="checkbox" checked="checked" name="remember" /> Remember me
         </label>
       </div>-->
-      <p v-if="errorMsg.length > 0" class="info">{{errorMsg}}</p>
+      <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
       <p>You don't have an account?</p>
       <p>
         <router-link :to="'/signup'">
