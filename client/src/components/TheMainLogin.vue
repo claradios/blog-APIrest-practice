@@ -1,40 +1,56 @@
 <template>
-  <div class="login">
-    <h1>Log In!</h1>
-    <!-- <form> -->
+  <v-content>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md4>
+          <v-card class="elevation-12">
+            <v-toolbar color="primary" dark flat>
+              <v-toolbar-title>Login form</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-tooltip bottom></v-tooltip>
+            </v-toolbar>
+            <v-card-text>
+              <v-form>
+                <v-text-field
+                  label="Username"
+                  placeholder="Jane Doe"
+                  name="username"
+                  v-model="username"
+                  prepend-icon="mdi-account"
+                  class="username"
+                  type="text"
+                ></v-text-field>
 
-    <div class="container">
-      <div class="field-box">
-        <label for="uname">
-          <b>Username</b>
-        </label>
-        <input type="text" class="username" placeholder="Jane Doe" name="username" v-model="username" required />
-      </div>
-
-      <div class="field-box">
-        <label for="psw">
-          <b>Password</b>
-        </label>
-        <input type="password" class="password" placeholder="12345678" name="psw" v-model="password" required />
-      </div>
-
-      <button @click="login()" class="btn">Login</button>
-      <!-- <div class="field-box">
-        <label>
-          <input type="checkbox" checked="checked" name="remember" /> Remember me
-        </label>
-      </div>-->
-      <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
-      <p>You don't have an account?</p>
-      <p>
-        <router-link :to="'/signup'">
-          <strong>Sign Up!</strong>
-        </router-link>
-      </p>
-    </div>
-
-    <!-- </form> -->
-  </div>
+                <v-text-field
+                  id="password"
+                  label="Password"
+                  name="password"
+                  prepend-icon="mdi-lock"
+                  type="password"
+                  v-model="password"
+                  class="password"
+                ></v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" @click="login()">Login</v-btn>
+            </v-card-actions>
+          </v-card >
+           <v-card class="text-center" color="transparent" elevation=0>
+            <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
+            <v-spacer></v-spacer>
+            <p>You don't have an account?</p>
+            <p>
+              <router-link :to="'/signup'">
+                <strong>Sign Up!</strong>
+              </router-link>
+            </p>
+            </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-content>
 </template>
 
 <script>
@@ -66,33 +82,5 @@ export default {
 </script>
 
 <style lang="scss">
-.routes {
-  color: #ffffff;
-  text-decoration: none;
-}
 
-.login {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.container {
-  background-color: rgb(235, 223, 223);
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.field-box {
-  display: flex;
-  flex-direction: column;
-  margin: 10px 0;
-}
-input {
-  padding: 5px;
-  text-align: center;
-}
 </style>
