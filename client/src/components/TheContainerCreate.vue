@@ -30,16 +30,15 @@
         <v-btn v-if="isEditing" @click="updatePost()">Update!</v-btn>
       </div>
       <v-spacer></v-spacer>
-      <v-card class="pl-12 ma-12">
+      <v-card class="pl-6 pr-6 ma-7">
       <v-text-field
         v-model="postData.title"
-        box
         label="Title"
         style="min-height: 96px"
         type="text"
         name="input-title"
       ></v-text-field>
-      <v-textarea name="input-7-1" box label="Content" auto-grow v-model="postData.content"></v-textarea>
+      <v-textarea name="input-7-1" label="Content" auto-grow v-model="postData.content"></v-textarea>
       </v-card>
     </v-container>
   </main>
@@ -160,7 +159,7 @@ button {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  height: 330px;
+  height: 200px;
   background-color: lightpink;
   display: flex;
   justify-content: center;
