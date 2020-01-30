@@ -14,7 +14,6 @@ describe('Log in and add comments', () => {
       // .should('have.value', 'tombola3')
 
     cy.contains('LOG IN').click({ force: true })
-    cy.wait(2000)
   })
 
   it('goes to first post and add a comment WITHOUT OFFENSIVE WORDS', () => {
@@ -46,12 +45,12 @@ describe('Log in and add comments', () => {
       )
     cy.contains('POST!').click()
   })
-  it('goes to SETTING and add Offensive Word', () => {
+  it('goes to SETTING , ADD Offensive Word and DELETE this Offensive Word', () => {
     cy.get('.nav').click()
     cy.contains('settings').click()
-    cy.get('input[name="new-word"]').type('aweonao')
+    cy.get('input[name="new-word"]').type('weonaculiá')
     cy.get('input[name="new-level"]').type('2')
     cy.contains('add +').click()
-    cy.get('.fa-trash').last().click()
+    cy.get('.mdi-delete').last().click()
   })
 })
