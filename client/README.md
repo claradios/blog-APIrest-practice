@@ -25,10 +25,11 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### To start Cypress:
 `npx cypress open`
-
+- recoger bien los mensajes del back
+// https://gist.github.com/fgilio/230ccd514e9381fafa51608fcf137253
 - hacer que los likes se coordinen y lleguen al back
 - manejar el unouthorize de cuando se termina la sesión y ya no vale el token pidiendo que inicie sesión otra vez o darle al token mucho más tiempo de validez
-- meter vuetify a las offensive words para practicar
+- meter vuetify 
 - hacer un readme
 
 # NICE TO HAVE
