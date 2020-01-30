@@ -14,6 +14,11 @@
 import userInfo from '@/store/'
 export default {
   name: 'TheFooter',
+  data () {
+    return {
+      userInfo
+    }
+  },
   computed: {
     isLogged () {
       return userInfo.state.token

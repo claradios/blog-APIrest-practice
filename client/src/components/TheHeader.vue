@@ -12,7 +12,7 @@
         </v-list-item>
 
         <div v-if="isLogged">
-          <v-list-item link to="login">
+          <v-list-item>
             <v-list-item-action>
             <v-btn icon ripple @click="logOut()">
               <v-icon>mdi-logout</v-icon>
@@ -22,10 +22,19 @@
               <v-list-item-title>Log out</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+
+          <v-list-item link to="/new-post">
+            <v-list-item-action>
+              <v-icon>mdi-plus-box</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>new post</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </div>
 
         <div v-else>
-          <v-list-item link to="login">
+          <v-list-item link to="/login">
             <v-list-item-action>
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
@@ -35,7 +44,8 @@
           </v-list-item>
         </div>
 
-          <v-list-item v-if="isAdmin === 'admin'" link to="admin/settings/offensivewords">
+        <div v-if="isAdmin === 'admin'">
+          <v-list-item link to="admin/settings/offensivewords">
             <v-list-item-action>
               <v-icon>mdi-settings</v-icon>
             </v-list-item-action>
@@ -43,6 +53,7 @@
               <v-list-item-title>settings</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+        </div>
 
       </v-list>
     </v-navigation-drawer>
@@ -60,7 +71,8 @@ export default {
   name: 'TheHeader',
   data () {
     return {
-      drawer: null
+      drawer: null,
+      userInfo
     }
   },
 
