@@ -22,8 +22,6 @@
               <span class="author">By {{singlepost.author}}</span>
             </div>
           </div>
-          <!-- <v-spacer></v-spacer>
-            <v-toolbar-title>{{singlepost.title}}</v-toolbar-title> -->
           <v-spacer></v-spacer>
           <v-btn
             icon
@@ -51,14 +49,13 @@
       </div>
 
       <article class="text">{{singlepost.content}}</article>
-
       <section class="comments">
-        <div v-if="roltype==='admin' || roltype==='publisher'">
-          <button @click="openBoxComment()" class="btn">
+        <div v-if="roltype==='admin' || roltype==='publisher'" class="text-center">
+          <v-btn v-if="closedBox" @click="openBoxComment()">
             add comment
             <i class="far fa-comment"></i>
-          </button>
-
+          </v-btn>
+          <v-btn v-if="!closedBox" @click="sendComment()" class="btn">Publish</v-btn>
           <div :class="{'hidden-box':closedBox}">
             <div class="comment-box">
               <textarea
@@ -68,9 +65,8 @@
                 class="comment-area"
               ></textarea>
             </div>
-            <button @click="sendComment()" class="btn">Publish</button>
           </div>
-
+          <v-spacer></v-spacer>
           <p v-if="successMsg" class="success">Tu comentario ha sido añadido!</p>
           <div class="info-message" v-if="badWords.length !== 0">
             <p>Tu comentario es ofensivo, revisa estas palabras:</p>
@@ -336,12 +332,14 @@ export default {
   display: none;
 }
 .success {
+  margin-top: 20px;
   background-color: rgb(93, 226, 153);
   color: #041e30;
   font-weight: 700;
   padding: 7px;
 }
 .error-box {
+  margin-top: 15px;
   height: 100vh;
   background-color: yellow;
   display: flex;

@@ -24,27 +24,22 @@
         ></card-filter>
       </div>
     </div>
-    <div>
-      <div class="title-container">
-        <label for="input-title"></label>
-        <input
-          type="text"
-          v-model="postData.title"
-          name="input-title"
-          placeholder="My Article's Title"
-        />
+    <v-container fluid grid-list-md>
+      <div class="text-center">
+        <v-btn v-if="!isEditing" @click="sendPost()" >Post!</v-btn>
+        <v-btn v-if="isEditing" @click="updatePost()">Update!</v-btn>
       </div>
-      <div class="content-container">
-        <textarea
-          class="caption-input"
-          placeholder="Write your article..."
-          type="text"
-          v-model="postData.content"
-        ></textarea>
-      </div>
-      <button v-if="!isEditing" @click="sendPost()" class="post-btn btn">Post!</button>
-      <button v-if="isEditing" @click="updatePost()" class="btn">Update!</button>
-    </div>
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="postData.title"
+        box
+        label="Title"
+        style="min-height: 96px"
+        type="text"
+        name="input-title"
+      ></v-text-field>
+      <v-textarea name="input-7-1" box label="Content" auto-grow v-model="postData.content"></v-textarea>
+    </v-container>
   </main>
 </template>
 
@@ -62,7 +57,8 @@ export default {
       isEditing: false,
       postData: {
         selectedFilter: '',
-        urlToImage: 'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
+        urlToImage:
+          'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
         title: '',
         content: ''
       }
@@ -137,21 +133,12 @@ main {
   height: calc(100vh);
   width: 100%;
 }
-.newpost::-webkit-scrollbar {
-  display: none;
-  width: 0 !important;
-}
+
 main::-webkit-scrollbar {
   display: none;
   width: 0 !important;
 }
-.newpost {
-  margin: 0;
-  //padding: 50px 0 90px 0;
-  overflow: auto;
-  height: calc(100vh);
-  width: 100%;
-}
+
 .upload {
   input {
     width: 0px;
@@ -172,25 +159,12 @@ button {
   color: #ffffff;
 }
 
-.content-container {
-  height: 210px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  textarea {
-    font-family: inherit;
-    color: inherit;
-    width: 600px;
-    height: 120px;
-    border: 3px solid #cccccc;
-    padding: 5px;
-  }
-
-  textarea:focus {
-    outline: 0;
-  }
-}
+// .content-container {
+//   height: 210px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
 .selected-image {
   background-repeat: no-repeat;
@@ -207,17 +181,5 @@ button {
   display: grid;
   grid-template-columns: auto auto auto auto;
   padding: 15px 10px;
-}
-
-.feed {
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 50px 0;
-}
-
-.feed::-webkit-scrollbar {
-  display: none;
-  width: 0 !important;
 }
 </style>

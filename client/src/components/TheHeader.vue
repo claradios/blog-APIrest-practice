@@ -45,7 +45,7 @@
         </div>
 
         <div v-if="isAdmin === 'admin'">
-          <v-list-item link to="admin/settings/offensivewords">
+          <v-list-item link to="/admin/settings/offensivewords">
             <v-list-item-action>
               <v-icon>mdi-settings</v-icon>
             </v-list-item-action>
