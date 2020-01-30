@@ -1,31 +1,48 @@
 <template>
-  <main class="main-settings">
-    <div v-if="rol!=='admin'" class="no-access-screen"><p>Acceso denegado</p></div>
-    <div v-if="rol==='admin'"  class="settings-wrapper"  >
-    <h2>Hi admin! This is your offensive list</h2>
-    <ul>
-      <li v-for="badWord in offensiveWords" :key="badWord._id">
-        <card-offensive-words
-          :badWord="badWord"
-          @delete-this-word="handleDeleteThisWord"
-          @edit-this-word="handleEditThisWord"
-        />
-      </li>
-    </ul>
-    <div class="add-word-container">
-      <div class="field-box">
-        <label for="new-word">Añadir palabra:</label>
-        <input type="text" name="new-word" v-model="newOffensiveW.word" placeholder="cabronazo" />
-      </div>
-      <div class="field-box">
-        <label for="new-level">Nivel de Ofensividad (1-5):</label>
-        <input type="text" name="new-level" v-model="newOffensiveW.level" placeholder="3" />
-      </div>
-      <button @click="addThisWord" class="btn">add +</button>
-      <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
+  <section>
+    <div v-if="rol!=='admin'" class="no-access-screen">
+      <p>Access Denied</p>
     </div>
+    <div v-if="rol==='admin'">
+      <v-card class="mx-auto mt-8" max-width="900">
+        <v-container fluid>
+          <v-row dense>
+            <v-col v-for="badWord in offensiveWords" :key="badWord._id" :cols="3">
+              <card-offensive-words
+                :badWord="badWord"
+                @delete-this-word="handleDeleteThisWord"
+                @edit-this-word="handleEditThisWord"
+              />
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+
+      <v-card class="mx-auto mt-8" max-width="900">
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              label="Offensive word"
+              placeholder="motherfucker"
+              name="new-word"
+              v-model="newOffensiveW.word"
+              type="text"
+            ></v-text-field>
+
+            <v-text-field
+              placeholder="3"
+              label="Level"
+              name="new-level"
+              type="text"
+              v-model="newOffensiveW.level"
+            ></v-text-field>
+          </v-form>
+          <v-btn @click="addThisWord" class="text-center" color="blue">add +</v-btn>
+          <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
+        </v-card-text>
+      </v-card>
     </div>
-  </main>
+  </section>
 </template>
 
 <script>
@@ -95,25 +112,12 @@ export default {
 </script>
 
 <style lang="scss">
-.main-settings {
-  margin-bottom: 70px;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-}
-.settings-wrapper {
-  max-width: 500px;
-}
 .no-access-screen {
-  height:100vh;
+  height: 100vh;
   width: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
-}
-ul {
-  padding: 0;
-  list-style:none;
 }
 </style>
