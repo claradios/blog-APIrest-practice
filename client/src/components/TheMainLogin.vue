@@ -40,7 +40,7 @@
            <v-card class="text-center" color="transparent" elevation=0>
             <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
             <v-spacer></v-spacer>
-            <p>You don't have an account?</p>
+            <p class="space">You don't have an account?</p>
             <p>
               <router-link :to="'/signup'">
                 <strong>Sign Up!</strong>
@@ -82,5 +82,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+.space {
+  margin-top: 20px;
+}
 </style>
