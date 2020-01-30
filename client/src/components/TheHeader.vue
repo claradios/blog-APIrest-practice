@@ -20,17 +20,6 @@
               <v-list-item-title>new post</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-
-          <v-list-item>
-            <v-list-item-action>
-              <v-btn class="no-margin" icon ripple @click="logOut()">
-                <v-icon>mdi-logout</v-icon>
-              </v-btn>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Log out</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
         </div>
 
         <div v-else>
@@ -54,10 +43,20 @@
             </v-list-item-content>
           </v-list-item>
         </div>
+
+        <v-spacer></v-spacer>
+        <v-list-item v-if="isLogged" @click="logOut()" >
+          <v-list-item-action >
+              <v-icon>mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Log out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="dark-blue" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="nav"/>
       <v-toolbar-title v-if="isLogged">{{username}}'s Blog</v-toolbar-title>
       <v-toolbar-title v-else>My Blog</v-toolbar-title>
     </v-app-bar>
@@ -89,7 +88,7 @@ export default {
   methods: {
     logOut () {
       localStorage.clear()
-      this.$router.go()
+      this.$router.go('/')
     }
   }
 }

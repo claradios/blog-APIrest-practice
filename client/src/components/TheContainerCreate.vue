@@ -26,10 +26,11 @@
     </div>
     <v-container fluid grid-list-md>
       <div class="text-center">
-        <v-btn v-if="!isEditing" @click="sendPost()" >Post!</v-btn>
+        <v-btn v-if="!isEditing" @click="sendPost()" >POST!</v-btn>
         <v-btn v-if="isEditing" @click="updatePost()">Update!</v-btn>
       </div>
       <v-spacer></v-spacer>
+      <v-card class="pl-12 ma-12">
       <v-text-field
         v-model="postData.title"
         box
@@ -39,6 +40,7 @@
         name="input-title"
       ></v-text-field>
       <v-textarea name="input-7-1" box label="Content" auto-grow v-model="postData.content"></v-textarea>
+      </v-card>
     </v-container>
   </main>
 </template>
@@ -128,11 +130,6 @@ export default {
 </script>
 
 <style lang="scss">
-main {
-  overflow: auto;
-  height: calc(100vh);
-  width: 100%;
-}
 
 main::-webkit-scrollbar {
   display: none;
@@ -158,13 +155,6 @@ label {
 button {
   color: #ffffff;
 }
-
-// .content-container {
-//   height: 210px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
 
 .selected-image {
   background-repeat: no-repeat;

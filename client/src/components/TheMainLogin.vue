@@ -34,7 +34,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" @click="login()">Login</v-btn>
+              <v-btn color="primary" @click="login()">LOG IN</v-btn>
             </v-card-actions>
           </v-card >
            <v-card class="text-center" color="transparent" elevation=0>

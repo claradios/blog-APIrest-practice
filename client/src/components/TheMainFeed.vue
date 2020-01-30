@@ -44,21 +44,10 @@ export default {
 </script>
 
 <style lang="scss">
-main {
-  overflow: auto;
-  height: calc(100vh);
-  width: 100vw;
-}
+
 .main::-webkit-scrollbar {
   display: none;
   width: 0 !important;
-}
-
-.feed {
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 50px 0 90px 0;
 }
 
 .feed::-webkit-scrollbar {
