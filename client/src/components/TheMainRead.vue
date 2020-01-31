@@ -328,12 +328,13 @@ export default {
   color: #f06595;
   font-weight: 700;
   padding: 7px;
+  margin-top: 15px;
 }
 .hidden-box {
   display: none;
 }
 .success {
-  margin-top: 20px;
+  margin-top: 15px;
   background-color: rgb(93, 226, 153);
   color: #041e30;
   font-weight: 700;

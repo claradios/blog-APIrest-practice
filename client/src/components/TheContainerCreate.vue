@@ -28,6 +28,7 @@
       <div class="text-center">
         <v-btn v-if="!isEditing" @click="sendPost()" >POST!</v-btn>
         <v-btn v-if="isEditing" @click="updatePost()">Update!</v-btn>
+        <p v-if="errorMsg.length > 0" class="info-message">{{errorMsg}}</p>
       </div>
       <v-spacer></v-spacer>
       <v-card class="pl-6 pr-6 ma-7">
@@ -55,6 +56,7 @@ export default {
   name: 'TheContainerCreate',
   data () {
     return {
+      errorMsg: '',
       isEditing: false,
       postData: {
         selectedFilter: '',
@@ -86,13 +88,19 @@ export default {
   methods: {
     async sendPost () {
       try {
-        const token = localStorage.getItem('token')
+        const { token } = userInfo.state
         if (token) {
-          await addPost(token, this.postData)
-          this.$router.push('/')
+          if (this.postData.title === '' || this.postData.content === '') {
+            this.errorMsg = 'Please complete Text and Content before sending'
+          } else {
+            await addPost(token, this.postData)
+            this.$router.push('/')
+            this.errorMsg = ''
+          }
         }
       } catch (error) {
         console.log(error.message)
+        this.errorMsg = error.message
       }
     },
 
@@ -103,8 +111,10 @@ export default {
         const body = this.postData
         await editPostById(token, id, body)
         this.$router.push(`/read/${id}`)
+        this.errorMsg = ''
       } catch (error) {
         console.log(error.message)
+        this.errorMsg = error.message
       }
     },
     handleFilterSelected (ev) {
