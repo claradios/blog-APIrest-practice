@@ -8,7 +8,7 @@ import TheMainFeed from '@/components/TheMainFeed.vue'
 import loadPosts from '@/service/loadPosts.js'
 
 export default {
-  name: 'home',
+  name: 'MountHome',
   data () {
     return {
       posts: [],

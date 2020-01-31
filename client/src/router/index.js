@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../components/Home.vue'
-import Read from '../components/Read.vue'
-import NewPost from '../components/NewPost.vue'
-import Edit from '../components/Edit.vue'
-import OffensiveWords from '../components/OffensiveWords.vue'
+import Home from '../components/MountHome.vue'
+import Read from '../components/MountRead.vue'
+import NewPost from '../components/MountNewPost.vue'
+import Edit from '../components/MountEdit.vue'
+import OffensiveWords from '../components/MountOffensiveWords.vue'
 import TheMainLogin from '../components/TheMainLogin.vue'
 import TheMainSignup from '@/components/TheMainSignup.vue'
 

@@ -8,7 +8,7 @@ import filters from '@/data/filters'
 import readPostById from '@/service/readPostById.js'
 
 export default {
-  name: 'read',
+  name: 'MountRead',
   data () {
     return {
       singlepost: {},

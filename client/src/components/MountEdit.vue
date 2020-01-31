@@ -9,7 +9,7 @@ import TheContainerCreate from '@/components/TheContainerCreate.vue'
 import filters from '@/data/filters.js'
 
 export default {
-  name: 'edit',
+  name: 'MountEdit',
   data () {
     return {
       filters

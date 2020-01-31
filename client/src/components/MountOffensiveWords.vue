@@ -8,7 +8,7 @@ import loadOffensiveWords from '@/service/loadOffensiveWords.js'
 import userInfo from '@/store/'
 
 export default {
-  name: 'offensivewords',
+  name: 'MountOffensivewords',
   data () {
     return {
       offensiveWords: [],
