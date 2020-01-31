@@ -5,8 +5,8 @@
       :id="filter.name"
       :style="{ backgroundImage: 'url(' + image + ')' }"
       @click="selectFilter">
-        <p>{{filter.name}}</p>
     </div>
+    <p>{{filter.name}}</p>
   </div>
 </template>
 

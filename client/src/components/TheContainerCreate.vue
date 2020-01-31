@@ -81,8 +81,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    } else {
-      console.log('no estamos editando')
     }
   },
   methods: {
@@ -94,7 +92,7 @@ export default {
           this.$router.push('/')
         }
       } catch (error) {
-        console.log(error)
+        console.log(error.message)
       }
     },
 
@@ -106,7 +104,7 @@ export default {
         await editPostById(token, id, body)
         this.$router.push(`/read/${id}`)
       } catch (error) {
-        console.log('ha habido un error actualizando este post')
+        console.log(error.message)
       }
     },
     handleFilterSelected (ev) {
@@ -170,5 +168,7 @@ button {
   display: grid;
   grid-template-columns: auto auto auto auto;
   padding: 15px 10px;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 </style>

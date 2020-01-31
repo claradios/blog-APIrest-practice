@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../components/MountHome.vue'
-import Read from '../components/MountRead.vue'
-import NewPost from '../components/MountNewPost.vue'
-import Edit from '../components/MountEdit.vue'
-import OffensiveWords from '../components/MountOffensiveWords.vue'
+import MountHome from '../components/MountHome.vue'
+import MountRead from '../components/MountRead.vue'
+import MountNewPost from '../components/MountNewPost.vue'
+import MountEdit from '../components/MountEdit.vue'
+import MountOffensiveWords from '../components/MountOffensiveWords.vue'
 import TheMainLogin from '../components/TheMainLogin.vue'
 import TheMainSignup from '@/components/TheMainSignup.vue'
 
@@ -15,25 +15,25 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: MountHome
   },
   {
     path: '/read/:id',
     name: 'read',
     props: true,
-    component: Read
+    component: MountRead
   },
   {
     path: '/edit/:id',
     name: 'edit',
     props: true,
-    component: Edit
+    component: MountEdit
   },
   {
     path: '/new-post',
     name: 'newPost',
     props: true,
-    component: NewPost
+    component: MountNewPost
   },
   {
     path: '/signup',
@@ -48,7 +48,7 @@ const routes = [
   {
     path: '/admin/settings/offensivewords',
     name: 'offensivewords',
-    component: OffensiveWords
+    component: MountOffensiveWords
   }
 ]
 
