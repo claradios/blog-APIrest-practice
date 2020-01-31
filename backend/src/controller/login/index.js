@@ -20,7 +20,7 @@ routerLogin.post('/',
             nickname,
             userImage
         }
-        const opts = { expiresIn: 6000 }; 
+        const opts = { expiresIn: 3600 }; 
         const token = jwt.sign({ username }, SECRET_KEY, opts);
 
         return res.status(200).json({ message: "Auth Passed", token, userData });
