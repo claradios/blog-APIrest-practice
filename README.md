@@ -10,7 +10,6 @@ It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
 ## Project setup
 
 - You need to `npm install` in both *backend* and *client* folders.
-
  ## Main structure
  ```js
 Blog-APIrest-practice 
@@ -125,40 +124,6 @@ La aplicación está en, al menos, 4 módulos Node:
 - *controller.js*: Tendrá definidos los métodos de la API REST. Se usará un router que será configurado en Express.
 - *repository.js*: Módulo que contendrá el código de acceso a la base de datos.
 - *validator.js*: Validador que verifica que el comentario no contiene ninguna palabra ofensiva.
-
-## API REST:
-La API REST deberá cumplir con el nivel de madurez 2 y el formato de las URLs deberá identificar recursos, no acciones.
-Se deberá entregar un fichero postman.json con al menos un ejemplo de cada una de los endpoints de la API REST.
-
-## Persistencia:
-La persistencia se implementará con MongoDB de forma obligatoria. Se podrán usar el driver oficial Mongo o el ODM Mongoose.
-Opcionalmente se podrá entregar la práctica con la persistencia de palabras ofensivas en una base de datos MySQL (con o si ORM).
-# USUARIOS AUTENTICADOS:
-
-### Administrador: 
-- Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
-
-### Publisher: 
-- Crear entradas del blog.   
-
-- Borrar y modificar únicamente las entradas que hayan creado ellos. 
-  
-- Borrar comentarios de sus entradas. 
-   
-- Añadir comentarios a otras entradas.  
-
-- acceder y modificar colección de offensive words.
-
-# USUARIOS NO AUTENTICADOS:
-
-### No autenticado: 
-- Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
-
-
-Cualquier usuario podrá registrarse en la aplicación y se le asignará el rol de “publisher”.  Para ello, se creará un endpoint de creación de usuarios. Para simplificar la implementación, un usuario no se puede borrar ni modificar.
-
-Se deberá implementar un script Node.js llamado load_admins.js que se conectará a MongoDB y creará los usuarios admin cuando se ejecute. Los usuarios estarán en un fichero de texto.
-
 
 
 # CLIENT
