@@ -9,7 +9,7 @@
         <div class="upload">
           <input type="file" name="file" id="file" class="inputfile" @change="handleUploadImage" />
           <label for="file">
-            upload your cover!
+            upload your cover (small size plz!) <br>or just use this marvellous beach!
             <i class="fas fa-camera-retro links"></i>
           </label>
         </div>
