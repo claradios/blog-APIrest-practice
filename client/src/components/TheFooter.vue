@@ -1,18 +1,24 @@
 <template>
-  <footer>
+  <v-footer
+  app color="dark-blue" dark>
     <div v-if="isLogged" class="footer-post">
       <router-link :to="'/new-post'" class="routes">
         <i class="fas fa-plus-square"></i> New Post
       </router-link>
     </div>
     <div v-else><span>©ClaraDios</span></div>
-  </footer>
+  </v-footer>
 </template>
 
 <script>
 import userInfo from '@/store/'
 export default {
   name: 'TheFooter',
+  data () {
+    return {
+      userInfo
+    }
+  },
   computed: {
     isLogged () {
       return userInfo.state.token

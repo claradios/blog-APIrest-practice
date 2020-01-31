@@ -4,14 +4,6 @@
       <p>{{errorMsg}}</p>
     </div>
     <article v-else class="card-singlepost">
-      <div class="header level">
-        <div class="level-left">
-          <figure class="image is-32x32">
-            <img :src="singlepost.userImage" :alt="singlepost.author" />
-          </figure>
-          <span class="author">{{singlepost.author}}</span>
-        </div>
-      </div>
       <div
         class="image-container"
         :class="singlepost.filter"
@@ -21,35 +13,49 @@
         <h2 class="title">{{singlepost.title}}</h2>
       </div>
       <div class="content">
-        <h4>by {{this.singlepost.author}}</h4>
-        <div class="heart">
-          <button @click="like" aria-label="You like">
-            <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
-          </button>
-        </div>
-        <span class="likes">{{singlepost.likes}} likes</span>
-        <button
-          v-if="roltype === 'admin' || name === singlepost.author"
-          class="tools"
-          @click="deletePost"
-          :id="singlepost._id"
-        >
-          <i class="fa fa-trash" aria-hidden="true"></i>
-        </button>
-        <div v-if="roltype === 'admin' || name === singlepost.author" class="tools">
-          <router-link :to="`/edit/${singlepost._id}`" class="links">
-            <i class="fas fa-edit"></i>
-          </router-link>
-        </div>
-      </div>
-      <section class="text">{{singlepost.content}}</section>
+        <v-toolbar>
+          <div class="header level">
+            <div class="level-left">
+              <figure class="image is-32x32">
+                <img :src="singlepost.userImage" :alt="singlepost.author" />
+              </figure>
+              <span class="author">By {{singlepost.author}}</span>
+            </div>
+          </div>
+          <v-spacer></v-spacer>
+          <v-btn
+            icon
+            v-if="roltype === 'admin' || name === singlepost.author"
+            class="tools"
+            @click="deletePost"
+            :id="singlepost._id"
+          >
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
 
+          <v-btn icon @click="like" class="heart">
+            <i class="far fa-heart fa-lg" :class="{'fas': this.singlepost.hasBeenLiked}"></i>
+            <span class="likes">{{singlepost.likes}}</span>
+          </v-btn>
+
+          <v-btn
+            v-if="roltype === 'admin' || name === singlepost.author"
+            icon
+            :to="`/edit/${singlepost._id}`"
+          >
+            <v-icon>mdi-pencil</v-icon>
+          </v-btn>
+        </v-toolbar>
+      </div>
+
+      <article class="text">{{singlepost.content}}</article>
       <section class="comments">
-        <div v-if="roltype==='admin' || roltype==='publisher'">
-          <button @click="openBoxComment()" class="btn">
+        <div v-if="roltype==='admin' || roltype==='publisher'" class="text-center">
+          <v-btn v-if="closedBox" @click="openBoxComment()">
             add comment
             <i class="far fa-comment"></i>
-          </button>
+          </v-btn>
+          <v-btn v-if="!closedBox" @click="sendComment()" class="btn">Publish</v-btn>
           <div :class="{'hidden-box':closedBox}">
             <div class="comment-box">
               <textarea
@@ -59,18 +65,17 @@
                 class="comment-area"
               ></textarea>
             </div>
-            <button @click="sendComment()" class="btn">Publish</button>
           </div>
+          <v-spacer></v-spacer>
           <p v-if="successMsg" class="success">Tu comentario ha sido añadido!</p>
-          <div class="info" v-if="badWords.length !== 0">
+          <div class="info-message" v-if="badWords.length !== 0">
             <p>Tu comentario es ofensivo, revisa estas palabras:</p>
             <ul>
               <li v-for="badWord in badWords" :key="badWord._id">{{badWord.word}}</li>
             </ul>
           </div>
-          <!-- <div v-else-if="errorHandleMsg"> errorHandleMsg</div> -->
         </div>
-        <p v-else class="info">
+        <p v-else class="info-message">
           You must be
           <router-link :to="'/login'">logged in</router-link>to post a comment
         </p>
@@ -103,6 +108,7 @@ export default {
   name: 'TheMainRead',
   data () {
     return {
+      userInfo,
       badWords: [],
       closedBox: true,
       successMsg: false,
@@ -113,7 +119,8 @@ export default {
   },
   props: {
     singlepost: Object,
-    errorMsg: String
+    errorMsg: String,
+    filters: Array
   },
   components: {
     CardComment
@@ -134,6 +141,7 @@ export default {
       return userInfo.state.userData.username
     }
   },
+
   methods: {
     like () {
       this.singlepost.hasBeenLiked
@@ -174,7 +182,6 @@ export default {
         } else {
           this.singlepost.comments.push(result)
         }
-        // cambiar de color el botón al deshabilitarlo
       } catch (error) {
         if (error.response) {
           this.badWords = error.response.data
@@ -224,7 +231,7 @@ export default {
 }
 
 .card-singlepost {
-  padding: 5px 0;
+  padding: 0;
 
   .header {
     height: 30px;
@@ -272,8 +279,8 @@ export default {
   }
 
   .title {
-    font-size: 45px;
-    color: white;
+    font-size: 50px;
+    color:#041e30
   }
 
   .content {
@@ -316,7 +323,7 @@ export default {
 .card-singlepost:last-child {
   margin-bottom: 50px;
 }
-.info {
+.info-message {
   background-color: lightpink;
   color: #f06595;
   font-weight: 700;
@@ -326,12 +333,14 @@ export default {
   display: none;
 }
 .success {
+  margin-top: 20px;
   background-color: rgb(93, 226, 153);
   color: #041e30;
   font-weight: 700;
   padding: 7px;
 }
 .error-box {
+  margin-top: 15px;
   height: 100vh;
   background-color: yellow;
   display: flex;

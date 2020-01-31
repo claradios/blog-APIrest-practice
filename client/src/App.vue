@@ -1,34 +1,21 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <v-app id="inspire">
+    <the-header/>
+    <v-content><router-view/></v-content>
+    <the-footer/>
+  </v-app>
 </template>
-<script>
 
-// import userInfo from '@/store/'
+<script>
+import TheHeader from '@/components/TheHeader.vue'
+import TheFooter from '@/components/TheFooter.vue'
+
 export default {
-  name: 'app'
-  // beforeMount () {
-  //   console.log('montando')
-  //   userInfo.getFromLocalStorage()
-  // }
-  // ,
-  // beforeDestroy () {
-  //   localStorage.clear()
-  // }
+  name: 'App',
+
+  components: {
+    TheHeader,
+    TheFooter
+  }
 }
 </script>
-<style>
-html,
-body,
-#app {
-  margin: 0;
-  /* margin-top: 60px; */
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  font-size: 14px;
-}
-</style>

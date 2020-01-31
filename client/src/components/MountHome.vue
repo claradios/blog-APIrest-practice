@@ -1,19 +1,14 @@
 <template>
-  <div>
-    <the-header />
     <the-main-feed :posts="posts" :errorMsg="errorMsg"/>
-    <the-footer />
-  </div>
 </template>
 
 <script>
-import TheHeader from '@/components/TheHeader.vue'
+
 import TheMainFeed from '@/components/TheMainFeed.vue'
-import TheFooter from '@/components/TheFooter.vue'
 import loadPosts from '@/service/loadPosts.js'
 
 export default {
-  name: 'home',
+  name: 'MountHome',
   data () {
     return {
       posts: [],
@@ -31,9 +26,7 @@ export default {
   },
 
   components: {
-    TheHeader,
-    TheMainFeed,
-    TheFooter
+    TheMainFeed
   }
 }
 </script>

@@ -1,21 +1,14 @@
 <template>
-  <div>
-    <the-header />
     <the-main-admin-panel :offensiveWords="offensiveWords" />
-    <the-footer />
-  </div>
 </template>
 
 <script>
-import TheHeader from '@/components/TheHeader.vue'
 import TheMainAdminPanel from '@/components/TheMainAdminPanel.vue'
-import TheFooter from '@/components/TheFooter.vue'
 import loadOffensiveWords from '@/service/loadOffensiveWords.js'
-
 import userInfo from '@/store/'
 
 export default {
-  name: 'offensivewords',
+  name: 'MountOffensivewords',
   data () {
     return {
       offensiveWords: [],
@@ -33,9 +26,7 @@ export default {
     }
   },
   components: {
-    TheHeader,
-    TheMainAdminPanel,
-    TheFooter
+    TheMainAdminPanel
   }
 }
 </script>

@@ -24,27 +24,23 @@
         ></card-filter>
       </div>
     </div>
-    <div>
-      <div class="title-container">
-        <label for="input-title"></label>
-        <input
-          type="text"
-          v-model="postData.title"
-          name="input-title"
-          placeholder="My Article's Title"
-        />
+    <v-container fluid grid-list-md>
+      <div class="text-center">
+        <v-btn v-if="!isEditing" @click="sendPost()" >POST!</v-btn>
+        <v-btn v-if="isEditing" @click="updatePost()">Update!</v-btn>
       </div>
-      <div class="content-container">
-        <textarea
-          class="caption-input"
-          placeholder="Write your article..."
-          type="text"
-          v-model="postData.content"
-        ></textarea>
-      </div>
-      <button v-if="!isEditing" @click="sendPost()" class="post-btn btn">Post!</button>
-      <button v-if="isEditing" @click="updatePost()" class="btn">Update!</button>
-    </div>
+      <v-spacer></v-spacer>
+      <v-card class="pl-6 pr-6 ma-7">
+      <v-text-field
+        v-model="postData.title"
+        placeholder="Title"
+        style="min-height: 96px"
+        type="text"
+        name="input-title"
+      ></v-text-field>
+      <v-textarea name="input-7-1" placeholder="Content" auto-grow v-model="postData.content"></v-textarea>
+      </v-card>
+    </v-container>
   </main>
 </template>
 
@@ -62,7 +58,8 @@ export default {
       isEditing: false,
       postData: {
         selectedFilter: '',
-        urlToImage: 'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
+        urlToImage:
+          'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
         title: '',
         content: ''
       }
@@ -84,8 +81,6 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    } else {
-      console.log('no estamos editando')
     }
   },
   methods: {
@@ -97,7 +92,7 @@ export default {
           this.$router.push('/')
         }
       } catch (error) {
-        console.log(error)
+        console.log(error.message)
       }
     },
 
@@ -109,7 +104,7 @@ export default {
         await editPostById(token, id, body)
         this.$router.push(`/read/${id}`)
       } catch (error) {
-        console.log('ha habido un error actualizando este post')
+        console.log(error.message)
       }
     },
     handleFilterSelected (ev) {
@@ -132,26 +127,12 @@ export default {
 </script>
 
 <style lang="scss">
-main {
-  overflow: auto;
-  height: calc(100vh);
-  width: 100%;
-}
-.newpost::-webkit-scrollbar {
-  display: none;
-  width: 0 !important;
-}
+
 main::-webkit-scrollbar {
   display: none;
   width: 0 !important;
 }
-.newpost {
-  margin: 0;
-  padding: 50px 0 90px 0;
-  overflow: auto;
-  height: calc(100vh);
-  width: 100%;
-}
+
 .upload {
   input {
     width: 0px;
@@ -172,31 +153,11 @@ button {
   color: #ffffff;
 }
 
-.content-container {
-  height: 210px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  textarea {
-    font-family: inherit;
-    color: inherit;
-    width: 600px;
-    height: 120px;
-    border: 3px solid #cccccc;
-    padding: 5px;
-  }
-
-  textarea:focus {
-    outline: 0;
-  }
-}
-
 .selected-image {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  height: 330px;
+  height: 200px;
   background-color: lightpink;
   display: flex;
   justify-content: center;
@@ -207,17 +168,7 @@ button {
   display: grid;
   grid-template-columns: auto auto auto auto;
   padding: 15px 10px;
-}
-
-.feed {
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 50px 0;
-}
-
-.feed::-webkit-scrollbar {
-  display: none;
-  width: 0 !important;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 </style>
