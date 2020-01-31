@@ -10,7 +10,7 @@
         :style="{ backgroundImage: 'url(' + singlepost.urlToImage + ')' }"
         @dblclick="like"
       >
-        <h2 class="title">{{singlepost.title}}</h2>
+        <h2 class="title-singlepost">{{singlepost.title}}</h2>
       </div>
       <div class="content">
         <v-toolbar>
@@ -278,9 +278,10 @@ export default {
     align-items: center;
   }
 
-  .title {
-    font-size: 50px;
-    color:#041e30
+  .title-singlepost {
+    font-size: 25px;
+    color:#ffffff;
+    text-shadow: 1px 0 0 #041e30, -1px 0 0 #041e30, 0 1px 0 #041e30, 0 -1px 0 #041e30, 1px 1px #041e30, -1px -1px 0 #041e30, 1px -1px 0 #041e30, -1px 1px 0 #041e30;
   }
 
   .content {
