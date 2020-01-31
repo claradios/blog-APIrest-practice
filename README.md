@@ -67,7 +67,7 @@ It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
  - When the app launch if there are no users, some default users will be upload.
  
  ## Main structure
-
+ ```js
 Blog-APIrest-practice 
 │
 ├── backend
@@ -116,7 +116,7 @@ Blog-APIrest-practice
 │       └── test
 │
 └── README.md
-
+```
 
 La aplicación está en, al menos, 4 módulos Node: 
 - *app.js*: Tendrá el servidor Express. 
