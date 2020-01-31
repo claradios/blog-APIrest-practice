@@ -1,12 +1,12 @@
 import * as axios from 'axios'
 
 async function addPost (token, body) {
-  const { title, content, urlToImage, filterSelected } = body
+  const { title, content, urlToImage, selectedFilter } = body
   const data = {
     title,
     content,
     urlToImage,
-    filter: filterSelected
+    filter: selectedFilter
   }
   const result = await axios.request({
     url: 'https://localhost:3443/posts/',
