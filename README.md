@@ -1,4 +1,168 @@
-# front-blog
+# BLOG PRACTICE
+
+This is an exercise as part of the Generación-K learning process.
+It consist in a fullstack app. The API REST has been build with node / mongoDB / express and the client with Vue and Vuetify.
+
+It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
+- use `npm run test` (back) 
+- use Cypress `npx cypress open`(client)
+
+## Project setup
+
+- You need to `npm install` in both *backend* and *client* folders.
+
+# BACKEND
+
+- To launch server go to `backend/src` and type `node app.js`
+
+- Find this file: `backend/ REST API Blog collection postman.json` and load it into your POSTMAN'S. It can be very helpful to play with the app and the different endpoints REST.
+
+## endpoints REST
+
+- *Posts and comments*
+
+    - GET all the posts (without comments)
+    *'/post'*
+
+    - POST a new post (without comments)
+    *'/post/'* 
+
+    - PUT to modify an existent post (except from its comments)
+    *'/post/:id/'*
+
+    - GET one post (with comments)
+    *'/post/:id'*
+
+    - DELETE an existing post (with all its comments)
+    *'/post/:id/*'
+
+    - POST a new comment to a post
+    *'/post/:id/comments/'*
+
+    - PUT to modify an existent comment
+    *'/post/:id/comments/:id'*
+
+    - DELETE an existent comment from a specific post
+    *'/post/:id/comments/:id'*
+
+- *Offensive Words*
+    /offensivewords    
+    - POST ,*/offensivewords*
+    - GET all,*/offensivewords*
+    - GET one, */offensivewords/:id*
+    - DELETE ONE , */offensivewords/:id*
+    - PUT, */offensivewords/:id*
+
+## Comment validator
+
+  There is an array of Offensive Words that only can be access by *admin users* . If a new comment contains any of this words, the app will throw an error specifying which words must be ommited to have a succesful comment.
+
+## Users and authentication
+
+ There are two types of authenticated users: "admin" and "publisher". Authentication has been implemented with *BASIC AUTH + JWT token*
+ - *Admin* has permission to add edit and delete whatever she/he wants
+ - *Publisher* only can add comments and posts and edit or delete the items who's author is herself/himself.
+ - These two types and everyone else can read all the information but cannot add delete or modify info.
+ - Anyone can Sign Up. Publisher rol will be assigned to this person.
+ - When the app launch if there are no users, some default users will be upload.
+ 
+ ## Main structure
+
+Blog-APIrest-practice 
+│
+├── backend
+│     └── src                            
+│          ├── controller
+│          │        ├── comments
+│          │        ├── login
+│          │        ├── offensivewords
+│          │        ├── posts
+│          │        ├── users
+│          │        └── index.js
+│          │
+│          ├── repository 
+│          ├── test
+│          ├── utils 
+│          ├── validator
+│          └── app.js
+├── client
+│       ├── public 
+│       ├── src  
+│       │ ├── assets 
+│       │ ├── components 
+│       │ │       ├── CardComment.vue
+│       │ │       ├── CardFilter.vue
+│       │ │       ├── CardOffensiveWords.vue
+│       │ │       ├── CardPost.vue
+│       │ │       ├── MountEdit.vue
+│       │ │       ├── MountHome.vue
+│       │ │       ├── MountNewPost.vue
+│       │ │       ├── MountOffensiveWords.vue
+│       │ │       ├── MountRead.vue
+│       │ │       ├── TheContainerCreate.vue
+│       │ │       ├── TheFooter.vue
+│       │ │       ├── TheHeader.vue
+│       │ │       ├── TheMainAdminPanel.vue
+│       │ │       ├── TheMainFeed.vue
+│       │ │       ├── TheMainLogin.vue
+│       │ │       ├── TheMainRead.vue
+│       │ │       └── TheMainSignup.vue
+│       │ ├── data
+│       │ ├── plugins
+│       │ ├── router
+│       │ ├── service
+│       │ └── app.js
+│       │
+│       └── test
+│
+└── README.md
+
+
+La aplicación está en, al menos, 4 módulos Node: 
+- *app.js*: Tendrá el servidor Express. 
+- *controller.js*: Tendrá definidos los métodos de la API REST. Se usará un router que será configurado en Express.
+- *repository.js*: Módulo que contendrá el código de acceso a la base de datos.
+- *validator.js*: Validador que verifica que el comentario no contiene ninguna palabra ofensiva.
+
+## API REST:
+La API REST deberá cumplir con el nivel de madurez 2 y el formato de las URLs deberá identificar recursos, no acciones.
+Se deberá entregar un fichero postman.json con al menos un ejemplo de cada una de los endpoints de la API REST.
+
+## Persistencia:
+La persistencia se implementará con MongoDB de forma obligatoria. Se podrán usar el driver oficial Mongo o el ODM Mongoose.
+Opcionalmente se podrá entregar la práctica con la persistencia de palabras ofensivas en una base de datos MySQL (con o si ORM).
+# USUARIOS AUTENTICADOS:
+
+### Administrador: 
+- Los usuarios de tipo admin podrán realizar cualquier operación de la API REST.
+
+### Publisher: 
+- Crear entradas del blog.   
+
+- Borrar y modificar únicamente las entradas que hayan creado ellos. 
+  
+- Borrar comentarios de sus entradas. 
+   
+- Añadir comentarios a otras entradas.  
+
+- acceder y modificar colección de offensive words.
+
+# USUARIOS NO AUTENTICADOS:
+
+### No autenticado: 
+- Podrán consultar información pero no podrán añadir comentarios ni añadir posts.
+
+
+Cualquier usuario podrá registrarse en la aplicación y se le asignará el rol de “publisher”.  Para ello, se creará un endpoint de creación de usuarios. Para simplificar la implementación, un usuario no se puede borrar ni modificar.
+
+Se deberá implementar un script Node.js llamado load_admins.js que se conectará a MongoDB y creará los usuarios admin cuando se ejecute. Los usuarios estarán en un fichero de texto.
+
+
+
+# CLIENT
+This is a Vue + vuetify project. 
+The image filters and upload image function has been based on the Vue Vixens practice that you can find in this repo: 
+https://github.com/VueVixensESP/vuevixens-instagram
 
 ## Project setup
 ```
@@ -24,24 +188,5 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-La programacion por componentes es con un enfoque declarativo. 
-Haces una plantilla con huecos que serán variables javascript, que si cambian se sustituirán en el pintado .
-
-La diferencia es que en angular esas variables son atributos de una clase y en react y vue están asociados a atributos de la propiedad "data" del objeto que exportas.
-
-Se utiliza el export de ES6 (el export default).
-
-PUBLIC -> lo que pongas ahi va a la raiz de la pagina directamente.
-SRC/ASSETS -> se procesa por webpack antes de ir a la raiz de la página.
-
-## cómo ejecuto código:
-
-Los códigos se definenen en la propiedad "methods" y ahí vas poniendo las funciones asociadas a lo que necesites. 
-
-dato -> d3 es ua libreia de graficos de muy bajo nivel. esta librería manipula directamente el DOM.
-
-el router de react
-
-// https://github.com/vuejs/vue-router/tree/dev/examples
-
-## el rooter hay que configurarlo al instalarlo. no viene por defecto
+### To start Cypress:
+`npx cypress open`
