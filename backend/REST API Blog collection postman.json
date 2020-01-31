@@ -66,7 +66,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"Maria Antonieta\",\n\t\"nickname\": \"marian\",\n\t\"password\": \"guillotina\"}"
+					"raw": "{\n\t\"username\": \"Bob Esponja\",\n\t\"nickname\": \"bobby\",\n\t\"password\": \"1234567\",\n\t\"userImage\": \"https://via.placeholder.com/110\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:3443/signup/",
@@ -89,6 +89,60 @@
 				"disableBodyPruning": true
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:3443/users/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "3443",
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query User GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -141,7 +195,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Un Día Más Con ApiRest\",\n\t\"content\": \"Hola de nuevo queridos seguidores. Hoy os traigo las últimas actualizaciones de MOngo que son una maravilla.\"}"
+					"raw": "  {\n    \"title\": \"Aprende A Cuidar tus Plantas\",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus leo velit, at mattis purus varius vel. Praesent aliquam tristique mi, euismod euismod turpis euismod pharetra. Etiam posuere odio sit amet urna consequat egestas. Maecenas mattis metus urna, eu feugiat elit fringilla vitae. Mauris non facilisis nisi. Proin et purus vel lectus faucibus lacinia. Donec sit amet nibh nec massa rhoncus pellentesque. Aliquam fermentum nec arcu non dignissim. Sed blandit accumsan dui, nec mattis turpis convallis vitae. Vivamus ut bibendum magna. In eleifend elit risus. Quisque dapibus mattis felis. Nam sit amet nisl imperdiet, dapibus tortor eget, blandit odio. Morbi vel erat sapien. Aliquam vel lacinia quam. Aliquam eu dui nulla. In rutrum arcu et erat luctus, id egestas augue sodales. Aenean ante lectus, commodo quis magna in, bibendum lacinia elit. Vestibulum convallis tellus lectus, non tempor turpis interdum congue. Nullam pharetra vel elit non finibus. Nullam venenatis nisi eu hendrerit placerat. Nunc sed neque vehicula, tempus elit id, rhoncus massa. Integer accumsan lorem non dolor tincidunt ultrices. Sed eu dolor ac enim suscipit pulvinar. Pellentesque luctus elit vel pellentesque blandit. Sed iaculis enim turpis, id facilisis urna mattis eget. Nunc dolor neque, commodo sit amet porta id, molestie at dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin tempus tortor ut nulla auctor vehicula. Praesent gravida eu lorem ac sagittis. Vestibulum et auctor nisl.\",\n    \"urlToImage\": \"https://cdn.shopify.com/s/files/1/2083/6855/products/ANTHURIUM_ANDREANUM_RED_-_GIFT_PLANTS.exoticflora.jpg?v=1578916119\",\n    \"likes\": 1300,\n    \"filter\": \"clarendon\"\n  }"
 				},
 				"url": {
 					"raw": "https://localhost:3443/posts/",
@@ -184,7 +238,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:3443/posts/5e160fcccc12600aad9a2b3c",
+					"raw": "https://localhost:3443/posts/5e340ac93d692a285b837248",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -192,7 +246,7 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"5e160fcccc12600aad9a2b3c"
+						"5e340ac93d692a285b837248"
 					]
 				}
 			},
@@ -222,7 +276,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\n\t\"title\": \"Hablemos De Lo Importante\",\n\t\"content\": \"He venido a hablar de mis ovejitas.\",\n\t\"urlToImage\":\"www.nada.com\"\n}",
+					"raw": " {\n    \"title\": \"Consejos Para Cuidar tus Plantitas\",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempus leo velit, at mattis purus varius vel. Praesent aliquam tristique mi, euismod euismod turpis euismod pharetra. Etiam posuere odio sit amet urna consequat egestas. Maecenas mattis metus urna, eu feugiat elit fringilla vitae. Mauris non facilisis nisi. Proin et purus vel lectus faucibus lacinia. Donec sit amet nibh nec massa rhoncus pellentesque. Aliquam fermentum nec arcu non dignissim. Sed blandit accumsan dui, nec mattis turpis convallis vitae. Vivamus ut bibendum magna. In eleifend elit risus. Quisque dapibus mattis felis. Nam sit amet nisl imperdiet, dapibus tortor eget, blandit odio. Morbi vel erat sapien. Aliquam vel lacinia quam. Aliquam eu dui nulla. In rutrum arcu et erat luctus, id egestas augue sodales. Aenean ante lectus, commodo quis magna in, bibendum lacinia elit. Vestibulum convallis tellus lectus, non tempor turpis interdum congue. Nullam pharetra vel elit non finibus. Nullam venenatis nisi eu hendrerit placerat. Nunc sed neque vehicula, tempus elit id, rhoncus massa. Integer accumsan lorem non dolor tincidunt ultrices. Sed eu dolor ac enim suscipit pulvinar. Pellentesque luctus elit vel pellentesque blandit. Sed iaculis enim turpis, id facilisis urna mattis eget. Nunc dolor neque, commodo sit amet porta id, molestie at dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin tempus tortor ut nulla auctor vehicula. Praesent gravida eu lorem ac sagittis. Vestibulum et auctor nisl.\",\n    \"urlToImage\": \"https://cdn.shopify.com/s/files/1/2083/6855/products/ANTHURIUM_ANDREANUM_RED_-_GIFT_PLANTS.exoticflora.jpg?v=1578916119\",\n    \"likes\": 1301,\n    \"filter\": \"clarendon\"\n  }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -230,7 +284,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:3443/posts/5e1c50f30a1f2f3542edd804",
+					"raw": "https://localhost:3443/posts/5e340ac93d692a285b837248",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -238,7 +292,7 @@
 					"port": "3443",
 					"path": [
 						"posts",
-						"5e1c50f30a1f2f3542edd804"
+						"5e340ac93d692a285b837248"
 					]
 				}
 			},
