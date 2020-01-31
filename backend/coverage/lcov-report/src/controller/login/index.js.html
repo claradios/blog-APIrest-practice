@@ -108,7 +108,7 @@ routerLogin.post('/',
         
         const { username } = req.user;
 &nbsp;
-        const opts = { expiresIn: 120 }; //token expires in 2min
+        const opts = { expiresIn: 3600 }; //token expires in 2min
         const token = jwt.sign({ username }, SECRET_KEY, opts);
 &nbsp;
         return res.status(200).json({ message: "Auth Passed", token });
