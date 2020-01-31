@@ -9,11 +9,10 @@
 <script>
 import TheHeader from '@/components/TheHeader.vue'
 import TheFooter from '@/components/TheFooter.vue'
-import userInfo from '@/store/'
+// import userInfo from '@/store/'
 export default {
   name: 'App',
 
- 
   components: {
     TheHeader,
     TheFooter
