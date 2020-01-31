@@ -10,6 +10,7 @@ It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
 ## Project setup
 
 - You need to `npm install` in both *backend* and *client* folders.
+
  ## Main structure
  ```js
 Blog-APIrest-practice 

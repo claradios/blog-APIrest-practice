@@ -97,7 +97,7 @@ export default {
             this.$router.push('/')
             this.errorMsg = ''
           }
-        }
+        } else { this.errorMsg = 'Please log in. Your sesion expired.' }
       } catch (error) {
         console.log(error.message)
         this.errorMsg = error.message
