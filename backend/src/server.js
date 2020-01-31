@@ -59,6 +59,7 @@ async function initApp() {
     await repository.dbConnect();
     await repository.loadDefaultWords();
     await repository.loadDefaultUsers();
+    await repository.loadDefaultPosts();
     return app;    
 } 
 

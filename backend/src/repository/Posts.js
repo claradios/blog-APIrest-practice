@@ -6,7 +6,8 @@ module.exports = class Posts {
     }
     addPost(post, user) {
         const { username, nickname, userImage } = user;
-        const { title, content, urlToImage, filter } = post;
+        const {username,nickname,userImage, title, content, urlToImage, filter } = post;
+        // I nead to overlap username , nickname, an userImage to load the defaultPosts
         const newPost = {
             author: username,
             nickname,
@@ -123,6 +124,13 @@ module.exports = class Posts {
             { $set: { "comments.$": newComment } }
         );
     }
+
+    loadPosts(array) {
+        array.forEach(async (post) => {
+            await this.addPost(post)
+        });
+    }
+
 
     closeIt() {
         this.collection.close();

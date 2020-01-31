@@ -8,7 +8,7 @@ const url = "mongodb://localhost:27017/postsDB";
 //default
 const defaultUserAdmins = require('../utils/loadAdmins.js');
 const defOffensiveWords = require('../utils/defOffensiveWords.js');
-
+const defPosts = require('../utils/defPosts.js');
 module.exports = {
     async dbConnect() {
         const conn = await MongoClient.connect(url, {
@@ -35,6 +35,13 @@ module.exports = {
         if (allUsers.length === 0) {
             await this.usersCol.loadAdminUsers(defaultUserAdmins);
             console.log('Default users have been inserted')
+        }    
+    },
+    async loadDefaultPosts() {
+        const allPosts = await this.postsCol.getAllPosts();
+        if (allPosts.length === 0) {
+            await this.postsCol.loadPosts(defPosts);
+            console.log('Default posts have been inserted')
         }
     },
 
