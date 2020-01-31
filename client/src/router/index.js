@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
+// import Login from '../views/Login.vue'
+import TheMainLogin from '../components/TheMainLogin.vue'
 import Read from '../views/Read.vue'
 import NewPost from '../views/NewPost.vue'
 import Signup from '../views/Signup.vue'
@@ -42,7 +43,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: TheMainLogin
   },
   {
     path: '/admin/settings/offensivewords',
