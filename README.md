@@ -11,6 +11,58 @@ It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
 
 - You need to `npm install` in both *backend* and *client* folders.
 
+ ## Main structure
+ ```js
+Blog-APIrest-practice 
+│
+├── backend
+│     └── src                            
+│          ├── controller
+│          │        ├── comments
+│          │        ├── login
+│          │        ├── offensivewords
+│          │        ├── posts
+│          │        ├── users
+│          │        └── index.js
+│          │
+│          ├── repository 
+│          ├── test
+│          ├── utils 
+│          ├── validator
+│          └── app.js
+├── client
+│       ├── public 
+│       ├── src  
+│       │ ├── assets 
+│       │ ├── components 
+│       │ │       ├── CardComment.vue
+│       │ │       ├── CardFilter.vue
+│       │ │       ├── CardOffensiveWords.vue
+│       │ │       ├── CardPost.vue
+│       │ │       ├── MountEdit.vue
+│       │ │       ├── MountHome.vue
+│       │ │       ├── MountNewPost.vue
+│       │ │       ├── MountOffensiveWords.vue
+│       │ │       ├── MountRead.vue
+│       │ │       ├── TheContainerCreate.vue
+│       │ │       ├── TheFooter.vue
+│       │ │       ├── TheHeader.vue
+│       │ │       ├── TheMainAdminPanel.vue
+│       │ │       ├── TheMainFeed.vue
+│       │ │       ├── TheMainLogin.vue
+│       │ │       ├── TheMainRead.vue
+│       │ │       └── TheMainSignup.vue
+│       │ ├── data
+│       │ ├── plugins
+│       │ ├── router
+│       │ ├── service
+│       │ └── app.js
+│       │
+│       └── test
+│
+└── README.md
+```
+
 # BACKEND
 
 - To launch server go to `backend/src` and type `node app.js`
@@ -66,58 +118,8 @@ It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
  - Anyone can Sign Up. Publisher rol will be assigned to this person.
  - When the app launch if there are no users, some default users will be upload.
  
- ## Main structure
- ```js
-Blog-APIrest-practice 
-│
-├── backend
-│     └── src                            
-│          ├── controller
-│          │        ├── comments
-│          │        ├── login
-│          │        ├── offensivewords
-│          │        ├── posts
-│          │        ├── users
-│          │        └── index.js
-│          │
-│          ├── repository 
-│          ├── test
-│          ├── utils 
-│          ├── validator
-│          └── app.js
-├── client
-│       ├── public 
-│       ├── src  
-│       │ ├── assets 
-│       │ ├── components 
-│       │ │       ├── CardComment.vue
-│       │ │       ├── CardFilter.vue
-│       │ │       ├── CardOffensiveWords.vue
-│       │ │       ├── CardPost.vue
-│       │ │       ├── MountEdit.vue
-│       │ │       ├── MountHome.vue
-│       │ │       ├── MountNewPost.vue
-│       │ │       ├── MountOffensiveWords.vue
-│       │ │       ├── MountRead.vue
-│       │ │       ├── TheContainerCreate.vue
-│       │ │       ├── TheFooter.vue
-│       │ │       ├── TheHeader.vue
-│       │ │       ├── TheMainAdminPanel.vue
-│       │ │       ├── TheMainFeed.vue
-│       │ │       ├── TheMainLogin.vue
-│       │ │       ├── TheMainRead.vue
-│       │ │       └── TheMainSignup.vue
-│       │ ├── data
-│       │ ├── plugins
-│       │ ├── router
-│       │ ├── service
-│       │ └── app.js
-│       │
-│       └── test
-│
-└── README.md
-```
 
+## main Backend structure
 La aplicación está en, al menos, 4 módulos Node: 
 - *app.js*: Tendrá el servidor Express. 
 - *controller.js*: Tendrá definidos los métodos de la API REST. Se usará un router que será configurado en Express.
