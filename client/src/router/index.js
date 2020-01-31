@@ -1,15 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
+import Home from '../components/Home.vue'
+import Read from '../components/Read.vue'
+import NewPost from '../components/NewPost.vue'
+import Edit from '../components/Edit.vue'
+import OffensiveWords from '../components/OffensiveWords.vue'
 import TheMainLogin from '../components/TheMainLogin.vue'
 import TheMainSignup from '@/components/TheMainSignup.vue'
-
-import Read from '../views/Read.vue'
-import NewPost from '../views/NewPost.vue'
-
-import Edit from '../views/Edit.vue'
-import OffensiveWords from '../views/OffensiveWords.vue'
 
 Vue.use(VueRouter)
 

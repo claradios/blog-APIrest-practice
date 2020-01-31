@@ -119,7 +119,8 @@ export default {
   },
   props: {
     singlepost: Object,
-    errorMsg: String
+    errorMsg: String,
+    filters: Array
   },
   components: {
     CardComment
@@ -140,6 +141,7 @@ export default {
       return userInfo.state.userData.username
     }
   },
+
   methods: {
     like () {
       this.singlepost.hasBeenLiked
@@ -180,7 +182,6 @@ export default {
         } else {
           this.singlepost.comments.push(result)
         }
-        // cambiar de color el botón al deshabilitarlo
       } catch (error) {
         if (error.response) {
           this.badWords = error.response.data
