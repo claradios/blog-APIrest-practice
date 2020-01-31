@@ -68,6 +68,7 @@
           </div>
           <v-spacer></v-spacer>
           <p v-if="successMsg" class="success">Tu comentario ha sido añadido!</p>
+          <div v-if="errorMsgB.length > 0" class="info-message">{{errorMsgB}}</div>
           <div class="info-message" v-if="badWords.length !== 0">
             <p>Tu comentario es ofensivo, revisa estas palabras:</p>
             <ul>
@@ -109,6 +110,7 @@ export default {
   data () {
     return {
       userInfo,
+      errorMsgB: '',
       badWords: [],
       closedBox: true,
       successMsg: false,
@@ -165,26 +167,34 @@ export default {
       this.badWords = []
     },
     async sendComment () {
-      try {
-        const { token } = userInfo.state
-        const { _id } = this.singlepost
-        const { text } = this.commentData
-        const result = await addComment(token, _id, text)
+      if (this.commentData.text === '') {
+        this.errorMsgB = 'Cannot send empty comments. Please write something.'
+      } else {
+        try {
+          const { token } = userInfo.state
+          const { _id } = this.singlepost
+          const { text } = this.commentData
 
-        this.closedBox = true
-        this.commentData.text = ''
-        this.successMsg = true
-        this.badWords = []
-        if (!this.singlepost.comments) {
-          console.log('no existe la propiedad comments')
-          this.organizedComments = []
-          this.organizedComments.push(result)
-        } else {
-          this.singlepost.comments.push(result)
-        }
-      } catch (error) {
-        if (error.response) {
-          this.badWords = error.response.data
+          const result = await addComment(token, _id, text)
+
+          this.closedBox = true
+          this.commentData.text = ''
+          this.successMsg = true
+          this.badWords = []
+          this.errorMsgB = ''
+
+          if (!this.singlepost.comments) {
+            console.log('no existe la propiedad comments')
+            this.organizedComments = []
+            this.organizedComments.push(result)
+          } else {
+            this.singlepost.comments.push(result)
+          }
+        } catch (error) {
+          if (error.response) {
+            this.badWords = error.response.data
+            this.errorMsgB = ''
+          }
         }
       }
     },
@@ -280,8 +290,10 @@ export default {
 
   .title-singlepost {
     font-size: 25px;
-    color:#ffffff;
-    text-shadow: 1px 0 0 #041e30, -1px 0 0 #041e30, 0 1px 0 #041e30, 0 -1px 0 #041e30, 1px 1px #041e30, -1px -1px 0 #041e30, 1px -1px 0 #041e30, -1px 1px 0 #041e30;
+    color: #ffffff;
+    text-shadow: 1px 0 0 #041e30, -1px 0 0 #041e30, 0 1px 0 #041e30,
+      0 -1px 0 #041e30, 1px 1px #041e30, -1px -1px 0 #041e30, 1px -1px 0 #041e30,
+      -1px 1px 0 #041e30;
   }
 
   .content {
