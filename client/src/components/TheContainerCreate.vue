@@ -3,7 +3,7 @@
     <div>
       <div
         class="selected-image"
-        :class="postData.selectedFilter"
+        :class="postData.filter"
         :style="{ backgroundImage: 'url(' + postData.urlToImage + ')' }"
       >
         <div class="upload">
@@ -59,7 +59,7 @@ export default {
       errorMsg: '',
       isEditing: false,
       postData: {
-        selectedFilter: '',
+        filter: '',
         urlToImage:
           'https://www.consalud.es/uploads/s1/10/30/54/9/playa-libre-sin-humos-foto-freepik.jpeg',
         title: '',
@@ -118,7 +118,7 @@ export default {
       }
     },
     handleFilterSelected (ev) {
-      this.postData.selectedFilter = ev.filter
+      this.postData.filter = ev.filter
       this.$emit('filter-selected', { filter: ev.filter })
     },
     handleUploadImage (ev) {
