@@ -11,7 +11,8 @@ It has been tested with *Jest* and *SUPERTEST* (unitary) and *CYPRESS* (e2e)
 
 - You need to `npm install` in both *backend* and *client* folders.
 
- ## Main structure
+ ## Main structure (simplified)
+ 
  ```js
 Blog-APIrest-practice 
 │
@@ -29,7 +30,8 @@ Blog-APIrest-practice
 │          ├── test
 │          ├── utils 
 │          ├── validator
-│          └── app.js
+│          ├── app.js
+│          └── server.js
 ├── client
 │       ├── public 
 │       ├── src  
