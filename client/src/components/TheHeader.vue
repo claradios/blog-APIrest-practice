@@ -88,7 +88,11 @@ export default {
   methods: {
     logOut () {
       localStorage.clear()
-      this.$router.go('/')
+      userInfo.state.token = ''
+      userInfo.state.userData = ''
+      if (this.$router.currentRoute.path !== '/') {
+        this.$router.push('/')
+      }
     }
   }
 }
