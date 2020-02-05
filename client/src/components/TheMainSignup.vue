@@ -46,18 +46,14 @@
                   label="upload picture"
                   name="profile"
                   type="file"
-                  v-model="userImage"
                   id="file"
                   class="inputfile"
                   @change="handleUploadImage"
                   required
                 ></v-file-input>
-                <v-avatar tile="true" size="56px" color="grey lighten-4">
+                <v-avatar size="56px" color="grey lighten-4">
                   <img :src="userImage" alt="avatar" />
                 </v-avatar>
-                <figure class="image is-32x32">
-                  <div :style="{ backgroundImage: 'url(' + userImage + ')' }"></div>
-                </figure>
               </v-form>
             </v-card-text>
             <v-card-actions>
