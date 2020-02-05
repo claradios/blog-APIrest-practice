@@ -7,7 +7,7 @@
       <v-card class="mx-auto mt-8" max-width="900">
         <v-container fluid>
           <v-row dense>
-            <v-col v-for="badWord in offensiveWords" :key="badWord._id" :cols="3">
+            <v-col v-for="badWord in offensiveWords"  :key="badWord._id" cols="12" sm="3">
               <card-offensive-words
                 :badWord="badWord"
                 @delete-this-word="handleDeleteThisWord"
